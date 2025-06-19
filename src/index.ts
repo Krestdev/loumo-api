@@ -1,0 +1,119 @@
+import express from "express";
+import morgan from "morgan";
+import bodyParser from "body-parser";
+import usersRouter from "./routes/users";
+import WinstonLogger from "./utils/logger";
+import errorHandler from "./middleware/errorHandler";
+import RoleRouter from "./routes/roles";
+import PermissionRouter from "./routes/permissions";
+import AddressRouter from "./routes/address";
+import ZoneRouter from "./routes/zone";
+import LogRouter from "./routes/log";
+import NotificationRouter from "./routes/notification";
+import CategoryRouter from "./routes/category";
+import ProductRouter from "./routes/product";
+import ProductVariantRouter from "./routes/productVariant";
+import ShopRouter from "./routes/shop";
+import OrderRouter from "./routes/order";
+import PaymentRouter from "./routes/payment";
+import AgentRouter from "./routes/agent";
+import OrderItemRouter from "./routes/orderItem";
+import DeliveryRouter from "./routes/delivery";
+import StockRouter from "./routes/stock";
+import PromotionRouter from "./routes/promotion";
+import cors from "cors";
+import helmet from "helmet";
+import FaqRouter from "./routes/faq";
+import TopicRouter from "./routes/topic";
+
+class Server {
+  private PORT = 5000;
+  private app = express();
+  private users = new usersRouter();
+  private roles = new RoleRouter();
+  private address = new AddressRouter();
+  private zone = new ZoneRouter();
+  private category = new CategoryRouter();
+  private product = new ProductRouter();
+  private productVariant = new ProductVariantRouter();
+  private log = new LogRouter();
+  private permission = new PermissionRouter();
+  private notification = new NotificationRouter();
+  private shop = new ShopRouter();
+  private order = new OrderRouter();
+  private orderitem = new OrderItemRouter();
+  private agent = new AgentRouter();
+  private delivery = new DeliveryRouter();
+  private payment = new PaymentRouter();
+  private stock = new StockRouter();
+  private promotion = new PromotionRouter();
+  private faq = new FaqRouter();
+  private topic = new TopicRouter();
+
+  private winstonLogger = new WinstonLogger();
+  constructor() {
+    this.app.use(helmet());
+    this.app.use(
+      cors({
+        origin: ["http://localhost:3000", "*"], // your frontend's origin
+        credentials: true, // if you use cookies/auth headers
+      })
+    );
+    // console logger
+    this.app.use(morgan("dev"));
+
+    // error and warning save to server
+    this.app.use(this.winstonLogger.warningLogger());
+    // error and warning save to server
+    this.app.use(this.winstonLogger.warningLogger());
+
+    // body parser
+    this.app.use(bodyParser.json());
+
+    // Routes
+    this.routes();
+
+    // error and warning save to server
+    // this.app.use(this.winstonLogger.errorLogger());
+
+    // Error Handler
+    this.app.use(errorHandler);
+  }
+
+  routes() {
+    this.app.use("/api/users", this.users.routes);
+    this.app.use("/api/roles", this.roles.routes);
+    this.app.use("/api/permissions", this.permission.routes);
+    this.app.use("/api/address", this.address.routes);
+    this.app.use("/api/zones", this.zone.routes);
+    this.app.use("/api/logs", this.log.routes);
+    this.app.use("/api/categories", this.category.routes);
+    this.app.use("/api/products", this.product.routes);
+    this.app.use("/api/productvariants", this.productVariant.routes);
+    this.app.use("/api/shops", this.shop.routes);
+    this.app.use("/api/stocks", this.stock.routes);
+    this.app.use("/api/promotions", this.promotion.routes);
+    this.app.use("/api/orders", this.order.routes);
+    this.app.use("/api/orderitems", this.orderitem.routes);
+    this.app.use("/api/agents", this.agent.routes);
+    this.app.use("/api/payments", this.payment.routes);
+    this.app.use("/api/deliveries", this.delivery.routes);
+    this.app.use("/api/notifications", this.notification.routes);
+    this.app.use("/api/faqs", this.faq.routes);
+    this.app.use("/api/topics", this.topic.routes);
+  }
+
+  errorMiddleware() {
+    this.app.use(errorHandler);
+  }
+
+  start() {
+    this.app.listen(this.PORT, () => {
+      console.table(`⚙️  Running on Port ${this.PORT}`);
+    });
+  }
+}
+
+const myApp = new Server();
+
+myApp.start();

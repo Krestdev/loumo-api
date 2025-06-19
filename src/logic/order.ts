@@ -1,0 +1,71 @@
+import { PrismaClient, Order } from "../../generated/prisma";
+
+const prisma = new PrismaClient();
+
+export class OrderLogic {
+  // Create a log and optionally connect to roles
+  async createOrder(
+    data: Omit<Order, "id"> & { addressId: number; userId: number }
+  ): Promise<Order> {
+    const { addressId, userId, ...orderData } = data;
+    return prisma.order.create({
+      data: {
+        ...orderData,
+        address: addressId
+          ? {
+              connect: {
+                id: addressId,
+              },
+            }
+          : {},
+        user: userId
+          ? {
+              connect: {
+                id: addressId,
+              },
+            }
+          : {},
+      },
+    });
+  }
+
+  // Get a order by id, including its roles
+  async getOrderById(id: number): Promise<Order | null> {
+    return prisma.order.findUnique({
+      where: { id },
+    });
+  }
+
+  // Get all orders, including their roles
+  async getAllOrders(): Promise<Order[]> {
+    return prisma.order.findMany({ include: { address: true } });
+  }
+
+  // Update a order and optionally update its roles
+  async updateOrder(
+    id: number,
+    data: Partial<Omit<Order, "id">> & { addressId?: number }
+  ): Promise<Order | null> {
+    const { addressId, userId, ...orderData } = data;
+    return prisma.order.update({
+      where: { id },
+      data: {
+        ...orderData,
+        address: addressId
+          ? {
+              connect: {
+                id: addressId,
+              },
+            }
+          : {},
+      },
+    });
+  }
+
+  // Delete a order (removes from join table as well)
+  async deleteOrder(id: number): Promise<Order | null> {
+    return prisma.order.delete({
+      where: { id },
+    });
+  }
+}

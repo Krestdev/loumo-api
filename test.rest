@@ -1,0 +1,657 @@
+### Login user by ID
+post http://localhost:5000/api/users/login
+Content-Type: application/json
+
+{
+  "email": "john@example.com",
+  "password": "password123"
+}
+
+### Get all users
+GET http://localhost:5000/api/users/?roleD=true&addressD=true&logD=true&notifD=true
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1MDEwNjE5MSwiZXhwIjoxNzUwMTkyNTkxfQ.Jp5NC3K8Yc3kM9CawNowT8kV40i0Ytxtl-CqkS9TzME
+
+### Get a single user by ID
+GET http://localhost:5000/api/users/1
+
+### Create a new user
+POST http://localhost:5000/api/users/
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "password123"
+}
+
+### Update a user by ID
+PUT http://localhost:5000/api/users/2
+Content-Type: application/json
+
+{
+  "name": "Jane Doe",
+  "verified": true
+}
+
+### assign role to a user by ID
+PUT http://localhost:5000/api/users/role/2
+Content-Type: application/json
+
+{
+  "roleId": 2
+}
+
+### Delete a user by ID
+DELETE http://localhost:5000/api/users/{userId}
+
+
+##################### roles ###########################
+
+
+### Get all roles
+GET http://localhost:5000/api/roles/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1MDEwNjE5MSwiZXhwIjoxNzUwMTkyNTkxfQ.Jp5NC3K8Yc3kM9CawNowT8kV40i0Ytxtl-CqkS9TzME
+
+### Get a single role by ID
+GET http://localhost:5000/api/roles/1
+
+### Create a new role
+POST http://localhost:5000/api/roles/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1MDEwNjE5MSwiZXhwIjoxNzUwMTkyNTkxfQ.Jp5NC3K8Yc3kM9CawNowT8kV40i0Ytxtl-CqkS9TzME
+
+{
+  "name": "delivery"
+}
+
+### Update a role by ID
+PUT http://localhost:5000/api/roles/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1MDEwNjE5MSwiZXhwIjoxNzUwMTkyNTkxfQ.Jp5NC3K8Yc3kM9CawNowT8kV40i0Ytxtl-CqkS9TzME
+
+{
+  "name": "superadmin",
+  "ids": [1,2,3,4,5,6,7,8]
+}
+
+### Delete a role by ID
+DELETE http://localhost:5000/api/roles/{roleId}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1MDEwNjE5MSwiZXhwIjoxNzUwMTkyNTkxfQ.Jp5NC3K8Yc3kM9CawNowT8kV40i0Ytxtl-CqkS9TzME
+
+##################### permissions ###########################
+
+### Get all permissions
+GET http://localhost:5000/api/permissions/
+
+### Get a single permission by ID
+GET http://localhost:5000/api/permissions/1
+
+### Create a new permission
+POST http://localhost:5000/api/permissions/
+Content-Type: application/json
+
+{
+  "action": "read:role"
+}
+
+### Update a permission by ID
+PUT http://localhost:5000/api/permissions/1
+Content-Type: application/json
+
+{
+  "action": "read:user"
+}
+
+### Delete a permission by ID
+DELETE http://localhost:5000/api/permissions/1
+
+
+##################### Address ###########################
+
+
+### Get all addresses
+GET http://localhost:5000/api/address/
+
+### Get a single address by ID (not ecessary)
+GET http://localhost:5000/api/address/1
+
+### Create a new address
+POST http://localhost:5000/api/address/
+Content-Type: application/json
+
+{
+  "name": "Home",
+  "description": "Primary residence",
+  "published": true,
+  "zoneId": 1
+}
+
+### Update an address by ID
+PUT http://localhost:5000/api/address/2
+Content-Type: application/json
+
+{
+  "name": "Work Home",
+  "description": "Office location",
+  "published": false,
+  "zoneId": 2
+}
+
+### Delete an address by ID
+DELETE http://localhost:5000/api/address/1
+
+
+########### Zone ########################
+
+
+### Get all zones
+GET http://localhost:5000/api/zones/
+
+### Get a single zone by ID
+GET http://localhost:5000/api/zones/1
+
+### Create a new zone
+POST http://localhost:5000/api/zones/
+Content-Type: application/json
+
+{
+  "name": "Zone D",
+  "price": 2500
+}
+
+### Update a zone by ID
+PUT http://localhost:5000/api/zones/4
+Content-Type: application/json
+
+{
+  "name": "Zone D",
+  "price": 5000,
+  "addressIds":[3]
+}
+
+### Delete a zone by ID
+DELETE http://localhost:5000/api/zones/1
+
+
+################ Logs###################
+
+
+### Get all logs
+GET http://localhost:5000/api/logs/
+
+### Get a single log by ID
+GET http://localhost:5000/api/logs/1
+
+### Create a new log
+POST http://localhost:5000/api/logs/
+Content-Type: application/json
+
+{
+  "action": "USER_LOGIN",
+  "description": "User logged in",
+  "userId": 1
+}
+
+### Update a log by ID
+PUT http://localhost:5000/api/logs/1
+Content-Type: application/json
+
+{
+  "action": "USER_LOGOUT",
+  "description": "User logged out"
+}
+
+### Delete a log by ID
+DELETE http://localhost:5000/api/logs/1
+
+
+################ notifications ##################
+
+
+### Get all notifications
+GET http://localhost:5000/api/notifications/
+
+### Get a single notification by ID
+GET http://localhost:5000/api/notifications/1
+
+### Create a new notification
+POST http://localhost:5000/api/notifications/
+Content-Type: application/json
+
+{
+  "action": "USER_REGISTERED",
+  "description": "A new user has registered",
+  "userId": 1
+}
+
+### Update a notification by ID
+PUT http://localhost:5000/api/notifications/1
+Content-Type: application/json
+
+{
+  "action": "USER_UPDATED",
+  "description": "User profile updated"
+}
+
+### Delete a notification by ID
+DELETE http://localhost:5000/api/notifications/1
+
+
+############### Category #######################
+
+
+### Get all categories
+GET http://localhost:5000/api/categories/
+
+### Get a single category by ID
+GET http://localhost:5000/api/categories/1
+
+### Create a new category
+POST http://localhost:5000/api/categories/
+Content-Type: application/json
+
+{
+  "name": "Electronics",
+  "weight": 10,
+  "status": true
+}
+
+### Update a category by ID
+PUT http://localhost:5000/api/categories/1
+Content-Type: application/json
+
+{
+  "name": "Home Appliances",
+  "weight": 20,
+  "status": false
+}
+
+### Delete a category by ID
+DELETE http://localhost:5000/api/categories/1
+
+
+############### Product #######################
+
+
+### Get all products
+GET http://localhost:5000/api/products/
+
+### Get a single product by ID
+GET http://localhost:5000/api/products/1
+
+### Create a new product
+POST http://localhost:5000/api/products/
+Content-Type: application/json
+
+{
+  "name": "iPhone 15",
+  "weight": 200,
+  "status": true,
+  "categoryId": 1
+}
+
+### Update a product by ID
+PUT http://localhost:5000/api/products/1
+Content-Type: application/json
+
+{
+  "name": "iPhone 15 Pro",
+  "weight": 210,
+  "status": true,
+  "categoryId": 1
+}
+
+### Delete a product by ID
+DELETE http://localhost:5000/api/products/1
+
+
+############### Product Variant #######################
+
+
+### Get all product variants
+GET http://localhost:5000/api/productvariants/
+
+### Get a single product variant by ID
+GET http://localhost:5000/api/productvariants/1
+
+### Create a new product variant
+POST http://localhost:5000/api/productvariants/
+Content-Type: application/json
+
+{
+  "name": "iPhone 15 Pro Max 256GB",
+  "weight": 215,
+  "status": true,
+  "productId": 1
+}
+
+### Update a product variant by ID
+PUT http://localhost:5000/api/productvariants/1
+Content-Type: application/json
+
+{
+  "name": "iPhone 15 Pro Max 512GB",
+  "weight": 220,
+  "status": true,
+  "productId": 1
+}
+
+### Delete a product variant by ID
+DELETE http://localhost:5000/api/productvariants/1
+
+
+############### Shop #######################
+
+
+### Get all shops
+GET http://localhost:5000/api/shops/
+
+### Get a single shop by ID
+GET http://localhost:5000/api/shops/1
+
+### Create a new shop
+POST http://localhost:5000/api/shops/
+Content-Type: application/json
+
+{
+  "name": "Main Street Shop",
+  "addressId": 2
+}
+
+### Update a shop by ID
+PUT http://localhost:5000/api/shops/1
+Content-Type: application/json
+
+{
+  "name": "Downtown Shop",
+  "addressId": 2
+}
+
+### Delete a shop by ID
+DELETE http://localhost:5000/api/shops/1
+
+
+############### Order #######################
+
+
+### Get all orders
+GET http://localhost:5000/api/orders/
+
+### Get a single order by ID
+GET http://localhost:5000/api/orders/1
+
+### Create a new order
+POST http://localhost:5000/api/orders/
+Content-Type: application/json
+
+{
+  "note": "Please deliver between 9am-12pm",
+  "addressId": 2,
+  "userId": 1
+}
+
+### Update an order by ID
+PUT http://localhost:5000/api/orders/1
+Content-Type: application/json
+
+{
+  "note": "Leave at the front desk",
+  "addressId": 2,
+  "userId": 1
+}
+
+### Delete an order by ID
+DELETE http://localhost:5000/api/orders/1
+
+
+############### Payment #######################
+
+
+### Get all payments
+GET http://localhost:5000/api/payments/
+
+### Get a single payment by ID
+GET http://localhost:5000/api/payments/1
+
+### Create a new payment
+POST http://localhost:5000/api/payments/
+Content-Type: application/json
+
+{
+  "name": "Credit Card",
+  "status": "completed",
+  "ref": "PAY123456",
+  "total": 250000,
+  "orderId": 1
+}
+
+### Update a payment by ID
+PUT http://localhost:5000/api/payments/1
+Content-Type: application/json
+
+{
+  "name": "Debit Card",
+  "status": "pending",
+  "ref": "PAY654321",
+  "orderId": 1
+}
+
+### Delete a payment by ID
+DELETE http://localhost:5000/api/payments/1
+
+
+############### Agent #######################
+
+
+### Get all agents
+GET http://localhost:5000/api/agents/
+
+### Get a single agent by ID
+GET http://localhost:5000/api/agents/1
+
+### Create a new agent
+POST http://localhost:5000/api/agents/
+Content-Type: application/json
+
+{
+  "code": "AGENT001",
+  "userId": 2
+}
+
+### Update an agent by ID
+PUT http://localhost:5000/api/agents/1
+Content-Type: application/json
+
+{
+  "code": "AGENT002",
+  "userId": 2
+}
+
+### Delete an agent by ID
+DELETE http://localhost:5000/api/agents/1
+
+
+############### Order Item #######################
+
+
+### Get all order items
+GET http://localhost:5000/api/orderitems/
+
+### Get a single order item by ID
+GET http://localhost:5000/api/orderitems/1
+
+### Create a new order item
+POST http://localhost:5000/api/orderitems/
+Content-Type: application/json
+
+{
+  "note": "Handle with care",
+  "orderId": 1
+}
+
+### Update an order item by ID
+PUT http://localhost:5000/api/orderitems/1
+Content-Type: application/json
+
+{
+  "note": "Leave at the back door"
+}
+
+  # "orderId": 1
+  # "deliveryId": 1
+### Delete an order item by ID
+DELETE http://localhost:5000/api/orderitems/1
+
+
+############### Delivery #######################
+
+
+### Get all deliveries
+GET http://localhost:5000/api/deliveries/
+
+### Get a single delivery by ID
+GET http://localhost:5000/api/deliveries/1
+
+### Create a new delivery
+POST http://localhost:5000/api/deliveries/
+Content-Type: application/json
+
+{
+  "status": "pending",
+  "orderId": 1
+}
+
+### Update a delivery by ID
+PUT http://localhost:5000/api/deliveries/1
+Content-Type: application/json
+
+{
+  "status": "completed",
+  "agentId": 1
+}
+
+### Delete a delivery by ID
+DELETE http://localhost:5000/api/deliveries/1
+
+
+############### Stock #######################
+
+
+### Get all stocks
+GET http://localhost:5000/api/stocks/
+
+### Get a single stock by ID
+GET http://localhost:5000/api/stocks/1
+
+### Create a new stock
+POST http://localhost:5000/api/stocks/
+Content-Type: application/json
+
+{
+  "quantity": 100,
+  "productVariantId": 1,
+  "shopId": 1
+}
+
+### Update a stock by ID
+PUT http://localhost:5000/api/stocks/1
+Content-Type: application/json
+
+{
+  "quantity": 150,
+  "promotionId": 1
+}
+
+### Delete a stock by ID
+DELETE http://localhost:5000/api/stocks/1
+
+
+############### Promotion #######################
+
+
+### Get all promotions
+GET http://localhost:5000/api/promotions/
+
+### Get a single promotion by ID
+GET http://localhost:5000/api/promotions/1
+
+### Create a new promotion
+POST http://localhost:5000/api/promotions/
+Content-Type: application/json
+
+{
+  "code": "SUMMER2024",
+  "percentage": 20,
+  "expireAt": "2024-12-31T23:59:59.000Z"
+}
+
+### Update a promotion by ID
+PUT http://localhost:5000/api/promotions/1
+Content-Type: application/json
+
+{
+  "code": "WINTER2024",
+  "percentage": 25,
+  "expireAt": "2025-03-31T23:59:59.000Z"
+}
+
+### Delete a promotion by ID
+DELETE http://localhost:5000/api/promotions/1
+
+############### FAQ #######################
+
+### Get all FAQs
+GET http://localhost:5000/api/faqs/
+
+### Get a single FAQ by ID
+GET http://localhost:5000/api/faqs/1
+
+### Create a new FAQ
+POST http://localhost:5000/api/faqs/
+Content-Type: application/json
+
+{
+  "question": "How do I reset my password?",
+  "answer": "Click on 'Forgot password' at login and follow the instructions.",
+  "topicId": 1
+}
+
+### Update a FAQ by ID
+PUT http://localhost:5000/api/faqs/1
+Content-Type: application/json
+
+{
+  "question": "How can I change my password?",
+  "answer": "Go to your profile settings and select 'Change password'.",
+  "topicId": 1
+}
+
+### Delete a FAQ by ID
+DELETE http://localhost:5000/api/faqs/1
+
+############### Topic #######################
+
+### Get all topics
+GET http://localhost:5000/api/topics/
+
+### Get a single topic by ID
+GET http://localhost:5000/api/topics/1
+
+### Create a new topic
+POST http://localhost:5000/api/topics/
+Content-Type: application/json
+
+{
+  "name": "Account Management"
+}
+
+### Update a topic by ID
+PUT http://localhost:5000/api/topics/1
+Content-Type: application/json
+
+{
+  "name": "User Account"
+}
+
+### Delete a topic by ID
+DELETE http://localhost:5000/api/topics/1
