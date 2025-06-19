@@ -15,9 +15,6 @@ RUN npm install
 COPY . .
 
 # Build the Next.js app
-RUN npx prisma migrate dev --name init
-RUN npx prisma generate
-RUN npm run build
 
 # Expose the port Next.js runs on
 EXPOSE 3000
