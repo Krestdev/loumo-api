@@ -11,6 +11,8 @@ const createPaymentSchema = Joi.object({
   name: Joi.string(),
   total: Joi.number(),
   status: Joi.string(),
+  tel: Joi.string().required(),
+  method: Joi.string().required(),
   ref: Joi.string(),
   ids: Joi.array().items(Joi.number()),
   orderId: Joi.number(),
@@ -20,6 +22,8 @@ const updatePaymentSchema = Joi.object({
   name: Joi.string().optional(),
   total: Joi.number().optional(),
   status: Joi.string().optional(),
+  tel: Joi.string().optional(),
+  method: Joi.string().optional(),
   ref: Joi.string().optional(),
   orderId: Joi.number(),
 });

@@ -180,7 +180,9 @@ model Payment {
   id      Int    @id @default(autoincrement())
   name    String
   status  String
+  method  String
   ref     String
+  tel     String
   total   Int
   order   Order  @relation(fields: [orderId], references: [id])
   orderId Int

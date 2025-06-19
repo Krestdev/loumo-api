@@ -1,13 +1,16 @@
 import { Order, PrismaClient, Payment } from "../../generated/prisma";
+import { PawapayService } from "../services/payment";
 
 const prisma = new PrismaClient();
+const pawapay = new PawapayService();
 
 export class PaymentLogic {
   async createPayment(
     data: Omit<Payment, "id"> & { orderId: number }
   ): Promise<Payment> {
     const { orderId, ...paymentData } = data;
-    return prisma.payment.create({
+
+    const payOutData = await prisma.payment.create({
       data: {
         ...paymentData,
         order: orderId
@@ -18,7 +21,37 @@ export class PaymentLogic {
             }
           : {},
       },
+      include: {
+        order: {
+          include: {
+            user: true,
+          },
+        },
+      },
     });
+
+    try {
+      const payout = await pawapay.requestPayout({
+        amount: payOutData.total.toString(),
+        currency: "XAF",
+        country: "CMR",
+        correspondent: payOutData.method, // "ORANGE_CM" | "MTN_MOMO_CMR"
+        customerTimestamp: new Date().toISOString(),
+        recipient: {
+          type: "MSISDN",
+          address: { value: payOutData.tel },
+        },
+        statementDescription: "Order 1234",
+      });
+
+      // this.updatePayment(payOutData.id,{...payOutData,status:payout.status})
+      console.log(payout);
+    } catch (err) {
+      console.log("Could not procid with Payment", err);
+      throw err;
+    }
+
+    return payOutData;
   }
 
   async updatePayment(

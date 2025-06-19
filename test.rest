@@ -421,6 +421,8 @@ Content-Type: application/json
   "name": "Credit Card",
   "status": "completed",
   "ref": "PAY123456",
+  "tel": "237657071178",
+  "method": "ORANGE_CMR",
   "total": 250000,
   "orderId": 1
 }
@@ -437,7 +439,7 @@ Content-Type: application/json
 }
 
 ### Delete a payment by ID
-DELETE http://localhost:5000/api/payments/1
+DELETE http://localhost:5000/api/payments/10
 
 
 ############### Agent #######################
