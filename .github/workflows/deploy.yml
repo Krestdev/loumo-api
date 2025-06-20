@@ -31,7 +31,7 @@ jobs:
 
       - name: Deploy to VPS
         run: |
-         ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'bash -s' <<'EOSH' || EXIT_CODE=$?
+         ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'bash -s' <<'EOSH'
             set -euo pipefail
 
             TIMESTAMP=${{ env.DEPLOY_TIME }}
