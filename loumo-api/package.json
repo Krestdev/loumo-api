@@ -6,7 +6,7 @@
     "build": "tsc --build",
     "start": "node ./build/index.js",
     "dev": "nodemon ./src/index.ts",
-    "lint": "lint",
+    "lint": "eslint",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
