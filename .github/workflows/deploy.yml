@@ -31,7 +31,7 @@ jobs:
 
       - name: Deploy to VPS
         run: |
-          ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} <<EOF
+          ssh -tt ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} <<EOF
             set -e
             TIMESTAMP=${{ env.DEPLOY_TIME }}
             RELEASE_DIR=~/deployments/loumo-app/releases/\$TIMESTAMP
