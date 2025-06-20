@@ -1,4 +1,3 @@
-// __tests__/health.test.ts
 import request from "supertest";
 import { Server } from "..";
 
