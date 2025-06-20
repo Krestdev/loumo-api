@@ -1,0 +1,41 @@
+services:
+  loumo:
+    container_name: loumo
+    build:
+      context: ./loumo-api
+      dockerfile: Dockerfile
+    command: sh -c "npx prisma migrate dev --name init && npx prisma generate && npm run build && npm run start"
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: "file:./dev.db"
+      SERVER_URI: "mongodb://mongo:27017/loumo-db?directConnection=true&serverSelectionTimeoutMS=2000&appName=loumo-app"
+      JWT_SECRET: "your_jwt_secret"
+      SMTP_USER: "info@le-carino.com"
+      SMTP_PASS: "admin@carino2024"
+      PAWAPAY_API_TOKEN: "eyJraWQiOiIxIiwiYWxnIjoiRVMyNTYifQ.eyJ0dCI6IkFBVCIsInN1YiI6IjUzMTciLCJtYXYiOiIxIiwiZXhwIjoyMDY1ODU2NzU1LCJpYXQiOjE3NTAzMjM5NTUsInBtIjoiREFGLFBBRiIsImp0aSI6IjU0YWNlYzhlLWY5ZTMtNDE5YS1iOGIwLTM0NjQ5ZGI5MzU5MiJ9.f9EpjHcwXTbXoggaD5cCbkJ9rPoRm3M1k4q2eo1lbfYS4lHMOAI-2DV_6hxpX7Ula12P6BHSoPgi5UgNDiMgdw"
+      PAWAPAY_BASE_URL: https://api.sandbox.pawapay.io
+    ports:
+      - "5000:5000"
+    networks:
+      - app-network
+
+  mongo:
+    container_name: mongo
+    image: mongo:6
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: loumo-db
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+    attachable: true
+
+volumes:
+  mongo-data: {}

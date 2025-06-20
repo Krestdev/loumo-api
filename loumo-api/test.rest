@@ -1,5 +1,8 @@
+# @host = https://loumoapi.krestdev.com
+@host = http://localhost:5000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1MDQwNTE3MiwiZXhwIjoxNzUwNDkxNTcyfQ.b0adqlbb_UEytXz-tmw96oK2LwP1Ko4YHY8QN6IqME4
 ### Login user by ID
-post http://localhost:5000/api/users/login
+post {{host}}/api/users/login
 Content-Type: application/json
 
 {
@@ -8,14 +11,14 @@ Content-Type: application/json
 }
 
 ### Get all users
-GET http://localhost:5000/api/users/?roleD=true&addressD=true&logD=true&notifD=true
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1MDEwNjE5MSwiZXhwIjoxNzUwMTkyNTkxfQ.Jp5NC3K8Yc3kM9CawNowT8kV40i0Ytxtl-CqkS9TzME
+GET {{host}}/api/users/?roleD=true&addressD=true&logD=true&notifD=true
+Authorization: Bearer {{token}}
 
 ### Get a single user by ID
-GET http://localhost:5000/api/users/1
+GET {{host}}/api/users/1
 
 ### Create a new user
-POST http://localhost:5000/api/users/
+POST {{host}}/api/users/
 Content-Type: application/json
 
 {
@@ -25,7 +28,7 @@ Content-Type: application/json
 }
 
 ### Update a user by ID
-PUT http://localhost:5000/api/users/2
+PUT {{host}}/api/users/2
 Content-Type: application/json
 
 {
@@ -34,7 +37,7 @@ Content-Type: application/json
 }
 
 ### assign role to a user by ID
-PUT http://localhost:5000/api/users/role/2
+PUT {{host}}/api/users/role/2
 Content-Type: application/json
 
 {
@@ -42,32 +45,32 @@ Content-Type: application/json
 }
 
 ### Delete a user by ID
-DELETE http://localhost:5000/api/users/{userId}
+DELETE {{host}}/api/users/{userId}
 
 
 ##################### roles ###########################
 
 
 ### Get all roles
-GET http://localhost:5000/api/roles/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1MDEwNjE5MSwiZXhwIjoxNzUwMTkyNTkxfQ.Jp5NC3K8Yc3kM9CawNowT8kV40i0Ytxtl-CqkS9TzME
+GET {{host}}/api/roles/
+Authorization: Bearer {{token}}
 
 ### Get a single role by ID
-GET http://localhost:5000/api/roles/1
+GET {{host}}/api/roles/1
 
 ### Create a new role
-POST http://localhost:5000/api/roles/
+POST {{host}}/api/roles/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1MDEwNjE5MSwiZXhwIjoxNzUwMTkyNTkxfQ.Jp5NC3K8Yc3kM9CawNowT8kV40i0Ytxtl-CqkS9TzME
+Authorization: Bearer {{token}}
 
 {
   "name": "delivery"
 }
 
 ### Update a role by ID
-PUT http://localhost:5000/api/roles/2
+PUT {{host}}/api/roles/2
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1MDEwNjE5MSwiZXhwIjoxNzUwMTkyNTkxfQ.Jp5NC3K8Yc3kM9CawNowT8kV40i0Ytxtl-CqkS9TzME
+Authorization: Bearer {{token}}
 
 {
   "name": "superadmin",
@@ -75,19 +78,19 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhd
 }
 
 ### Delete a role by ID
-DELETE http://localhost:5000/api/roles/{roleId}
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1MDEwNjE5MSwiZXhwIjoxNzUwMTkyNTkxfQ.Jp5NC3K8Yc3kM9CawNowT8kV40i0Ytxtl-CqkS9TzME
+DELETE {{host}}/api/roles/{roleId}
+Authorization: Bearer {{token}}
 
 ##################### permissions ###########################
 
 ### Get all permissions
-GET http://localhost:5000/api/permissions/
+GET {{host}}/api/permissions/
 
 ### Get a single permission by ID
-GET http://localhost:5000/api/permissions/1
+GET {{host}}/api/permissions/1
 
 ### Create a new permission
-POST http://localhost:5000/api/permissions/
+POST {{host}}/api/permissions/
 Content-Type: application/json
 
 {
@@ -95,7 +98,7 @@ Content-Type: application/json
 }
 
 ### Update a permission by ID
-PUT http://localhost:5000/api/permissions/1
+PUT {{host}}/api/permissions/1
 Content-Type: application/json
 
 {
@@ -103,20 +106,20 @@ Content-Type: application/json
 }
 
 ### Delete a permission by ID
-DELETE http://localhost:5000/api/permissions/1
+DELETE {{host}}/api/permissions/1
 
 
 ##################### Address ###########################
 
 
 ### Get all addresses
-GET http://localhost:5000/api/address/
+GET {{host}}/api/address/
 
 ### Get a single address by ID (not ecessary)
-GET http://localhost:5000/api/address/1
+GET {{host}}/api/address/1
 
 ### Create a new address
-POST http://localhost:5000/api/address/
+POST {{host}}/api/address/
 Content-Type: application/json
 
 {
@@ -127,7 +130,7 @@ Content-Type: application/json
 }
 
 ### Update an address by ID
-PUT http://localhost:5000/api/address/2
+PUT {{host}}/api/address/2
 Content-Type: application/json
 
 {
@@ -138,20 +141,20 @@ Content-Type: application/json
 }
 
 ### Delete an address by ID
-DELETE http://localhost:5000/api/address/1
+DELETE {{host}}/api/address/1
 
 
 ########### Zone ########################
 
 
 ### Get all zones
-GET http://localhost:5000/api/zones/
+GET {{host}}/api/zones/
 
 ### Get a single zone by ID
-GET http://localhost:5000/api/zones/1
+GET {{host}}/api/zones/1
 
 ### Create a new zone
-POST http://localhost:5000/api/zones/
+POST {{host}}/api/zones/
 Content-Type: application/json
 
 {
@@ -160,7 +163,7 @@ Content-Type: application/json
 }
 
 ### Update a zone by ID
-PUT http://localhost:5000/api/zones/4
+PUT {{host}}/api/zones/4
 Content-Type: application/json
 
 {
@@ -170,20 +173,20 @@ Content-Type: application/json
 }
 
 ### Delete a zone by ID
-DELETE http://localhost:5000/api/zones/1
+DELETE {{host}}/api/zones/1
 
 
 ################ Logs###################
 
 
 ### Get all logs
-GET http://localhost:5000/api/logs/
+GET {{host}}/api/logs/
 
 ### Get a single log by ID
-GET http://localhost:5000/api/logs/1
+GET {{host}}/api/logs/1
 
 ### Create a new log
-POST http://localhost:5000/api/logs/
+POST {{host}}/api/logs/
 Content-Type: application/json
 
 {
@@ -193,7 +196,7 @@ Content-Type: application/json
 }
 
 ### Update a log by ID
-PUT http://localhost:5000/api/logs/1
+PUT {{host}}/api/logs/1
 Content-Type: application/json
 
 {
@@ -202,20 +205,20 @@ Content-Type: application/json
 }
 
 ### Delete a log by ID
-DELETE http://localhost:5000/api/logs/1
+DELETE {{host}}/api/logs/1
 
 
 ################ notifications ##################
 
 
 ### Get all notifications
-GET http://localhost:5000/api/notifications/
+GET {{host}}/api/notifications/
 
 ### Get a single notification by ID
-GET http://localhost:5000/api/notifications/1
+GET {{host}}/api/notifications/1
 
 ### Create a new notification
-POST http://localhost:5000/api/notifications/
+POST {{host}}/api/notifications/
 Content-Type: application/json
 
 {
@@ -225,7 +228,7 @@ Content-Type: application/json
 }
 
 ### Update a notification by ID
-PUT http://localhost:5000/api/notifications/1
+PUT {{host}}/api/notifications/1
 Content-Type: application/json
 
 {
@@ -234,20 +237,20 @@ Content-Type: application/json
 }
 
 ### Delete a notification by ID
-DELETE http://localhost:5000/api/notifications/1
+DELETE {{host}}/api/notifications/1
 
 
 ############### Category #######################
 
 
 ### Get all categories
-GET http://localhost:5000/api/categories/
+GET {{host}}/api/categories/
 
 ### Get a single category by ID
-GET http://localhost:5000/api/categories/1
+GET {{host}}/api/categories/1
 
 ### Create a new category
-POST http://localhost:5000/api/categories/
+POST {{host}}/api/categories/
 Content-Type: application/json
 
 {
@@ -257,7 +260,7 @@ Content-Type: application/json
 }
 
 ### Update a category by ID
-PUT http://localhost:5000/api/categories/1
+PUT {{host}}/api/categories/1
 Content-Type: application/json
 
 {
@@ -267,20 +270,20 @@ Content-Type: application/json
 }
 
 ### Delete a category by ID
-DELETE http://localhost:5000/api/categories/1
+DELETE {{host}}/api/categories/1
 
 
 ############### Product #######################
 
 
 ### Get all products
-GET http://localhost:5000/api/products/
+GET {{host}}/api/products/
 
 ### Get a single product by ID
-GET http://localhost:5000/api/products/1
+GET {{host}}/api/products/1
 
 ### Create a new product
-POST http://localhost:5000/api/products/
+POST {{host}}/api/products/
 Content-Type: application/json
 
 {
@@ -291,7 +294,7 @@ Content-Type: application/json
 }
 
 ### Update a product by ID
-PUT http://localhost:5000/api/products/1
+PUT {{host}}/api/products/1
 Content-Type: application/json
 
 {
@@ -302,20 +305,20 @@ Content-Type: application/json
 }
 
 ### Delete a product by ID
-DELETE http://localhost:5000/api/products/1
+DELETE {{host}}/api/products/1
 
 
 ############### Product Variant #######################
 
 
 ### Get all product variants
-GET http://localhost:5000/api/productvariants/
+GET {{host}}/api/productvariants/
 
 ### Get a single product variant by ID
-GET http://localhost:5000/api/productvariants/1
+GET {{host}}/api/productvariants/1
 
 ### Create a new product variant
-POST http://localhost:5000/api/productvariants/
+POST {{host}}/api/productvariants/
 Content-Type: application/json
 
 {
@@ -326,7 +329,7 @@ Content-Type: application/json
 }
 
 ### Update a product variant by ID
-PUT http://localhost:5000/api/productvariants/1
+PUT {{host}}/api/productvariants/1
 Content-Type: application/json
 
 {
@@ -337,20 +340,20 @@ Content-Type: application/json
 }
 
 ### Delete a product variant by ID
-DELETE http://localhost:5000/api/productvariants/1
+DELETE {{host}}/api/productvariants/1
 
 
 ############### Shop #######################
 
 
 ### Get all shops
-GET http://localhost:5000/api/shops/
+GET {{host}}/api/shops/
 
 ### Get a single shop by ID
-GET http://localhost:5000/api/shops/1
+GET {{host}}/api/shops/1
 
 ### Create a new shop
-POST http://localhost:5000/api/shops/
+POST {{host}}/api/shops/
 Content-Type: application/json
 
 {
@@ -359,7 +362,7 @@ Content-Type: application/json
 }
 
 ### Update a shop by ID
-PUT http://localhost:5000/api/shops/1
+PUT {{host}}/api/shops/1
 Content-Type: application/json
 
 {
@@ -368,20 +371,20 @@ Content-Type: application/json
 }
 
 ### Delete a shop by ID
-DELETE http://localhost:5000/api/shops/1
+DELETE {{host}}/api/shops/1
 
 
 ############### Order #######################
 
 
 ### Get all orders
-GET http://localhost:5000/api/orders/
+GET {{host}}/api/orders/
 
 ### Get a single order by ID
-GET http://localhost:5000/api/orders/1
+GET {{host}}/api/orders/1
 
 ### Create a new order
-POST http://localhost:5000/api/orders/
+POST {{host}}/api/orders/
 Content-Type: application/json
 
 {
@@ -391,7 +394,7 @@ Content-Type: application/json
 }
 
 ### Update an order by ID
-PUT http://localhost:5000/api/orders/1
+PUT {{host}}/api/orders/1
 Content-Type: application/json
 
 {
@@ -401,20 +404,20 @@ Content-Type: application/json
 }
 
 ### Delete an order by ID
-DELETE http://localhost:5000/api/orders/1
+DELETE {{host}}/api/orders/1
 
 
 ############### Payment #######################
 
 
 ### Get all payments
-GET http://localhost:5000/api/payments/
+GET {{host}}/api/payments/
 
 ### Get a single payment by ID
-GET http://localhost:5000/api/payments/1
+GET {{host}}/api/payments/1
 
 ### Create a new payment
-POST http://localhost:5000/api/payments/
+POST {{host}}/api/payments/
 Content-Type: application/json
 
 {
@@ -428,7 +431,7 @@ Content-Type: application/json
 }
 
 ### Update a payment by ID
-PUT http://localhost:5000/api/payments/1
+PUT {{host}}/api/payments/1
 Content-Type: application/json
 
 {
@@ -439,20 +442,20 @@ Content-Type: application/json
 }
 
 ### Delete a payment by ID
-DELETE http://localhost:5000/api/payments/10
+DELETE {{host}}/api/payments/10
 
 
 ############### Agent #######################
 
 
 ### Get all agents
-GET http://localhost:5000/api/agents/
+GET {{host}}/api/agents/
 
 ### Get a single agent by ID
-GET http://localhost:5000/api/agents/1
+GET {{host}}/api/agents/1
 
 ### Create a new agent
-POST http://localhost:5000/api/agents/
+POST {{host}}/api/agents/
 Content-Type: application/json
 
 {
@@ -461,7 +464,7 @@ Content-Type: application/json
 }
 
 ### Update an agent by ID
-PUT http://localhost:5000/api/agents/1
+PUT {{host}}/api/agents/1
 Content-Type: application/json
 
 {
@@ -470,20 +473,20 @@ Content-Type: application/json
 }
 
 ### Delete an agent by ID
-DELETE http://localhost:5000/api/agents/1
+DELETE {{host}}/api/agents/1
 
 
 ############### Order Item #######################
 
 
 ### Get all order items
-GET http://localhost:5000/api/orderitems/
+GET {{host}}/api/orderitems/
 
 ### Get a single order item by ID
-GET http://localhost:5000/api/orderitems/1
+GET {{host}}/api/orderitems/1
 
 ### Create a new order item
-POST http://localhost:5000/api/orderitems/
+POST {{host}}/api/orderitems/
 Content-Type: application/json
 
 {
@@ -492,7 +495,7 @@ Content-Type: application/json
 }
 
 ### Update an order item by ID
-PUT http://localhost:5000/api/orderitems/1
+PUT {{host}}/api/orderitems/1
 Content-Type: application/json
 
 {
@@ -502,20 +505,20 @@ Content-Type: application/json
   # "orderId": 1
   # "deliveryId": 1
 ### Delete an order item by ID
-DELETE http://localhost:5000/api/orderitems/1
+DELETE {{host}}/api/orderitems/1
 
 
 ############### Delivery #######################
 
 
 ### Get all deliveries
-GET http://localhost:5000/api/deliveries/
+GET {{host}}/api/deliveries/
 
 ### Get a single delivery by ID
-GET http://localhost:5000/api/deliveries/1
+GET {{host}}/api/deliveries/1
 
 ### Create a new delivery
-POST http://localhost:5000/api/deliveries/
+POST {{host}}/api/deliveries/
 Content-Type: application/json
 
 {
@@ -524,7 +527,7 @@ Content-Type: application/json
 }
 
 ### Update a delivery by ID
-PUT http://localhost:5000/api/deliveries/1
+PUT {{host}}/api/deliveries/1
 Content-Type: application/json
 
 {
@@ -533,20 +536,20 @@ Content-Type: application/json
 }
 
 ### Delete a delivery by ID
-DELETE http://localhost:5000/api/deliveries/1
+DELETE {{host}}/api/deliveries/1
 
 
 ############### Stock #######################
 
 
 ### Get all stocks
-GET http://localhost:5000/api/stocks/
+GET {{host}}/api/stocks/
 
 ### Get a single stock by ID
-GET http://localhost:5000/api/stocks/1
+GET {{host}}/api/stocks/1
 
 ### Create a new stock
-POST http://localhost:5000/api/stocks/
+POST {{host}}/api/stocks/
 Content-Type: application/json
 
 {
@@ -556,7 +559,7 @@ Content-Type: application/json
 }
 
 ### Update a stock by ID
-PUT http://localhost:5000/api/stocks/1
+PUT {{host}}/api/stocks/1
 Content-Type: application/json
 
 {
@@ -565,20 +568,20 @@ Content-Type: application/json
 }
 
 ### Delete a stock by ID
-DELETE http://localhost:5000/api/stocks/1
+DELETE {{host}}/api/stocks/1
 
 
 ############### Promotion #######################
 
 
 ### Get all promotions
-GET http://localhost:5000/api/promotions/
+GET {{host}}/api/promotions/
 
 ### Get a single promotion by ID
-GET http://localhost:5000/api/promotions/1
+GET {{host}}/api/promotions/1
 
 ### Create a new promotion
-POST http://localhost:5000/api/promotions/
+POST {{host}}/api/promotions/
 Content-Type: application/json
 
 {
@@ -588,7 +591,7 @@ Content-Type: application/json
 }
 
 ### Update a promotion by ID
-PUT http://localhost:5000/api/promotions/1
+PUT {{host}}/api/promotions/1
 Content-Type: application/json
 
 {
@@ -598,18 +601,18 @@ Content-Type: application/json
 }
 
 ### Delete a promotion by ID
-DELETE http://localhost:5000/api/promotions/1
+DELETE {{host}}/api/promotions/1
 
 ############### FAQ #######################
 
 ### Get all FAQs
-GET http://localhost:5000/api/faqs/
+GET {{host}}/api/faqs/
 
 ### Get a single FAQ by ID
-GET http://localhost:5000/api/faqs/1
+GET {{host}}/api/faqs/1
 
 ### Create a new FAQ
-POST http://localhost:5000/api/faqs/
+POST {{host}}/api/faqs/
 Content-Type: application/json
 
 {
@@ -619,7 +622,7 @@ Content-Type: application/json
 }
 
 ### Update a FAQ by ID
-PUT http://localhost:5000/api/faqs/1
+PUT {{host}}/api/faqs/1
 Content-Type: application/json
 
 {
@@ -629,18 +632,18 @@ Content-Type: application/json
 }
 
 ### Delete a FAQ by ID
-DELETE http://localhost:5000/api/faqs/1
+DELETE {{host}}/api/faqs/1
 
 ############### Topic #######################
 
 ### Get all topics
-GET http://localhost:5000/api/topics/
+GET {{host}}/api/topics/
 
 ### Get a single topic by ID
-GET http://localhost:5000/api/topics/1
+GET {{host}}/api/topics/1
 
 ### Create a new topic
-POST http://localhost:5000/api/topics/
+POST {{host}}/api/topics/
 Content-Type: application/json
 
 {
@@ -648,7 +651,7 @@ Content-Type: application/json
 }
 
 ### Update a topic by ID
-PUT http://localhost:5000/api/topics/1
+PUT {{host}}/api/topics/1
 Content-Type: application/json
 
 {
@@ -656,4 +659,4 @@ Content-Type: application/json
 }
 
 ### Delete a topic by ID
-DELETE http://localhost:5000/api/topics/1
+DELETE {{host}}/api/topics/1
