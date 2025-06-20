@@ -54,7 +54,7 @@ jobs:
                 break
               fi
               echo "Waiting for app..."
-              sleep 3
+              sleep 6
             done
             if curl --fail http://localhost:5000/health; then
               ln -sfn \$RELEASE_DIR ~/deployments/loumo-app/current
