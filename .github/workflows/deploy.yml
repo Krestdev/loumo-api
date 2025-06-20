@@ -31,7 +31,7 @@ jobs:
 
       - name: Deploy to VPS
         run: |
-          ssh -tt ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} <<'EOF'
+         ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'bash -s' <<'EOSH' || EXIT_CODE=$?
             set -euo pipefail
 
             TIMESTAMP=${{ env.DEPLOY_TIME }}
@@ -81,7 +81,7 @@ jobs:
 
             echo "🎯 Deployment complete for release $TIMESTAMP"
             exit 0
-          EOF
+          EOSH
 
       - name: Confirm remote session is done
         run: echo "🧠 SSH session completed cleanly"
