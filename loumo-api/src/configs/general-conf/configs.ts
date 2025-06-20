@@ -27,6 +27,7 @@ const config = {
     SMTP_USER: env["SMTP_USER"] ?? "",
     SMTP_PASS: env["SMTP_PASS"] ?? "",
   },
+  NODE_ENV: env["NODE_ENV"] ?? "dev",
 };
 
 export default config;
