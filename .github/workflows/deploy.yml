@@ -46,7 +46,15 @@ jobs:
             docker compose -f docker-compose.yml --env-file .env up -d
 
             # Health check (adjust port/path as needed)
-            sleep 10
+            # sleep 10
+            for i in {1..10}; do
+              if curl --fail http://localhost:5000/health; then
+                echo "✅ Health check passed"
+                break
+              fi
+              echo "Waiting for app..."
+              sleep 3
+            done
             if curl --fail http://localhost:5000/health; then
               ln -sfn \$RELEASE_DIR ~/deployments/loumo-app/current
               echo "Deployment successful"
