@@ -18,7 +18,7 @@ jobs:
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      
+
       - name: Add VPS to known_hosts
         run: |
           ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
@@ -31,31 +31,57 @@ jobs:
 
       - name: Deploy to VPS
         run: |
-          ssh -tt ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} <<EOF
-            set -e
+         ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'bash -s' << EOF
+            set -euo pipefail
+
             TIMESTAMP=${{ env.DEPLOY_TIME }}
-            RELEASE_DIR=~/deployments/loumo-app/releases/\$TIMESTAMP
+            RELEASE_DIR=~/deployments/loumo-app/releases/$TIMESTAMP
 
-            mkdir -p \$RELEASE_DIR
-            cd \$RELEASE_DIR
+            mkdir -p $RELEASE_DIR
+            cd $RELEASE_DIR
 
-            git clone https://github.com/${{ github.repository }} . --depth 1
+            git clone https://github.com/${{ github.repository }} temp-clone --depth 1
+            mv temp-clone/* temp-clone/.* . 2>/dev/null || true
+            rm -rf temp-clone
+
             cp ~/deployments/loumo-app/shared/.env .env
             export DOCKER_BUILDKIT=0
+
+            # Remove any containers that might conflict
+            docker rm -f mongo loumo 2>/dev/null || true
+
             docker compose -f docker-compose.yml --env-file .env build
             docker compose -f docker-compose.yml --env-file .env up -d
 
-            # Health check (adjust port/path as needed)
-            sleep 10
+            # Health check loop
+            for i in {1..10}; do
+              if curl --fail http://localhost:5000/health; then
+                echo "✅ Health check passed"
+                break
+              fi
+              echo "⏳ Waiting for app to be ready... ($i/10)"
+              sleep 6
+            done
+
             if curl --fail http://localhost:5000/health; then
-              ln -sfn \$RELEASE_DIR ~/deployments/loumo-app/current
-              echo "Deployment successful"
+              ln -sfn $RELEASE_DIR ~/deployments/loumo-app/current
+              echo "✅ Deployment successful"
             else
-              echo "Health check failed, rolling back"
-              PREV=\$(readlink ~/deployments/loumo-app/current)
-              docker compose -f \$RELEASE_DIR/docker-compose.yml down
-              ln -sfn \$PREV ~/deployments/loumo-app/current
-              docker compose -f \$PREV/docker-compose.yml up -d
+              echo "❌ Health check failed, rolling back"
+              if [ -L ~/deployments/loumo-app/current ]; then
+                PREV=$(readlink ~/deployments/loumo-app/current)
+                docker compose -f $RELEASE_DIR/docker-compose.yml --env-file .env down || true
+                ln -sfn $PREV ~/deployments/loumo-app/current
+                docker compose -f $PREV/docker-compose.yml --env-file $PREV/.env up -d
+              else
+                echo "⚠️ No previous release to roll back to"
+              fi
               exit 1
             fi
+
+            echo "🎯 Deployment complete for release $TIMESTAMP"
+            exit 0
           EOF
+
+      - name: Confirm remote session is done
+        run: echo "🧠 SSH session completed cleanly"
