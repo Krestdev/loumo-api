@@ -2,7 +2,6 @@ import expressWinston from "express-winston";
 import winston, { format } from "winston";
 import "winston-mongodb";
 import { config } from "../configs";
-import { NextFunction } from "express";
 
 export default class WinstonLogger {
   warningLogger = () => {
