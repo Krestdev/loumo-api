@@ -146,6 +146,7 @@ model Product {
 model Category {
   id       Int       @id @default(autoincrement())
   name     String
+  imgUrl   String?
   weight   Int
   status   Boolean   @default(true)
   products Product[]
