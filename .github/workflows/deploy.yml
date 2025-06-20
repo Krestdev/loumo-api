@@ -1,0 +1,55 @@
+name: Deploy Loumo API
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to VPS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Create release folder on VPS
+        run: |
+          TIMESTAMP=$(date +"%Y%m%d-%H%M")
+          echo "RELEASE_DIR=~/deployments/loumo-app/releases/$TIMESTAMP" >> $GITHUB_ENV
+          echo "DEPLOY_TIME=$TIMESTAMP" >> $GITHUB_ENV
+
+      - name: Deploy to VPS
+        run: |
+          ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} <<EOF
+            set -e
+            TIMESTAMP=${{ env.DEPLOY_TIME }}
+            RELEASE_DIR=~/deployments/loumo-app/releases/\$TIMESTAMP
+
+            mkdir -p \$RELEASE_DIR
+            cd \$RELEASE_DIR
+
+            git clone https://github.com/${{ github.repository }} . --depth 1
+            docker compose -f docker-compose.yml --env-file .env build
+            docker compose -f docker-compose.yml --env-file .env up -d
+
+            # Health check (adjust port/path as needed)
+            sleep 10
+            if curl --fail http://localhost:5000/health; then
+              ln -sfn \$RELEASE_DIR ~/deployments/loumo-app/current
+              echo "Deployment successful"
+            else
+              echo "Health check failed, rolling back"
+              PREV=\$(readlink ~/deployments/loumo-app/current)
+              docker compose -f \$RELEASE_DIR/docker-compose.yml down
+              ln -sfn \$PREV ~/deployments/loumo-app/current
+              docker compose -f \$PREV/docker-compose.yml up -d
+              exit 1
+            fi
+          EOF
