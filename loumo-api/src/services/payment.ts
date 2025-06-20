@@ -9,6 +9,8 @@ interface Recipient {
 }
 
 interface PayoutRequest {
+  payoutId?: string;
+  status?: string;
   amount: string;
   currency: string;
   country: string;
@@ -16,7 +18,16 @@ interface PayoutRequest {
   recipient: Recipient;
   customerTimestamp: string;
   statementDescription?: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, string>;
+  receivedByRecipient?: string;
+  correspondentIds?: Record<string, string>;
+  created: string;
+}
+
+interface ResendRequest {
+  payoutId: string;
+  status: string;
+  rejectionReason?: string;
 }
 
 export class PawapayService {
@@ -43,7 +54,7 @@ export class PawapayService {
   public async requestPayout(data: Omit<PayoutRequest, "payoutId">): Promise<{
     payoutId: string;
     status: string;
-    created: String;
+    created: string;
     rejectionReason?: {
       rejectionCode: string;
       rejectionMessage: string;
@@ -63,7 +74,7 @@ export class PawapayService {
   /**
    * Check the status of an existing payout
    */
-  public async checkPayoutStatus(payoutId: string): Promise<any> {
+  public async checkPayoutStatus(payoutId: string): Promise<PayoutRequest[]> {
     const response = await this.client.get(`/payouts/${payoutId}/status`);
     return response.data;
   }
@@ -71,7 +82,7 @@ export class PawapayService {
   /**
    * Resend payout callback (for recovery or manual retries)
    */
-  public async resendPayoutCallback(payoutId: string): Promise<any> {
+  public async resendPayoutCallback(payoutId: string): Promise<ResendRequest> {
     const response = await this.client.post(
       `/payouts/${payoutId}/resend-callback`
     );
@@ -81,7 +92,7 @@ export class PawapayService {
   /**
    * Cancel a payout (only works for ENQUEUED status)
    */
-  public async cancelPayout(payoutId: string): Promise<any> {
+  public async cancelPayout(payoutId: string): Promise<ResendRequest> {
     const response = await this.client.post(`/payouts/${payoutId}/cancel`);
     return response.data;
   }

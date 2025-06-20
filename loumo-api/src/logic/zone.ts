@@ -1,4 +1,4 @@
-import { PrismaClient, Zone } from "../../generated/prisma";
+import { Address, PrismaClient, Zone } from "../../generated/prisma";
 
 const prisma = new PrismaClient();
 
@@ -21,7 +21,9 @@ export class ZoneLogic {
   }
 
   // Get a zone by id, including its addresses
-  async getZoneById(id: number): Promise<(Zone & { addresses: any[] }) | null> {
+  async getZoneById(
+    id: number
+  ): Promise<(Zone & { addresses: Address[] }) | null> {
     return prisma.zone.findUnique({
       where: { id },
       include: { addresses: true },
@@ -29,7 +31,7 @@ export class ZoneLogic {
   }
 
   // Get all zones, including their addresses
-  async getAllZones(): Promise<(Zone & { addresses: any[] })[]> {
+  async getAllZones(): Promise<(Zone & { addresses: Address[] })[]> {
     return prisma.zone.findMany({
       include: { addresses: true },
     });
@@ -39,7 +41,7 @@ export class ZoneLogic {
   async updateZone(
     id: number,
     data: Partial<Omit<Zone, "id">> & { addressIds?: number[] }
-  ): Promise<(Zone & { addresses: any[] }) | null> {
+  ): Promise<(Zone & { addresses: Address[] }) | null> {
     const { addressIds, ...zoneData } = data;
     return prisma.zone.update({
       where: { id },
@@ -56,7 +58,9 @@ export class ZoneLogic {
   }
 
   // Delete a zone (removes from join table as well)
-  async deleteZone(id: number): Promise<(Zone & { addresses: any[] }) | null> {
+  async deleteZone(
+    id: number
+  ): Promise<(Zone & { addresses: Address[] }) | null> {
     return prisma.zone.delete({
       where: { id },
       include: { addresses: true },

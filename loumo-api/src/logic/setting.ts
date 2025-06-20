@@ -34,9 +34,9 @@ export class SettingLogic {
   // Update a setting and optionally update its roles
   async updateSetting(
     id: number,
-    data: Partial<Omit<Setting, "id">> & { faqsIds?: number[] }
+    data: Partial<Omit<Setting, "id">>
   ): Promise<Setting | null> {
-    const { faqsIds, ...settingData } = data;
+    const { ...settingData } = data;
     return prisma.setting.update({
       where: { id },
       data: {

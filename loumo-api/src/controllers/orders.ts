@@ -59,8 +59,8 @@ export default class OrderController {
   };
   createOrder = async (
     request: Request<
-      {},
-      {},
+      object,
+      object,
       Omit<Order, "id"> & { addressId: number; userId: number }
     >,
     response: Response
@@ -82,7 +82,7 @@ export default class OrderController {
   updateOrder = async (
     request: Request<
       { id: string },
-      {},
+      object,
       Partial<Omit<Order, "id">> & { addressId?: number }
     >,
     response: Response

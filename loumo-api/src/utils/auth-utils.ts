@@ -16,7 +16,7 @@ export function getUserIdFromRequest(req: Request): number | null {
       userId: number;
     };
     return decoded.userId;
-  } catch (err) {
+  } catch {
     return null;
   }
 }

@@ -58,7 +58,7 @@ export default class LogController {
     return true;
   };
   createLog = async (
-    request: Request<{}, {}, Omit<Log, "id"> & { userId: number }>,
+    request: Request<object, object, Omit<Log, "id"> & { userId: number }>,
     response: Response
   ) => {
     if (!this.validate(request, response, "create")) return;
@@ -79,7 +79,7 @@ export default class LogController {
   updateLog = async (
     request: Request<
       { id: string },
-      {},
+      object,
       Partial<Omit<Log, "id">> & { userId?: number }
     >,
     response: Response

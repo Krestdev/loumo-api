@@ -58,7 +58,11 @@ export default class notificationController {
     return true;
   };
   createNotification = async (
-    request: Request<{}, {}, Omit<Notification, "id"> & { userId: number }>,
+    request: Request<
+      object,
+      object,
+      Omit<Notification, "id"> & { userId: number }
+    >,
     response: Response
   ) => {
     if (!this.validate(request, response, "create")) return;
@@ -84,7 +88,7 @@ export default class notificationController {
   updateNotification = async (
     request: Request<
       { id: string },
-      {},
+      object,
       Partial<Omit<Notification, "id">> & { userId?: number }
     >,
     response: Response

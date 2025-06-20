@@ -58,7 +58,7 @@ export default class FaqController {
     return true;
   };
   createFaq = async (
-    request: Request<{}, {}, Omit<Faq, "id"> & { topicId: number }>,
+    request: Request<object, object, Omit<Faq, "id"> & { topicId: number }>,
     response: Response
   ) => {
     if (!this.validate(request, response, "create")) return;
@@ -78,7 +78,7 @@ export default class FaqController {
   updateFaq = async (
     request: Request<
       { id: string },
-      {},
+      object,
       Partial<Omit<Faq, "id">> & { topicId?: number }
     >,
     response: Response

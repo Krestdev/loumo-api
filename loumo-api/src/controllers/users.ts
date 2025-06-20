@@ -111,7 +111,7 @@ export default class UserController {
   };
 
   createUser = async (
-    request: Request<{}, {}, Omit<User, "id">>,
+    request: Request<object, object, Omit<User, "id">>,
     response: Response
   ) => {
     if (!this.validate(request, response, "userCreate")) return;
@@ -120,7 +120,7 @@ export default class UserController {
       const user = await userLogic.register(request.body);
       response.status(201).json(user);
     } catch (error) {
-      throw new CustomError("", 500);
+      throw new CustomError("Failed to Create SHop", undefined, error as Error);
     }
   };
 
@@ -138,12 +138,12 @@ export default class UserController {
       }
       response.json(user);
     } catch (error) {
-      throw new CustomError("", 500);
+      throw new CustomError("Failed to get a user", undefined, error as Error);
     }
   };
 
   login = async (
-    request: Request<{}, {}, { email: string; password: string }>,
+    request: Request<object, object, { email: string; password: string }>,
     response: Response
   ) => {
     if (!this.validate(request, response, "login")) return;
@@ -157,7 +157,7 @@ export default class UserController {
       }
       response.json(user);
     } catch (error) {
-      throw new CustomError("", 500);
+      throw new CustomError("Failed to login user", undefined, error as Error);
     }
   };
 
@@ -168,7 +168,7 @@ export default class UserController {
       const users = await userLogic.listUsers(query);
       response.json(users);
     } catch (error) {
-      throw new CustomError("", 500);
+      throw new CustomError("Failed to Create SHop", undefined, error as Error);
     }
   };
 
@@ -190,7 +190,7 @@ export default class UserController {
   };
 
   assignRole = async (
-    request: Request<{ id: string }, {}, { roleId: number }>,
+    request: Request<{ id: string }, object, { roleId: number }>,
     response: Response
   ) => {
     if (!this.validate(request, response, "paramId")) return;

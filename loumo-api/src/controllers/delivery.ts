@@ -81,7 +81,7 @@ export default class DeliveryController {
 
   // Get one delivery by ID
   getOneDelivery = async (
-    request: Request<{ id: string }, {}, {}, {}>,
+    request: Request<{ id: string }>,
     response: Response
   ) => {
     if (!this.validate(request, response, "paramId")) return;
@@ -105,8 +105,8 @@ export default class DeliveryController {
   // Create a new delivery
   createDelivery = async (
     request: Request<
-      {},
-      {},
+      object,
+      object,
       Omit<Delivery, "id" | "agentId"> & {
         orderId: number;
         orderItemsIds?: number[];
@@ -132,7 +132,7 @@ export default class DeliveryController {
   updateDelivery = async (
     request: Request<
       { id: string },
-      {},
+      object,
       Partial<Omit<Delivery, "id" | "orderId">> & { agentId?: number }
     >,
     response: Response

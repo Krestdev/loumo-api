@@ -16,17 +16,58 @@ const updatePermissionSchema = Joi.object({
   ids: Joi.array().items(Joi.number()),
 });
 
+const paramSchema = Joi.object({
+  id: Joi.number(),
+});
+
 export default class PermissionController {
+  validate = (
+    request: Request<{ id?: string }>,
+    response: Response,
+    schema: "create" | "update" | "paramId" | "queryData"
+  ) => {
+    let result: Joi.ValidationResult | null = null;
+    switch (schema) {
+      case "create":
+        result = createPermissionSchema.validate(request.body);
+        if (result.error) {
+          response
+            .status(400)
+            .json({ result: result.error.details[0].message });
+        }
+        break;
+      case "update":
+        result = updatePermissionSchema.validate(request.body);
+        if (result.error) {
+          response
+            .status(400)
+            .json({ result: result.error.details[0].message });
+        }
+        break;
+      case "paramId":
+        result = paramSchema.validate(request.params);
+        if (result.error) {
+          response
+            .status(400)
+            .json({ result: result.error.details[0].message });
+        }
+        break;
+
+      default:
+        break;
+    }
+    if (result !== null && result.error) {
+      return false;
+    }
+    return true;
+  };
+
   createPermission = async (
-    request: Request<{}, {}, { action: string; ids: number[] }>,
+    request: Request<object, object, { action: string; ids: number[] }>,
     response: Response
   ) => {
-    const { action, ids } = request.body;
-    const { error } = createPermissionSchema.validate(request.body);
-    if (error) {
-      response.status(400).json({ error: error.details[0].message });
-      return;
-    }
+    if (!this.validate(request, response, "create")) return;
+
     try {
       const newPermission = await permissionLogic.createPermission(
         request.body
@@ -43,16 +84,16 @@ export default class PermissionController {
   };
 
   updatePermission = async (
-    request: Request<{ id: string }, {}, { action?: string; ids?: number[] }>,
+    request: Request<
+      { id: string },
+      object,
+      { action?: string; ids?: number[] }
+    >,
     response: Response
   ) => {
     const { id } = request.params;
-    const { action, ids } = request.body;
-    const { error } = updatePermissionSchema.validate(request.body);
-    if (error) {
-      response.status(400).json({ error: error.details[0].message });
-      return;
-    }
+    if (!this.validate(request, response, "update")) return;
+    if (!this.validate(request, response, "paramId")) return;
     try {
       const updatedPermission = await permissionLogic.updatePermission(
         Number(id),
@@ -86,6 +127,7 @@ export default class PermissionController {
     response: Response
   ) => {
     const { id } = request.params;
+    if (!this.validate(request, response, "paramId")) return;
     try {
       await permissionLogic.deletePermission(Number(id));
       response.status(204).send();

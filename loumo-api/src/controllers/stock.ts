@@ -80,7 +80,7 @@ export default class StockController {
 
   // Get one stock by ID
   getOneStock = async (
-    request: Request<{ id: string }, {}, {}, {}>,
+    request: Request<{ id: string }>,
     response: Response
   ) => {
     if (!this.validate(request, response, "paramId")) return;
@@ -100,8 +100,8 @@ export default class StockController {
   // Create a new stock
   createStock = async (
     request: Request<
-      {},
-      {},
+      object,
+      object,
       Omit<Stock, "id" | "promotionId"> & {
         orderId: number;
         orderItemsIds?: number[];
@@ -127,7 +127,7 @@ export default class StockController {
   updateStock = async (
     request: Request<
       { id: string },
-      {},
+      object,
       Partial<Omit<Stock, "id" | "productVariantId">> & { promotionId?: number }
     >,
     response: Response

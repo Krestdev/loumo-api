@@ -83,7 +83,11 @@ export class DeliveryLogic {
     return prisma.delivery.update({
       where: { id: deliveryId },
       data: {
-        agent: {},
+        agent: {
+          disconnect: {
+            id: agentId,
+          },
+        },
       },
     });
   }

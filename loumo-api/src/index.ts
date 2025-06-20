@@ -39,9 +39,9 @@ import TopicRouter from "./routes/topic";
  *
  * To start the server, call the `start()` method, which listens on the configured port.
  */
-class Server {
+export class Server {
   private PORT = 5000;
-  private app = express();
+  app = express();
   private users = new usersRouter();
   private roles = new RoleRouter();
   private address = new AddressRouter();

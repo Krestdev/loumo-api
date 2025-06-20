@@ -90,7 +90,7 @@ export default class PaymentController {
 
   // Get one payment by ID
   getOnePayment = async (
-    request: Request<{ id: string }, {}, {}, {}>,
+    request: Request<{ id: string }>,
     response: Response
   ) => {
     if (!this.validate(request, response, "paramId")) return;
@@ -113,7 +113,7 @@ export default class PaymentController {
 
   // Create a new payment
   createPayment = async (
-    request: Request<{}, {}, Omit<Payment, "id"> & { orderId: number }>,
+    request: Request<object, object, Omit<Payment, "id"> & { orderId: number }>,
     response: Response
   ) => {
     if (!this.validate(request, response, "create")) return;
@@ -134,7 +134,7 @@ export default class PaymentController {
   updatePayment = async (
     request: Request<
       { id: string },
-      {},
+      object,
       Partial<Omit<Payment, "id">> & { orderId: number }
     >,
     response: Response

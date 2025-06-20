@@ -60,7 +60,11 @@ export default class ProductController {
     return true;
   };
   createProduct = async (
-    request: Request<{}, {}, Omit<Product, "id"> & { categoryId: number }>,
+    request: Request<
+      object,
+      object,
+      Omit<Product, "id"> & { categoryId: number }
+    >,
     response: Response
   ) => {
     if (!this.validate(request, response, "create")) return;
@@ -84,7 +88,7 @@ export default class ProductController {
   updateProduct = async (
     request: Request<
       { id: string },
-      {},
+      object,
       Partial<Omit<Product, "id">> & { categoryId?: number }
     >,
     response: Response

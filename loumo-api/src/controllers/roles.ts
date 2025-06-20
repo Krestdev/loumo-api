@@ -74,10 +74,7 @@ export default class RoleController {
   };
 
   // Get one role by ID
-  getOneRole = async (
-    request: Request<{ id: string }, {}, {}, {}>,
-    response: Response
-  ) => {
+  getOneRole = async (request: Request<{ id: string }>, response: Response) => {
     if (!this.validate(request, response, "paramId")) return;
 
     try {
@@ -94,7 +91,7 @@ export default class RoleController {
 
   // Create a new role
   createRole = async (
-    request: Request<{}, {}, Omit<Role, "id"> & { ids: number[] }>,
+    request: Request<object, object, Omit<Role, "id"> & { ids: number[] }>,
     response: Response
   ) => {
     if (!this.validate(request, response, "roleCreate")) return;
@@ -108,7 +105,11 @@ export default class RoleController {
 
   // Update an existing role
   updateRole = async (
-    request: Request<{ id: string }, {}, Partial<Role> & { ids?: number[] }>,
+    request: Request<
+      { id: string },
+      object,
+      Partial<Role> & { ids?: number[] }
+    >,
     response: Response
   ) => {
     if (!this.validate(request, response, "paramId")) return;

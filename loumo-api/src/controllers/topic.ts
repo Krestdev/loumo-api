@@ -55,7 +55,7 @@ export default class TopicController {
     return true;
   };
   createTopic = async (
-    request: Request<{}, {}, Omit<Topic, "id">>,
+    request: Request<object, object, Omit<Topic, "id">>,
     response: Response
   ) => {
     if (!this.validate(request, response, "create")) return;
@@ -75,7 +75,7 @@ export default class TopicController {
   updateTopic = async (
     request: Request<
       { id: string },
-      {},
+      object,
       Partial<Omit<Topic, "id">> & { faqIds?: number }
     >,
     response: Response

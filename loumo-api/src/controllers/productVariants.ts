@@ -61,8 +61,8 @@ export default class ProductVariantController {
   };
   createProductVariant = async (
     request: Request<
-      {},
-      {},
+      object,
+      object,
       Omit<ProductVariant, "id"> & { productId: number }
     >,
     response: Response
@@ -90,7 +90,7 @@ export default class ProductVariantController {
   updateProductVariant = async (
     request: Request<
       { id: string },
-      {},
+      object,
       Partial<Omit<ProductVariant, "id">> & { productId?: number }
     >,
     response: Response

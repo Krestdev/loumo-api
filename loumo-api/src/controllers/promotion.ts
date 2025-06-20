@@ -83,7 +83,7 @@ export default class PromotionController {
 
   // Get one promotion by ID
   getOnePromotion = async (
-    request: Request<{ id: string }, {}, {}, {}>,
+    request: Request<{ id: string }>,
     response: Response
   ) => {
     if (!this.validate(request, response, "paramId")) return;
@@ -106,7 +106,11 @@ export default class PromotionController {
 
   // Create a new promotion
   createPromotion = async (
-    request: Request<{}, {}, Omit<Promotion, "id"> & { stockIds?: number[] }>,
+    request: Request<
+      object,
+      object,
+      Omit<Promotion, "id"> & { stockIds?: number[] }
+    >,
     response: Response
   ) => {
     if (!this.validate(request, response, "create")) return;
@@ -127,7 +131,7 @@ export default class PromotionController {
   updatePromotion = async (
     request: Request<
       { id: string },
-      {},
+      object,
       Partial<Omit<Promotion, "id">> & { stockIds: number[] }
     >,
     response: Response

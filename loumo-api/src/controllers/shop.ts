@@ -56,7 +56,7 @@ export default class ShopController {
     return true;
   };
   createShop = async (
-    request: Request<{}, {}, Omit<Shop, "id"> & { addressId: number }>,
+    request: Request<object, object, Omit<Shop, "id"> & { addressId: number }>,
     response: Response
   ) => {
     if (!this.validate(request, response, "create")) return;
@@ -76,7 +76,7 @@ export default class ShopController {
   updateShop = async (
     request: Request<
       { id: string },
-      {},
+      object,
       Partial<Omit<Shop, "id">> & { addressId?: number }
     >,
     response: Response

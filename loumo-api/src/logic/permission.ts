@@ -1,4 +1,4 @@
-import { PrismaClient, Permission } from "../../generated/prisma";
+import { PrismaClient, Permission, Role } from "../../generated/prisma";
 
 const prisma = new PrismaClient();
 
@@ -23,7 +23,7 @@ export class PermissionLogic {
   // Get a permission by id, including its roles
   async getPermissionById(
     id: number
-  ): Promise<(Permission & { roles: any[] }) | null> {
+  ): Promise<(Permission & { roles: Role[] }) | null> {
     return prisma.permission.findUnique({
       where: { id },
       include: { roles: true },
@@ -31,7 +31,7 @@ export class PermissionLogic {
   }
 
   // Get all permissions, including their roles
-  async getAllPermissions(): Promise<(Permission & { roles: any[] })[]> {
+  async getAllPermissions(): Promise<(Permission & { roles: Role[] })[]> {
     return prisma.permission.findMany({
       include: { roles: true },
     });
@@ -41,7 +41,7 @@ export class PermissionLogic {
   async updatePermission(
     id: number,
     data: Partial<Omit<Permission, "id">> & { roleIds?: number[] }
-  ): Promise<(Permission & { roles: any[] }) | null> {
+  ): Promise<(Permission & { roles: Role[] }) | null> {
     const { roleIds, ...permissionData } = data;
     return prisma.permission.update({
       where: { id },
@@ -60,7 +60,7 @@ export class PermissionLogic {
   // Delete a permission (removes from join table as well)
   async deletePermission(
     id: number
-  ): Promise<(Permission & { roles: any[] }) | null> {
+  ): Promise<(Permission & { roles: Role[] }) | null> {
     return prisma.permission.delete({
       where: { id },
       include: { roles: true },

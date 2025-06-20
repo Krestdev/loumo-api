@@ -83,7 +83,7 @@ export default class CategoryController {
 
   // Get one category by ID
   getOneCategory = async (
-    request: Request<{ id: string }, {}, {}, {}>,
+    request: Request<{ id: string }>,
     response: Response
   ) => {
     if (!this.validate(request, response, "paramId")) return;
@@ -106,7 +106,11 @@ export default class CategoryController {
 
   // Create a new category
   createCategory = async (
-    request: Request<{}, {}, Omit<Category, "id"> & { productIds?: number[] }>,
+    request: Request<
+      object,
+      object,
+      Omit<Category, "id"> & { productIds?: number[] }
+    >,
     response: Response
   ) => {
     if (!this.validate(request, response, "create")) return;
@@ -127,7 +131,7 @@ export default class CategoryController {
   updateCategory = async (
     request: Request<
       { id: string },
-      {},
+      object,
       Partial<Omit<Category, "id">> & { productIds: number[] }
     >,
     response: Response

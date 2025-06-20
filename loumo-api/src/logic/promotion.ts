@@ -1,4 +1,4 @@
-import { PrismaClient, Promotion } from "../../generated/prisma";
+import { PrismaClient, Promotion, Stock } from "../../generated/prisma";
 
 const prisma = new PrismaClient();
 
@@ -23,7 +23,7 @@ export class PromotionLogic {
   // Get a promotion by id, including its stock
   async getPromotionById(
     id: number
-  ): Promise<(Promotion & { stock: any[] }) | null> {
+  ): Promise<(Promotion & { stock: Stock[] }) | null> {
     return prisma.promotion.findUnique({
       where: { id },
       include: { stock: true },
@@ -31,7 +31,7 @@ export class PromotionLogic {
   }
 
   // Get all promotions, including their stock
-  async getAllPromotions(): Promise<(Promotion & { stock: any[] })[]> {
+  async getAllPromotions(): Promise<(Promotion & { stock: Stock[] })[]> {
     return prisma.promotion.findMany({
       include: { stock: true },
     });
@@ -41,7 +41,7 @@ export class PromotionLogic {
   async updatePromotion(
     id: number,
     data: Partial<Omit<Promotion, "id">> & { stockIds?: number[] }
-  ): Promise<(Promotion & { stock: any[] }) | null> {
+  ): Promise<(Promotion & { stock: Stock[] }) | null> {
     const { stockIds, ...promotionData } = data;
     return prisma.promotion.update({
       where: { id },
@@ -60,7 +60,7 @@ export class PromotionLogic {
   // Delete a promotion (removes from join table as well)
   async deletePromotion(
     id: number
-  ): Promise<(Promotion & { stock: any[] }) | null> {
+  ): Promise<(Promotion & { stock: Stock[] }) | null> {
     return prisma.promotion.delete({
       where: { id },
       include: { stock: true },

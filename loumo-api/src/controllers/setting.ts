@@ -74,7 +74,7 @@ export default class SettingController {
     return true;
   };
   createSetting = async (
-    request: Request<{}, {}, Omit<Setting, "id">>,
+    request: Request<object, object, Omit<Setting, "id">>,
     response: Response
   ) => {
     if (!this.validate(request, response, "create")) return;
@@ -96,7 +96,7 @@ export default class SettingController {
   };
 
   updateSetting = async (
-    request: Request<{ id: string }, {}, Partial<Omit<Setting, "id">>>,
+    request: Request<{ id: string }, object, Partial<Omit<Setting, "id">>>,
     response: Response
   ) => {
     const { id } = request.params;
@@ -119,7 +119,7 @@ export default class SettingController {
   };
 
   getSettings = async (
-    request: Request<{}, {}, {}, { section: string }>,
+    request: Request<object, object, object, { section: string }>,
     response: Response
   ) => {
     this.validate(request, response, "query");

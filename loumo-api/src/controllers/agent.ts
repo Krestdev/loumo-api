@@ -55,7 +55,7 @@ export default class AgentController {
     return true;
   };
   createAgent = async (
-    request: Request<{}, {}, Omit<Agent, "id"> & { userId: number }>,
+    request: Request<object, object, Omit<Agent, "id"> & { userId: number }>,
     response: Response
   ) => {
     if (!this.validate(request, response, "create")) return;
@@ -73,7 +73,7 @@ export default class AgentController {
   };
 
   updateAgent = async (
-    request: Request<{ id: string }, {}, Partial<Omit<Agent, "id">>>,
+    request: Request<{ id: string }, object, Partial<Omit<Agent, "id">>>,
     response: Response
   ) => {
     const { id } = request.params;

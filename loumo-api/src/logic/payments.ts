@@ -35,6 +35,7 @@ export class PaymentLogic {
         amount: payOutData.total.toString(),
         currency: "XAF",
         country: "CMR",
+        created: new Date().toISOString(),
         correspondent: payOutData.method, // "ORANGE_CM" | "MTN_MOMO_CMR"
         customerTimestamp: new Date().toISOString(),
         recipient: {
@@ -78,7 +79,7 @@ export class PaymentLogic {
     });
   }
 
-  async addOorderToPayment(
+  async addPaymentToOrder(
     paymentId: number,
     orderId: number
   ): Promise<Payment> {
@@ -94,17 +95,17 @@ export class PaymentLogic {
     });
   }
 
-  async removeOrderFromPayment(
-    paymentId: number,
-    orderId: number
-  ): Promise<Payment> {
-    return prisma.payment.update({
-      where: { id: paymentId },
-      data: {
-        order: {},
-      },
-    });
-  }
+  // async removeOrderFromPayment(
+  //   paymentId: number,
+  //   orderId: number
+  // ): Promise<Payment> {
+  //   return prisma.payment.update({
+  //     where: { id: paymentId },
+  //     data: {
+  //       order: {},
+  //     },
+  //   });
+  // }
 
   async listPayments(): Promise<(Payment & { order: Order })[]> {
     return prisma.payment.findMany({

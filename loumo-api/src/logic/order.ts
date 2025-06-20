@@ -44,9 +44,9 @@ export class OrderLogic {
   // Update a order and optionally update its roles
   async updateOrder(
     id: number,
-    data: Partial<Omit<Order, "id">> & { addressId?: number }
+    data: Partial<Omit<Order, "id" | "userId">> & { addressId?: number }
   ): Promise<Order | null> {
-    const { addressId, userId, ...orderData } = data;
+    const { addressId, ...orderData } = data;
     return prisma.order.update({
       where: { id },
       data: {

@@ -329,11 +329,11 @@ Content-Type: application/json
 }
 
 ### Update a product variant by ID
-PUT {{host}}/api/productvariants/1
+PUT {{host}}/api/productvariants/3
 Content-Type: application/json
 
 {
-  "name": "iPhone 15 Pro Max 512GB",
+  "name": "128GB",
   "weight": 220,
   "status": true,
   "productId": 1

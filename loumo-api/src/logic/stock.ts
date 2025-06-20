@@ -87,6 +87,11 @@ export class StockLogic {
       where: { id: stockId },
       data: {
         productVariant: {},
+        promotion: {
+          disconnect: {
+            id: promotionId,
+          },
+        },
       },
     });
   }

@@ -60,7 +60,7 @@ export default class AddressController {
     return true;
   };
   createAddress = async (
-    request: Request<{}, {}, Address & { zoneId?: number }>,
+    request: Request<object, object, Address & { zoneId?: number }>,
     response: Response
   ) => {
     if (!this.validate(request, response, "create")) return;
@@ -85,7 +85,7 @@ export default class AddressController {
   updateAddress = async (
     request: Request<
       { id: string },
-      {},
+      object,
       Partial<Omit<Address, "id">> & { zoneId?: number }
     >,
     response: Response

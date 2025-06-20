@@ -76,10 +76,7 @@ export default class ZoneController {
   };
 
   // Get one zone by ID
-  getOneZone = async (
-    request: Request<{ id: string }, {}, {}, {}>,
-    response: Response
-  ) => {
+  getOneZone = async (request: Request<{ id: string }>, response: Response) => {
     if (!this.validate(request, response, "paramId")) return;
 
     try {
@@ -96,7 +93,11 @@ export default class ZoneController {
 
   // Create a new zone
   createZone = async (
-    request: Request<{}, {}, Omit<Zone, "id"> & { addressIds?: number[] }>,
+    request: Request<
+      object,
+      object,
+      Omit<Zone, "id"> & { addressIds?: number[] }
+    >,
     response: Response
   ) => {
     if (!this.validate(request, response, "create")) return;
@@ -113,7 +114,7 @@ export default class ZoneController {
   updateZone = async (
     request: Request<
       { id: string },
-      {},
+      object,
       Partial<Omit<Zone, "id">> & { addressIds: number[] }
     >,
     response: Response

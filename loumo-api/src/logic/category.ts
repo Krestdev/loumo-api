@@ -23,7 +23,7 @@ export class CategoryLogic {
   // Get a category by id, including its products
   async getCategoryById(
     id: number
-  ): Promise<(Category & { products: any[] }) | null> {
+  ): Promise<(Category & { products: Product[] }) | null> {
     return prisma.category.findUnique({
       where: { id },
       include: { products: true },
@@ -31,7 +31,7 @@ export class CategoryLogic {
   }
 
   // Get all categorys, including their products
-  async getAllCategorys(): Promise<(Category & { products: any[] })[]> {
+  async getAllCategorys(): Promise<(Category & { products: Product[] })[]> {
     return prisma.category.findMany({
       include: {
         products: {
@@ -72,7 +72,7 @@ export class CategoryLogic {
   // Delete a category (removes from join table as well)
   async deleteCategory(
     id: number
-  ): Promise<(Category & { products: any[] }) | null> {
+  ): Promise<(Category & { products: Product[] }) | null> {
     return prisma.category.delete({
       where: { id },
       include: { products: true },
