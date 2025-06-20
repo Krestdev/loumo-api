@@ -7,7 +7,13 @@ export default class WinstonLogger {
   warningLogger = () => {
     if (process.env.NODE_ENV === "test") {
       return expressWinston.logger({
-        transports: [new winston.transports.Console()],
+        transports: [
+          new winston.transports.File({
+            level: "error",
+            filename: "error.test.log",
+          }),
+        ],
+        format: winston.format.combine(format.timestamp(), format.errors()),
       }); // dummy logger
     }
     return expressWinston.logger({
@@ -29,6 +35,17 @@ export default class WinstonLogger {
     });
   };
   errorLogger = () => {
+    if (process.env.NODE_ENV === "test") {
+      return expressWinston.logger({
+        transports: [
+          new winston.transports.File({
+            level: "error",
+            filename: "error.test.log",
+          }),
+        ],
+        format: winston.format.combine(format.timestamp(), format.errors()),
+      }); // dummy logger
+    }
     return expressWinston.errorLogger({
       transports: [
         new winston.transports.Console(),

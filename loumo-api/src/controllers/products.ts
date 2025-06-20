@@ -127,6 +127,21 @@ export default class ProductController {
     }
   };
 
+  getOneProduct = async (request: Request, response: Response) => {
+    const { id } = request.params;
+    if (!this.validate(request, response, "paramId")) return;
+    try {
+      const products = await productLogic.getProductById(Number(id));
+      response.status(200).json(products);
+    } catch (err) {
+      throw new CustomError(
+        "Failed to fetch products",
+        undefined,
+        err as Error
+      );
+    }
+  };
+
   deleteProduct = async (
     request: Request<{ id: string }>,
     response: Response

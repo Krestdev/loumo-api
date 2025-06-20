@@ -9,12 +9,14 @@ const productVariantLogic = new ProductVariantLogic();
 const createProductVariantSchema = Joi.object({
   name: Joi.string(),
   weight: Joi.number(),
+  price: Joi.number(),
   status: Joi.boolean(),
   productId: Joi.number().optional(),
 });
 
 const updateProductVariantSchema = Joi.object({
   name: Joi.string().optional(),
+  price: Joi.number().optional(),
   weight: Joi.number().optional(),
   status: Joi.boolean().optional(),
   productId: Joi.number().optional(),
@@ -119,6 +121,22 @@ export default class ProductVariantController {
   getProductVariants = async (request: Request, response: Response) => {
     try {
       const productVariants = await productVariantLogic.getAllProducts();
+      response.status(200).json(productVariants);
+    } catch (err) {
+      throw new CustomError(
+        "Failed to fetch productVariants",
+        undefined,
+        err as Error
+      );
+    }
+  };
+
+  getOneProductVariant = async (request: Request, response: Response) => {
+    if (!this.validate(request, response, "paramId")) return;
+
+    try {
+      const id = Number(request.params.id);
+      const productVariants = await productVariantLogic.getProductById(id);
       response.status(200).json(productVariants);
     } catch (err) {
       throw new CustomError(

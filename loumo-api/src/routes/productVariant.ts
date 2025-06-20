@@ -11,6 +11,7 @@ export default class ProductVariantRouter {
 
   registerRoutes() {
     this.routes.get("/", this.productVariantController.getProductVariants);
+    this.routes.get("/:id", this.productVariantController.getOneProductVariant);
     this.routes.post("/", this.productVariantController.createProductVariant);
     this.routes.put("/:id", this.productVariantController.updateProductVariant);
     this.routes.delete(

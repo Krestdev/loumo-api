@@ -322,7 +322,7 @@ POST {{host}}/api/productvariants/
 Content-Type: application/json
 
 {
-  "name": "iPhone 15 Pro Max 256GB",
+  "name": "256GB",
   "weight": 215,
   "status": true,
   "productId": 1
