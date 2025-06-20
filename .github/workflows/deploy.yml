@@ -40,6 +40,7 @@ jobs:
             cd \$RELEASE_DIR
 
             git clone https://github.com/${{ github.repository }} . --depth 1
+            cp ~/deployments/loumo-app/shared/.env .env
             docker compose -f docker-compose.yml --env-file .env build
             docker compose -f docker-compose.yml --env-file .env up -d
 
