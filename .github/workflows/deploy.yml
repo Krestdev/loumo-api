@@ -42,8 +42,8 @@ jobs:
             git clone https://github.com/${{ github.repository }} . --depth 1
             cp ~/deployments/loumo-app/shared/.env .env
             export DOCKER_BUILDKIT=0
+            docker rm -f mongo loumo 2>/dev/null || true
             docker compose -f docker-compose.yml --env-file .env build
-            docker compose -f docker-compose.yml down
             docker compose -f docker-compose.yml --env-file .env up -d
 
             # Health check (adjust port/path as needed)
