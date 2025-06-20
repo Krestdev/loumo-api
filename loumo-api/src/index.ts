@@ -26,6 +26,19 @@ import helmet from "helmet";
 import FaqRouter from "./routes/faq";
 import TopicRouter from "./routes/topic";
 
+/**
+ * Represents the main application server for the Loumo API.
+ *
+ * This class initializes and configures an Express application with middleware for security,
+ * logging, CORS, and error handling. It registers all API route handlers for various resources,
+ * such as users, roles, permissions, addresses, products, orders, and more.
+ *
+ * The server uses Winston for logging warnings and errors, Morgan for HTTP request logging,
+ * Helmet for security headers, and body-parser for JSON payloads. All API endpoints are
+ * prefixed with `/api/` and routed to their respective routers.
+ *
+ * To start the server, call the `start()` method, which listens on the configured port.
+ */
 class Server {
   private PORT = 5000;
   private app = express();
