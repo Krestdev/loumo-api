@@ -84,6 +84,7 @@ class Server {
     this.app.use(bodyParser.json());
 
     // Routes
+    this.health();
     this.routes();
 
     // error and warning save to server
@@ -91,6 +92,12 @@ class Server {
 
     // Error Handler
     this.app.use(errorHandler);
+  }
+
+  health() {
+    this.app.get("/health", (req, res) => {
+      res.status(200).json({ status: "ok" });
+    });
   }
 
   routes() {
