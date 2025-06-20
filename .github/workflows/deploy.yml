@@ -43,6 +43,7 @@ jobs:
             cp ~/deployments/loumo-app/shared/.env .env
             export DOCKER_BUILDKIT=0
             docker compose -f docker-compose.yml --env-file .env build
+            docker rm -f mongo || true
             docker compose -f docker-compose.yml --env-file .env up -d
 
             # Health check (adjust port/path as needed)
