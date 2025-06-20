@@ -8,6 +8,6 @@ export default defineConfig([
   { files: ["**/*.{js,mjs,cjs,ts,mts,cts}"], plugins: { js }, extends: ["js/recommended"] },
   { files: ["**/*.{js,mjs,cjs,ts,mts,cts}"], languageOptions: { globals: globals.browser } },
   tseslint.configs.recommended,{
-    ignores: ["node_modules/*","build/*","generated/*","prisma/*","*/__tests__/*","jest.config.js"]
+    ignores: ["node_modules/*","build/*","generated/*","prisma/*","*/__tests__/*","jest.config.js","coverage/*"]
   }
 ]);

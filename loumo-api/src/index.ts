@@ -25,6 +25,7 @@ import cors from "cors";
 import helmet from "helmet";
 import FaqRouter from "./routes/faq";
 import TopicRouter from "./routes/topic";
+import rateLimit from "express-rate-limit";
 
 /**
  * Represents the main application server for the Loumo API.
@@ -72,6 +73,8 @@ export class Server {
         credentials: true, // if you use cookies/auth headers
       })
     );
+
+    this.rateLimiter();
     // console logger
     this.app.use(morgan("dev"));
 
@@ -98,6 +101,17 @@ export class Server {
     this.app.get("/health", (req, res) => {
       res.status(200).json({ status: "ok" });
     });
+  }
+
+  rateLimiter() {
+    // Set up rate limiter: maximum of 100 requests per 15 minutes per IP
+    const limiter = rateLimit({
+      windowMs: 15 * 60 * 1000, // 15 minutes
+      max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+      message:
+        "Too many requests from this IP, please try again after 15 minutes",
+    });
+    this.app.use(limiter);
   }
 
   routes() {
