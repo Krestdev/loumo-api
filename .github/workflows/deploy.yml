@@ -31,7 +31,7 @@ jobs:
 
       - name: Deploy to VPS
         run: |
-         ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'bash -s' <<'EOF
+         ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'bash -s' << EOF
             set -euo pipefail
 
             TIMESTAMP=${{ env.DEPLOY_TIME }}
