@@ -1,5 +1,4 @@
 import axios, { AxiosInstance } from "axios";
-import { v4 as uuidv4 } from "uuid";
 
 interface Recipient {
   type: "MSISDN";
@@ -51,7 +50,7 @@ export class PawapayService {
   /**
    * Request a new payout
    */
-  public async requestPayout(data: Omit<PayoutRequest, "payoutId">): Promise<{
+  public async requestPayout(data: PayoutRequest): Promise<{
     payoutId: string;
     status: string;
     created: string;
@@ -60,14 +59,7 @@ export class PawapayService {
       rejectionMessage: string;
     };
   }> {
-    const payoutId = uuidv4();
-
-    const payload = {
-      payoutId,
-      ...data,
-    };
-
-    const response = await this.client.post("/payouts", payload);
+    const response = await this.client.post("/payouts", data);
     return response.data;
   }
 
@@ -75,7 +67,7 @@ export class PawapayService {
    * Check the status of an existing payout
    */
   public async checkPayoutStatus(payoutId: string): Promise<PayoutRequest[]> {
-    const response = await this.client.get(`/payouts/${payoutId}/status`);
+    const response = await this.client.get(`/payouts/${payoutId}`);
     return response.data;
   }
 

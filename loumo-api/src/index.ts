@@ -26,6 +26,7 @@ import helmet from "helmet";
 import FaqRouter from "./routes/faq";
 import TopicRouter from "./routes/topic";
 import rateLimit from "express-rate-limit";
+import "./cron/paymentStatusChecker";
 
 /**
  * Represents the main application server for the Loumo API.

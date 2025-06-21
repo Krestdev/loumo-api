@@ -421,7 +421,7 @@ Content-Type: application/json
 
 {
   "name": "Credit Card",
-  "status": "completed",
+  "status": "PENDING",
   "ref": "PAY123456",
   "tel": "237657071178",
   "method": "ORANGE_CMR",
@@ -441,7 +441,7 @@ Content-Type: application/json
 }
 
 ### Delete a payment by ID
-DELETE {{host}}/api/payments/10
+DELETE {{host}}/api/payments/15
 
 
 ############### Agent #######################

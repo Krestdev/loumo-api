@@ -1,5 +1,6 @@
 import { Order, PrismaClient, Payment } from "../../generated/prisma";
 import { PawapayService } from "../services/payment";
+import { v4 as uuidv4 } from "uuid";
 
 const prisma = new PrismaClient();
 const pawapay = new PawapayService();
@@ -9,10 +10,11 @@ export class PaymentLogic {
     data: Omit<Payment, "id"> & { orderId: number }
   ): Promise<Payment> {
     const { orderId, ...paymentData } = data;
-
+    const payoutId = uuidv4();
     const payOutData = await prisma.payment.create({
       data: {
         ...paymentData,
+        payoutId: payoutId,
         order: orderId
           ? {
               connect: {
@@ -32,6 +34,7 @@ export class PaymentLogic {
 
     try {
       const payout = await pawapay.requestPayout({
+        payoutId: payoutId,
         amount: payOutData.total.toString(),
         currency: "XAF",
         country: "CMR",
