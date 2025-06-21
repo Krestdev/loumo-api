@@ -30,6 +30,9 @@ jobs:
       - name: Install deps
         run: npm ci
         working-directory: ./loumo-api
+      - name: Install deps
+        run: npm run prisma:setup
+        working-directory: ./loumo-api
       - name: Run tests
         run: npm test
         working-directory: ./loumo-api
