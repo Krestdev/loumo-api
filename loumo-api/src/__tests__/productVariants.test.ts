@@ -4,24 +4,34 @@ import { Server } from "../index";
 const server = new Server();
 
 describe("Product Variant Endpoints", () => {
+  let createdCategoryId: number;
   let createdProductId: number;
   let createdVariantId: number;
 
   beforeAll(async () => {
+    // Create a category to associate with the product
+    const categoryRes = await request(server.app)
+      .post("/api/categories/")
+      .send({
+        name: "Test Category",
+        status: true,
+      });
+    createdCategoryId = categoryRes.body.id;
+
     // Create a product to associate with the variant
     const productRes = await request(server.app).post("/api/products/").send({
       name: "Variant Test Product",
       weight: 50,
       status: true,
-      categoryId: 1,
+      categoryId: createdCategoryId,
     });
     createdProductId = productRes.body.id;
-    // console.log(productRes.body);
   });
 
   afterAll(async () => {
-    // Clean up: delete the product
+    // Clean up: delete the product and category
     await request(server.app).delete(`/api/products/${createdProductId}`);
+    await request(server.app).delete(`/api/categories/${createdCategoryId}`);
   });
 
   it("should create a new product variant", async () => {
@@ -44,7 +54,6 @@ describe("Product Variant Endpoints", () => {
   });
 
   it("should get a single product variant by ID", async () => {
-    // createdVariantId = 1;
     const res = await request(server.app).get(
       `/api/productvariants/${createdVariantId}`
     );
@@ -53,7 +62,6 @@ describe("Product Variant Endpoints", () => {
   });
 
   it("should update a product variant by ID", async () => {
-    // createdVariantId = 1;
     const res = await request(server.app)
       .put(`/api/productvariants/${createdVariantId}`)
       .send({
@@ -68,7 +76,6 @@ describe("Product Variant Endpoints", () => {
   });
 
   it("should delete a product variant by ID", async () => {
-    // createdVariantId = 1;
     const res = await request(server.app).delete(
       `/api/productvariants/${createdVariantId}`
     );

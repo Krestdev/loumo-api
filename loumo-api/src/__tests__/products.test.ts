@@ -5,13 +5,24 @@ const server = new Server();
 
 describe("Product Endpoints", () => {
   let createdProductId: number;
+  let createdCategoryId: number;
+
+  beforeAll(async () => {
+    // Create a category before running product tests
+    const res = await request(server.app).post("/api/categories/").send({
+      name: "Test Category",
+    });
+    expect(res.statusCode).toBe(201);
+    expect(res.body).toHaveProperty("id");
+    createdCategoryId = res.body.id;
+  });
 
   it("should create a new product", async () => {
     const res = await request(server.app).post("/api/products/").send({
       name: "Test Product",
       weight: 100,
       status: true,
-      categoryId: 1,
+      categoryId: createdCategoryId,
     });
     expect(res.statusCode).toBe(201);
     expect(res.body).toHaveProperty("id");
@@ -39,7 +50,7 @@ describe("Product Endpoints", () => {
         name: "Updated Product",
         weight: 120,
         status: false,
-        categoryId: 1,
+        categoryId: createdCategoryId,
       });
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty("name", "Updated Product");
