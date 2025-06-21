@@ -1,0 +1,15 @@
+{
+  "watch": ["src"],
+  "ignore": [
+    "node_modules",
+    "dist",
+    "build",
+    ".git",
+    ".env",
+    "**/__tests__",
+    "**/*.test.ts",
+    "coverage"
+  ],
+  "ext": "ts,js,json",
+  "exec": "ts-node src/index.ts"
+}

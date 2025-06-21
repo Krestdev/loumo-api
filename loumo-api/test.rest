@@ -123,9 +123,8 @@ POST {{host}}/api/address/
 Content-Type: application/json
 
 {
-  "name": "Home",
-  "description": "Primary residence",
-  "published": true,
+  "local": "Home",
+  "street": "Primary residence",
   "zoneId": 1
 }
 
@@ -176,7 +175,7 @@ Content-Type: application/json
 DELETE {{host}}/api/zones/1
 
 
-################ Logs###################
+################ Logs ###################
 
 
 ### Get all logs

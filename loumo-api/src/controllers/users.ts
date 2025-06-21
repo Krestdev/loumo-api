@@ -9,14 +9,21 @@ const userLogic = new UserLogic();
 const createUserSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().email().required(),
+  tel: Joi.string().required(),
   password: Joi.string().min(6).required(),
   address: Joi.array().items(Joi.number()),
   // Add other fields as needed
 });
 
+// favorites
+const addToFavSchema = Joi.object({
+  productIds: Joi.array().items(Joi.number()),
+});
+
 const updateUserSchema = Joi.object({
   name: Joi.string().optional(),
   email: Joi.string().email().optional(),
+  tel: Joi.string().optional(),
   password: Joi.string().min(6).optional(),
   address: Joi.array().items(Joi.number()).optional(),
   // verified: Joi.boolean().optional(),
@@ -61,6 +68,7 @@ export default class UserController {
       | "queryData"
       | "assignRole"
       | "login"
+      | "fav"
   ) => {
     let result: Joi.ValidationResult | null = null;
     switch (schema) {
@@ -96,6 +104,12 @@ export default class UserController {
         break;
       case "login":
         result = loginSchema.validate(request.body);
+        if (result.error) {
+          response.status(400).json({ error: result.error.details[0].message });
+        }
+        break;
+      case "fav":
+        result = addToFavSchema.validate(request.body);
         if (result.error) {
           response.status(400).json({ error: result.error.details[0].message });
         }
@@ -150,7 +164,6 @@ export default class UserController {
     try {
       const { email, password } = request.body;
       const user = await userLogic.authenticateUser(email, password);
-      console.log(user);
       if (!user) {
         response.status(404).json({ error: "User not found" });
         return;
@@ -186,6 +199,27 @@ export default class UserController {
       response.json(updatedUser);
     } catch (error) {
       throw new CustomError("Error updating user", 500, error as Error);
+    }
+  };
+
+  addProductToFavorites = async (
+    request: Request<{ id: string }, object, { productIds: number[] }>,
+    response: Response
+  ) => {
+    if (!this.validate(request, response, "paramId")) return;
+    try {
+      const id = Number(request.params.id);
+      const addedProduct = await userLogic.updateUser(id, request.body);
+      if (!addedProduct) {
+        response.status(404).json({ error: "User or Product not found" });
+      }
+      response.json(addedProduct);
+    } catch (error) {
+      throw new CustomError(
+        "Error adding product to user favorite",
+        500,
+        error as Error
+      );
     }
   };
 

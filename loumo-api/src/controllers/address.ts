@@ -7,15 +7,15 @@ import { Address } from "../../generated/prisma";
 const addressLogic = new AddressLogic();
 
 const createAddressSchema = Joi.object({
-  name: Joi.string(),
-  description: Joi.string(),
+  local: Joi.string(),
+  street: Joi.string(),
   published: Joi.boolean().optional(),
   zoneId: Joi.number().optional(),
 });
 
 const updateAddressSchema = Joi.object({
-  name: Joi.string().optional(),
-  description: Joi.string().optional(),
+  local: Joi.string().optional(),
+  street: Joi.string().optional(),
   published: Joi.boolean().optional(),
   zoneId: Joi.number().optional(),
 });

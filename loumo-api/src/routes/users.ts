@@ -1,6 +1,8 @@
 import { Router } from "express";
 import UserController from "../controllers/users";
-import { authorize } from "../middleware/authorize";
+// import { authorize } from "../middleware/authorize";
+
+// authorize("read:user")
 
 export default class UserRouter {
   routes: Router = Router();
@@ -11,14 +13,11 @@ export default class UserRouter {
   }
 
   registerRoutes() {
-    this.routes.get(
-      "/",
-      authorize("read:user"),
-      this.userController.getAllUsers
-    );
+    this.routes.get("/", this.userController.getAllUsers);
     this.routes.post("/login", this.userController.login);
     this.routes.get("/", this.userController.getAllUsers);
     this.routes.get("/:id", this.userController.getUserById);
+    this.routes.patch("/:id", this.userController.addProductToFavorites);
     this.routes.post("/", this.userController.createUser);
     this.routes.put("/:id", this.userController.updateUser);
     this.routes.put("/role/:id", this.userController.assignRole);

@@ -134,7 +134,10 @@ export class UserLogic {
 
   // Get user by ID
   async getUserById(id: number): Promise<User | null> {
-    return prisma.user.findUnique({ where: { id } });
+    return prisma.user.findUnique({
+      where: { id },
+      include: { favorite: true, orders: true },
+    });
   }
 
   // Get user by ID
@@ -159,14 +162,22 @@ export class UserLogic {
   // Update user
   async updateUser(
     id: number,
-    data: Partial<{ email: string; password: string; name: string }>
+    data: Partial<User> & { productIds?: number[] }
   ): Promise<User | null> {
     if (data.password) {
       data.password = await bcrypt.hash(data.password, 10);
     }
+    const { productIds, ...userData } = data;
     return prisma.user.update({
       where: { id },
-      data,
+      data: {
+        ...userData,
+        favorite: productIds
+          ? {
+              connect: productIds.map((id) => ({ id })),
+            }
+          : {},
+      },
     });
   }
 
