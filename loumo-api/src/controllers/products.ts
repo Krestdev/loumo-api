@@ -24,11 +24,15 @@ const paramSchema = Joi.object({
   id: Joi.number(),
 });
 
+const slugSchema = Joi.object({
+  slug: Joi.string(),
+});
+
 export default class ProductController {
   validate = (
     request: Request<{ id?: number }>,
     response: Response,
-    schema: "create" | "update" | "paramId"
+    schema: "create" | "update" | "paramId" | "slug"
   ) => {
     let result: Joi.ValidationResult | null = null;
     switch (schema) {
@@ -46,6 +50,12 @@ export default class ProductController {
         break;
       case "paramId":
         result = paramSchema.validate(request.params);
+        if (result.error) {
+          response.status(400).json({ error: result.error.details[0].message });
+        }
+        break;
+      case "slug":
+        result = slugSchema.validate(request.params);
         if (result.error) {
           response.status(400).json({ error: result.error.details[0].message });
         }
@@ -132,6 +142,21 @@ export default class ProductController {
     if (!this.validate(request, response, "paramId")) return;
     try {
       const products = await productLogic.getProductById(Number(id));
+      response.status(200).json(products);
+    } catch (err) {
+      throw new CustomError(
+        "Failed to fetch products",
+        undefined,
+        err as Error
+      );
+    }
+  };
+
+  getSlugProduct = async (request: Request, response: Response) => {
+    const { slug } = request.params;
+    if (!this.validate(request, response, "slug")) return;
+    try {
+      const products = await productLogic.getProductBySlug(slug);
       response.status(200).json(products);
     } catch (err) {
       throw new CustomError(

@@ -34,6 +34,7 @@
     "morgan": "^1.10.0",
     "node-cron": "^4.1.1",
     "nodemailer": "^7.0.3",
+    "slugify": "^1.6.6",
     "uuid": "^11.1.0",
     "winston": "^3.17.0",
     "winston-mongodb": "^7.0.0"

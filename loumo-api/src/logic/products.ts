@@ -1,4 +1,5 @@
 import { PrismaClient, Product } from "../../generated/prisma";
+import slugify from "slugify";
 
 const prisma = new PrismaClient();
 
@@ -8,9 +9,11 @@ export class ProductLogic {
     data: Omit<Product, "id"> & { categoryId?: number }
   ): Promise<Product> {
     const { categoryId, ...productData } = data;
+    const slug = slugify(data.name, { lower: true });
     return prisma.product.create({
       data: {
         ...productData,
+        slug,
         category: categoryId
           ? {
               connect: {
@@ -26,6 +29,15 @@ export class ProductLogic {
   async getProductById(id: number): Promise<Product | null> {
     return prisma.product.findUnique({
       where: { id },
+    });
+  }
+
+  // Get a product by slug, including its roles
+  async getProductBySlug(slug: string): Promise<Product | null> {
+    return prisma.product.findFirst({
+      where: {
+        slug,
+      },
     });
   }
 

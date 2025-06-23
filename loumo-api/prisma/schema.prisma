@@ -137,6 +137,7 @@ model ProductVariant {
 model Product {
   id         Int              @id @default(autoincrement())
   name       String
+  slug       String
   weight     Int
   status     Boolean
   variants   ProductVariant[]

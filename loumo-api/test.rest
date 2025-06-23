@@ -413,7 +413,7 @@ DELETE {{host}}/api/orders/1
 GET {{host}}/api/payments/
 
 ### Get a single payment by ID
-GET {{host}}/api/payments/1
+GET {{host}}/api/payments/16
 
 ### Create a new payment
 POST {{host}}/api/payments/
