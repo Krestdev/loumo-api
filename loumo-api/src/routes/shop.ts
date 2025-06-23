@@ -11,6 +11,7 @@ export default class ShopRouter {
 
   registerRoutes() {
     this.routes.get("/", this.shopController.getShops);
+    this.routes.get("/:id", this.shopController.getOneShop);
     this.routes.post("/", this.shopController.createShop);
     this.routes.put("/:id", this.shopController.updateShop);
     this.routes.delete("/:id", this.shopController.deleteShop);

@@ -23,8 +23,9 @@ Content-Type: application/json
 
 {
   "name": "John Doe",
-  "email": "john@example.com",
-  "password": "password123"
+  "email": "kenfackjordanjunior@gmail.com",
+  "password": "password123",
+  "tel":"653395861"
 }
 
 ### Update a user by ID
@@ -37,7 +38,7 @@ Content-Type: application/json
 }
 
 ### assign role to a user by ID
-PUT {{host}}/api/users/role/2
+PUT {{host}}/api/users/role/15
 Content-Type: application/json
 
 {
@@ -45,7 +46,7 @@ Content-Type: application/json
 }
 
 ### Delete a user by ID
-DELETE {{host}}/api/users/{userId}
+DELETE {{host}}/api/users/15
 
 
 ##################### roles ###########################

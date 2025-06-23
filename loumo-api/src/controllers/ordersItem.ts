@@ -125,6 +125,21 @@ export default class OrderItemController {
     }
   };
 
+  getAnOrderItem = async (request: Request, response: Response) => {
+    if (!this.validate(request, response, "paramId")) return;
+    const id = Number(request.params.id);
+    try {
+      const orderItems = await orderItemLogic.getOrderItemById(id);
+      response.status(200).json(orderItems);
+    } catch (err) {
+      throw new CustomError(
+        "Failed to fetch orderItems",
+        undefined,
+        err as Error
+      );
+    }
+  };
+
   deleteOrderItem = async (
     request: Request<{ id: string }>,
     response: Response

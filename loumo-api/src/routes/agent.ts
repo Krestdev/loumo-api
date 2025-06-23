@@ -11,6 +11,7 @@ export default class AgentRouter {
 
   registerRoutes() {
     this.routes.get("/", this.agentController.getAgents);
+    this.routes.get("/:id", this.agentController.getOneAgent);
     this.routes.post("/", this.agentController.createAgent);
     this.routes.put("/:id", this.agentController.updateAgent);
     this.routes.delete("/:id", this.agentController.deleteAgent);

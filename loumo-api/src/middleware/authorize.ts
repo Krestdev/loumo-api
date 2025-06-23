@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 export function authorize(requiredPermission: string) {
   return async (req: Request, res: Response, next: NextFunction) => {
     const userId = getUserIdFromRequest(req); // parse JWT token
-    console.log(userId);
+
     if (!userId) {
       res.status(401).json({ message: "Unauthorized" });
       return;

@@ -106,6 +106,17 @@ export default class TopicController {
     }
   };
 
+  getOneTopic = async (request: Request, response: Response) => {
+    if (!this.validate(request, response, "paramId")) return;
+    const id = Number(request.params.id);
+    try {
+      const topics = await topicLogic.getTopicById(id);
+      response.status(200).json(topics);
+    } catch (err) {
+      throw new CustomError("Failed to fetch topics", undefined, err as Error);
+    }
+  };
+
   deleteTopic = async (
     request: Request<{ id: string }>,
     response: Response

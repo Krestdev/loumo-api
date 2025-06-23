@@ -11,7 +11,8 @@ export default class AddressRouter {
 
   registerRoutes() {
     //read address
-    this.routes.get("/", this.addressController.getAddresss);
+    this.routes.get("/", this.addressController.getAddresses);
+    this.routes.get("/:id", this.addressController.getOneAddress);
     //create address
     this.routes.post("/", this.addressController.createAddress);
     //update address

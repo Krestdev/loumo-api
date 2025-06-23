@@ -14,7 +14,7 @@ cron.schedule("*/1 * * * *", async () => {
     });
 
     if (pendingPayments.length > 0) {
-      console.log("Checking pending payments...");
+      console.info("Checking pending payments...");
     }
 
     for (const payment of pendingPayments) {
@@ -29,11 +29,11 @@ cron.schedule("*/1 * * * *", async () => {
               where: { id: payment.id },
               data: { status: payoutStatus },
             });
-            console.log(
+            console.info(
               `Payment ${payment.id} status updated to ${payoutStatus}`
             );
           } else {
-            console.log(payoutStatusArr);
+            console.info(payoutStatusArr);
           }
         })
         .catch((error) => {

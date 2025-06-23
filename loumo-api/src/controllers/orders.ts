@@ -113,6 +113,17 @@ export default class OrderController {
     }
   };
 
+  getOneOrder = async (request: Request, response: Response) => {
+    if (!this.validate(request, response, "paramId")) return;
+    const id = Number(request.params.id);
+    try {
+      const orders = await orderLogic.getOrderById(id);
+      response.status(200).json(orders);
+    } catch (err) {
+      throw new CustomError("Failed to fetch orders", undefined, err as Error);
+    }
+  };
+
   deleteOrder = async (
     request: Request<{ id: string }>,
     response: Response

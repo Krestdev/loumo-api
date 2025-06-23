@@ -127,6 +127,21 @@ export default class notificationController {
     }
   };
 
+  getANotification = async (request: Request, response: Response) => {
+    if (!this.validate(request, response, "paramId")) return;
+    const id = Number(request.params.id);
+    try {
+      const notifications = await notificationLogic.getNotificationById(id);
+      response.status(200).json(notifications);
+    } catch (err) {
+      throw new CustomError(
+        "Failed to fetch notifications",
+        undefined,
+        err as Error
+      );
+    }
+  };
+
   deleteNotification = async (
     request: Request<{ id: string }>,
     response: Response

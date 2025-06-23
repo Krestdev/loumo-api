@@ -104,6 +104,17 @@ export default class ShopController {
     }
   };
 
+  getOneShop = async (request: Request, response: Response) => {
+    if (!this.validate(request, response, "paramId")) return;
+    const id = Number(request.params.id);
+    try {
+      const shops = await shopLogic.getAllShops();
+      response.status(200).json(shops);
+    } catch (err) {
+      throw new CustomError("Failed to fetch shops", undefined, err as Error);
+    }
+  };
+
   deleteShop = async (request: Request<{ id: string }>, response: Response) => {
     const { id } = request.params;
     try {

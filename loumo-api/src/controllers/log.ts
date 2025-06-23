@@ -71,7 +71,6 @@ export default class LogController {
       const newLog = await logLogic.createLog(request.body);
       response.status(201).json(newLog);
     } catch (err) {
-      console.log(err);
       throw new CustomError("Failed to create log", undefined, err as Error);
     }
   };

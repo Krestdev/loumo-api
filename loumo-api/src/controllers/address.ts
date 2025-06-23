@@ -73,7 +73,6 @@ export default class AddressController {
       const newAddress = await addressLogic.createAddress(request.body);
       response.status(201).json(newAddress);
     } catch (err) {
-      console.log(err);
       throw new CustomError(
         "Failed to create address",
         undefined,
@@ -111,9 +110,24 @@ export default class AddressController {
     }
   };
 
-  getAddresss = async (request: Request, response: Response) => {
+  getAddresses = async (request: Request, response: Response) => {
     try {
       const addresss = await addressLogic.getAllAddresss();
+      response.status(200).json(addresss);
+    } catch (err) {
+      throw new CustomError(
+        "Failed to fetch addresss",
+        undefined,
+        err as Error
+      );
+    }
+  };
+
+  getOneAddress = async (request: Request, response: Response) => {
+    if (!this.validate(request, response, "paramId")) return;
+    const id = Number(request.params.id);
+    try {
+      const addresss = await addressLogic.getAddressById(id);
       response.status(200).json(addresss);
     } catch (err) {
       throw new CustomError(

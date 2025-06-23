@@ -11,6 +11,8 @@ export default class TopicRouter {
 
   registerRoutes() {
     this.routes.get("/", this.topicController.getTopics);
+    this.routes.get("/:id", this.topicController.getOneTopic);
+    this.routes.get("/", this.topicController.getTopics);
     this.routes.post("/", this.topicController.createTopic);
     this.routes.put("/:id", this.topicController.updateTopic);
     this.routes.delete("/:id", this.topicController.deleteTopic);
