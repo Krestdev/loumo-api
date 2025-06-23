@@ -5,7 +5,7 @@ import { config } from "../configs";
 
 export default class WinstonLogger {
   warningLogger = () => {
-    if (process.env.NODE_ENV === "test") {
+    if (config.NODE_ENV === "test") {
       return expressWinston.logger({
         transports: [
           new winston.transports.File({
@@ -20,7 +20,7 @@ export default class WinstonLogger {
       transports: [
         new winston.transports.MongoDB({
           level: "warn",
-          db: config.MONGDB.SERVER_URI,
+          db: config.LOG_DATABASE.URL,
           collection: "logs",
         }),
       ],
@@ -35,7 +35,7 @@ export default class WinstonLogger {
     });
   };
   errorLogger = () => {
-    if (process.env.NODE_ENV === "test") {
+    if (config.NODE_ENV === "test") {
       return expressWinston.logger({
         transports: [
           new winston.transports.File({

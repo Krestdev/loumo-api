@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from "axios";
+import { config } from "../configs";
 
 interface Recipient {
   type: "MSISDN";
@@ -35,9 +36,8 @@ export class PawapayService {
   private authToken: string;
 
   constructor() {
-    this.baseUrl =
-      process.env.PAWAPAY_BASE_URL || "https://api.sandbox.pawapay.io";
-    this.authToken = process.env.PAWAPAY_API_TOKEN || "";
+    this.baseUrl = config.PAWAPAY.BASE_URL || "https://api.sandbox.pawapay.io";
+    this.authToken = config.PAWAPAY.API_TOKEN || "";
     this.client = axios.create({
       baseURL: this.baseUrl,
       headers: {

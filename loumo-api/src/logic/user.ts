@@ -28,6 +28,9 @@ export class UserLogic {
     const hashedPassword = await bcrypt.hash(password, 10);
     const otp = generateOTP();
     // Save OTP and set verified to false
+
+    // sendMail({to:email,subject:"New Account Creation",""})
+
     return prisma.user.create({
       data: {
         email: email,

@@ -19,9 +19,6 @@ export async function sendMail({
       user: config.EMAIL.SMTP_USER, // your email address
       pass: config.EMAIL.SMTP_PASS, // app password or real password (use ENV!)
     },
-    // tls: {
-    //   rejectUnauthorized: false,
-    // },
   });
 
   const mailOptions = {
