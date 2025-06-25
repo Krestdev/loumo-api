@@ -11,6 +11,7 @@ const createProductVariantSchema = Joi.object({
   weight: Joi.number(),
   price: Joi.number(),
   status: Joi.boolean(),
+  imgUrl: Joi.string(),
   productId: Joi.number().optional(),
 });
 
@@ -18,6 +19,7 @@ const updateProductVariantSchema = Joi.object({
   name: Joi.string().optional(),
   price: Joi.number().optional(),
   weight: Joi.number().optional(),
+  imgUrl: Joi.string().optional(),
   status: Joi.boolean().optional(),
   productId: Joi.number().optional(),
 });

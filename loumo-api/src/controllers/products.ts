@@ -8,6 +8,7 @@ const productLogic = new ProductLogic();
 
 const createProductSchema = Joi.object({
   name: Joi.string(),
+  slug: Joi.string(),
   weight: Joi.number(),
   status: Joi.boolean(),
   categoryId: Joi.number().optional(),
@@ -15,6 +16,7 @@ const createProductSchema = Joi.object({
 
 const updateProductSchema = Joi.object({
   name: Joi.string().optional(),
+  slug: Joi.string().optional(),
   weight: Joi.number().optional(),
   status: Joi.boolean().optional(),
   categoryId: Joi.number().optional(),

@@ -29,6 +29,9 @@ export class ProductLogic {
   async getProductById(id: number): Promise<Product | null> {
     return prisma.product.findUnique({
       where: { id },
+      include: {
+        variants: true,
+      },
     });
   }
 
@@ -37,6 +40,9 @@ export class ProductLogic {
     return prisma.product.findFirst({
       where: {
         slug,
+      },
+      include: {
+        variants: true,
       },
     });
   }

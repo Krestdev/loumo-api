@@ -12,6 +12,7 @@ const createUserSchema = Joi.object({
   tel: Joi.string().required(),
   password: Joi.string().min(6).required(),
   address: Joi.array().items(Joi.number()),
+  imgUrl: Joi.string(),
   // Add other fields as needed
 });
 

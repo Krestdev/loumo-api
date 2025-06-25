@@ -294,16 +294,17 @@ Content-Type: application/json
 }
 
 ### Update a product by ID
-PUT {{host}}/api/products/1
+PUT {{host}}/api/products/35
 Content-Type: application/json
 
+  # "name": "iPhone 15 Pro",
 {
-  "name": "iPhone 15 Pro",
-  "weight": 210,
-  "status": true,
-  "categoryId": 1
+  "slug": "Variant_Test_Product2"
 }
 
+  # "weight": 210,
+  # "status": true,
+  # "categoryId": 1
 ### Delete a product by ID
 DELETE {{host}}/api/products/1
 
