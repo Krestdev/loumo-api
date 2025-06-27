@@ -17,7 +17,7 @@ services:
     ports:
       - "5000:5000"
     networks:
-      - app-network
+      - caddy-net
 
   mongo:
     container_name: mongo
