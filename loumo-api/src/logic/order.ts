@@ -38,7 +38,7 @@ export class OrderLogic {
 
   // Get all orders, including their roles
   async getAllOrders(): Promise<Order[]> {
-    return prisma.order.findMany({ include: { address: true } });
+    return prisma.order.findMany({ include: { address: true, user: true } });
   }
 
   // Update a order and optionally update its roles

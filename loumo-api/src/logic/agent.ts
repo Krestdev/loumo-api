@@ -5,9 +5,10 @@ const prisma = new PrismaClient();
 export class AgentLogic {
   // Create a log and optionally connect to roles
   async createAgent(
-    data: Omit<Agent, "id"> & { userId?: number }
+    data: Omit<Agent, "id"> & { userId: number }
   ): Promise<Agent> {
-    const { userId, ...agentData } = data;
+    const { userId, zoneId, ...agentData } = data;
+    // const { zoneId, ...restAgentData } = agentData as any;
     return prisma.agent.create({
       data: {
         ...agentData,
@@ -15,6 +16,13 @@ export class AgentLogic {
           ? {
               connect: {
                 id: userId,
+              },
+            }
+          : {},
+        zone: zoneId
+          ? {
+              connect: {
+                id: zoneId,
               },
             }
           : {},

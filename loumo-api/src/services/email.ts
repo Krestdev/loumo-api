@@ -61,7 +61,7 @@ export default class Mailer {
 
     // Render HTML from EJS template
     const html = await ejs.renderFile(
-      path.join(__dirname, "../emails/password-reset.ejs"),
+      path.join(__dirname, "./templates/passwordReset.ejs"),
       { name, email, appName: config.APP_NAME, resetUrl, year }
     );
 

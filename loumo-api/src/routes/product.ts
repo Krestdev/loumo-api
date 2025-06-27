@@ -15,6 +15,8 @@ export default class ProductRouter {
     this.routes.get("/slug/:slug", this.productController.getSlugProduct);
     this.routes.post("/", this.productController.createProduct);
     this.routes.put("/:id", this.productController.updateProduct);
+    this.routes.post("/bulckupdate", this.productController.updateBulkProduct);
+    this.routes.put("/delete/bulck", this.productController.bulkDeleteProduct);
     this.routes.delete("/:id", this.productController.deleteProduct);
   }
 }

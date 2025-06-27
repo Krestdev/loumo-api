@@ -33,7 +33,14 @@ export class ZoneLogic {
   // Get all zones, including their addresses
   async getAllZones(): Promise<(Zone & { addresses: Address[] })[]> {
     return prisma.zone.findMany({
-      include: { addresses: true },
+      include: {
+        addresses: {
+          include: {
+            orders: true,
+            shops: true,
+          },
+        },
+      },
     });
   }
 

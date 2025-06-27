@@ -27,7 +27,7 @@ const updateUserSchema = Joi.object({
   tel: Joi.string().optional(),
   password: Joi.string().min(6).optional(),
   address: Joi.array().items(Joi.number()).optional(),
-  // verified: Joi.boolean().optional(),
+  verified: Joi.boolean().optional(),
   // Add other fields as needed
 }).min(1);
 
@@ -47,6 +47,7 @@ const loginSchema = Joi.object({
 const verifyAccountSchema = Joi.object({
   email: Joi.string().email(),
   otp: Joi.string(),
+  newPassword: Joi.string().min(6).optional(),
 });
 
 const querySchema = Joi.object({

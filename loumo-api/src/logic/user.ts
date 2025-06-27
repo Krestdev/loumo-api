@@ -35,7 +35,7 @@ export class UserLogic {
       name,
       email,
       appName: "Loumo APP",
-      loginUrl: "http://Loumo-shop",
+      loginUrl: `${config.FRONTEND_URL}/auth/register/${otp}?email=${email}`,
     });
 
     return prisma.user.create({
@@ -45,6 +45,7 @@ export class UserLogic {
         name: name,
         verified: false,
         verificationOtp: otp,
+        fidelity: 10,
         verificationOtpExpires: new Date(Date.now() + 10 * 60 * 1000), // 10 min expiry
         addresses: addressList
           ? {
@@ -89,7 +90,7 @@ export class UserLogic {
       await this.email.sendPasswordRestOtp({
         name: name,
         email: user.email,
-        resetUrl: `${config.FRONTEND_URL}/users/reset?token=${user.passwordResetOtp}`,
+        resetUrl: `${config.FRONTEND_URL}/auth/${user.passwordResetOtp}?email=${user.email}`,
       });
       return true;
     }
@@ -107,7 +108,7 @@ export class UserLogic {
     await this.email.sendPasswordRestOtp({
       name: name,
       email: data.email,
-      resetUrl: `${config.FRONTEND_URL}/users/reset?token=${otp}`,
+      resetUrl: `${config.FRONTEND_URL}/auth/${otp}?email=${user.email}`,
     });
     return true;
   }
@@ -284,7 +285,13 @@ export class UserLogic {
             },
           },
         }),
-        ...(addressD && { addresses: true }),
+        ...(addressD && {
+          addresses: {
+            include: {
+              zone: true,
+            },
+          },
+        }),
         ...(notifD && { notifications: true }),
         ...(logD && { logs: true }),
         ...(ordersD && { orders: true }),

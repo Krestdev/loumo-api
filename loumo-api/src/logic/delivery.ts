@@ -1,10 +1,11 @@
 import { Agent, PrismaClient, Delivery } from "../../generated/prisma";
+import { v4 as uuidv4 } from "uuid";
 
 const prisma = new PrismaClient();
 
 export class DeliveryLogic {
   async createDelivery(
-    data: Omit<Delivery, "id" | "agentId"> & {
+    data: Omit<Delivery, "id" | "agentId" | "trackingCode"> & {
       orderId: number;
       orderItemsIds?: number[];
     }
@@ -13,6 +14,7 @@ export class DeliveryLogic {
     return prisma.delivery.create({
       data: {
         ...deliveryData,
+        trackingCode: `TRK${uuidv4().replace(/-/g, "").slice(0, 10)}`,
         order: orderId
           ? {
               connect: {
@@ -56,7 +58,17 @@ export class DeliveryLogic {
   ): Promise<(Delivery & { agent: Agent | null }) | null> {
     return prisma.delivery.findUnique({
       where: { id },
-      include: { agent: true },
+      include: {
+        agent: true,
+        order: {
+          include: {
+            user: true,
+            address: {
+              include: { zone: true },
+            },
+          },
+        },
+      },
     });
   }
 
@@ -94,7 +106,23 @@ export class DeliveryLogic {
 
   async listDeliverys(): Promise<(Delivery & { agent: Agent | null })[]> {
     return prisma.delivery.findMany({
-      include: { agent: true },
+      include: {
+        agent: {
+          include: {
+            zone: true,
+          },
+        },
+        order: {
+          include: {
+            user: true,
+            address: {
+              include: {
+                zone: true,
+              },
+            },
+          },
+        },
+      },
     });
   }
 

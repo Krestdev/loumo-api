@@ -14,11 +14,12 @@ datasource db {
 model User {
   id                      Int       @id @default(autoincrement())
   email                   String    @unique
-  name                    String?
+  name                    String
   password                String
   passwordResetOtp        String?
   passwordResetOtpExpires DateTime?
   tel                     String?
+  fidelity                Int
 
   verified               Boolean   @default(false)
   verificationOtp        String?
@@ -88,10 +89,13 @@ model Notification {
 }
 
 model Zone {
-  id        Int       @id @default(autoincrement())
-  name      String
-  price     Int
-  addresses Address[]
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String
+  price       Int
+  status      String
+  addresses   Address[]
+  agents      Agent[]
 }
 
 model Shop {
@@ -157,15 +161,20 @@ model Category {
 }
 
 model Order {
-  id         Int         @id @default(autoincrement())
-  note       String
-  address    Address     @relation(fields: [addressId], references: [id])
-  addressId  Int         @unique
-  user       User        @relation(fields: [userId], references: [id])
-  userId     Int         @unique
-  orderItems OrderItem[]
-  payment    Payment[]
-  delivery   Delivery[]
+  id          Int         @id @default(autoincrement())
+  note        String
+  weight      Int
+  total       Int
+  deliveryFee Int
+  address     Address     @relation(fields: [addressId], references: [id])
+  addressId   Int         @unique
+  user        User        @relation(fields: [userId], references: [id])
+  userId      Int         @unique
+  status      String
+  orderItems  OrderItem[]
+  payment     Payment?
+  delivery    Delivery[]
+  createdAt   DateTime    @default(now())
 }
 
 model OrderItem {
@@ -190,18 +199,23 @@ model Payment {
   ref      String
   tel      String
   total    Int
-  order    Order  @relation(fields: [orderId], references: [id])
-  orderId  Int
+  order    Order? @relation(fields: [orderId], references: [id])
+  orderId  Int?   @unique
 }
 
 model Delivery {
-  id        Int         @id @default(autoincrement())
-  status    String
-  order     Order       @relation(fields: [orderId], references: [id])
-  orderId   Int
-  orderItem OrderItem[]
-  agent     Agent?      @relation(fields: [agentId], references: [id])
-  agentId   Int?
+  id               Int         @id @default(autoincrement())
+  status           String
+  trackingCode     String
+  order            Order       @relation(fields: [orderId], references: [id])
+  orderId          Int
+  orderItem        OrderItem[]
+  agent            Agent?      @relation(fields: [agentId], references: [id])
+  priority         String
+  agentId          Int?
+  scheduledTime    DateTime
+  deliveredTime    DateTime?
+  estimatedArrival DateTime?
 }
 
 model Agent {
@@ -209,7 +223,10 @@ model Agent {
   code     String
   user     User       @relation(fields: [userId], references: [id])
   userId   Int        @unique
+  status   String     @default("inactive")
   delivery Delivery[]
+  zone     Zone       @relation(fields: [zoneId], references: [id])
+  zoneId   Int
 }
 
 model Topic {

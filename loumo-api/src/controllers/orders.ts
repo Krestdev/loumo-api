@@ -8,12 +8,16 @@ const orderLogic = new OrderLogic();
 
 const createOrderSchema = Joi.object({
   note: Joi.string(),
+  status: Joi.string(),
+  weight: Joi.number(),
   addressId: Joi.number().optional(),
   userId: Joi.number().optional(),
 });
 
 const updateOrderSchema = Joi.object({
   note: Joi.string().optional(),
+  status: Joi.string().optional(),
+  weight: Joi.number().optional(),
   addressId: Joi.number().optional(),
   userId: Joi.number().optional(),
 });

@@ -6,9 +6,14 @@ post {{host}}/api/users/login
 Content-Type: application/json
 
 {
-  "email": "john@example.com",
-  "password": "password123"
+  "email": "etarcos@gmail.com",
+  "password": "Etarcos123"
 }
+
+# {
+#   "email": "john@example.com",
+#   "password": "password123"
+# }
 
 ### Get all users
 GET {{host}}/api/users/?roleD=true&addressD=true&logD=true&notifD=true
@@ -29,11 +34,11 @@ Content-Type: application/json
 }
 
 ### Update a user by ID
-PUT {{host}}/api/users/2
+PUT {{host}}/api/users/18
 Content-Type: application/json
 
 {
-  "name": "Jane Doe",
+  "name": "Etarcos",
   "verified": true
 }
 
@@ -46,7 +51,7 @@ Content-Type: application/json
 }
 
 ### Delete a user by ID
-DELETE {{host}}/api/users/15
+DELETE {{host}}/api/users/18
 
 
 ##################### roles ###########################
@@ -294,12 +299,12 @@ Content-Type: application/json
 }
 
 ### Update a product by ID
-PUT {{host}}/api/products/35
+PUT {{host}}/api/products/23
 Content-Type: application/json
 
   # "name": "iPhone 15 Pro",
 {
-  "slug": "Variant_Test_Product2"
+  "categoryId": 5
 }
 
   # "weight": 210,
@@ -443,7 +448,7 @@ Content-Type: application/json
 }
 
 ### Delete a payment by ID
-DELETE {{host}}/api/payments/15
+DELETE {{host}}/api/payments/16
 
 
 ############### Agent #######################
@@ -469,10 +474,11 @@ PUT {{host}}/api/agents/1
 Content-Type: application/json
 
 {
-  "code": "AGENT002",
-  "userId": 2
+  "status": "active"
 }
 
+#   "code": "AGENT002",
+#   "userId": 2,
 ### Delete an agent by ID
 DELETE {{host}}/api/agents/1
 

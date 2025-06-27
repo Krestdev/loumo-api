@@ -73,12 +73,9 @@ export class PaymentLogic {
     });
   }
 
-  async getPaymentById(
-    id: number
-  ): Promise<(Payment & { order: Order }) | null> {
+  async getPaymentById(id: number): Promise<Payment | null> {
     return prisma.payment.findUnique({
       where: { id },
-      include: { order: true },
     });
   }
 
@@ -110,7 +107,7 @@ export class PaymentLogic {
   //   });
   // }
 
-  async listPayments(): Promise<(Payment & { order: Order })[]> {
+  async listPayments(): Promise<Payment[]> {
     return prisma.payment.findMany({
       include: { order: true },
     });
