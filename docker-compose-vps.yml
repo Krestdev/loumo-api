@@ -28,7 +28,7 @@ services:
     volumes:
       - mongo-data:/data/db
     ports:
-      - "5000:5000"
+      - "27017:27017"
     networks:
       - caddy-net
 
