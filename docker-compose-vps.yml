@@ -28,14 +28,14 @@ services:
     volumes:
       - mongo-data:/data/db
     ports:
-      - "27017:27017"
+      - "5000:5000"
     networks:
-      - app-network
+      - caddy-net
 
 networks:
-  app-network:
-    driver: bridge
-    attachable: true
+  caddy-net:
+    name: caddy-net
+    external: true
 
 volumes:
   mongo-data: {}
