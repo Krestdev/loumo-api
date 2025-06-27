@@ -8,3 +8,5 @@ coverage
 generated
 logfiles/*
 migrations
+
+tsconfig.tsbuildinfo
