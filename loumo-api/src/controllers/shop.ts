@@ -108,7 +108,7 @@ export default class ShopController {
     if (!this.validate(request, response, "paramId")) return;
     const id = Number(request.params.id);
     try {
-      const shops = await shopLogic.getAllShops();
+      const shops = await shopLogic.getShopById(id);
       response.status(200).json(shops);
     } catch (err) {
       throw new CustomError("Failed to fetch shops", undefined, err as Error);
