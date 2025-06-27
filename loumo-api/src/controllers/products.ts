@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import Joi, { boolean } from "joi";
-import { CustomError } from "../middleware/errorHandler";
+import Joi from "joi";
 import { Product } from "../../generated/prisma";
 import { ProductLogic } from "../logic/products";
+import { CustomError } from "../middleware/errorHandler";
 
 const productLogic = new ProductLogic();
 
