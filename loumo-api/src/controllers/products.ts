@@ -1,13 +1,14 @@
 import { Request, Response } from "express";
 import Joi from "joi";
-import { CustomError } from "../middleware/errorHandler";
 import { Product } from "../../generated/prisma";
 import { ProductLogic } from "../logic/products";
+import { CustomError } from "../middleware/errorHandler";
 
 const productLogic = new ProductLogic();
 
 const createProductSchema = Joi.object({
   name: Joi.string(),
+  slug: Joi.string(),
   weight: Joi.number(),
   status: Joi.boolean(),
   categoryId: Joi.number().optional(),
@@ -15,20 +16,49 @@ const createProductSchema = Joi.object({
 
 const updateProductSchema = Joi.object({
   name: Joi.string().optional(),
+  slug: Joi.string().optional(),
   weight: Joi.number().optional(),
   status: Joi.boolean().optional(),
   categoryId: Joi.number().optional(),
+});
+
+const bulkUpdateProductSchema = Joi.object({
+  product: Joi.array().items(
+    Joi.object({
+      name: Joi.string().optional(),
+      slug: Joi.string().optional(),
+      weight: Joi.number().optional(),
+      status: Joi.boolean().optional(),
+      categoryId: Joi.number().optional(),
+    })
+  ),
+  status: Joi.boolean(),
+  categoryId: Joi.number(),
+});
+
+const bulkDeleteSchema = Joi.object({
+  ids: Joi.array().items(Joi.number()),
 });
 
 const paramSchema = Joi.object({
   id: Joi.number(),
 });
 
+const slugSchema = Joi.object({
+  slug: Joi.string(),
+});
+
 export default class ProductController {
   validate = (
     request: Request<{ id?: number }>,
     response: Response,
-    schema: "create" | "update" | "paramId"
+    schema:
+      | "create"
+      | "update"
+      | "bulkUpdate"
+      | "paramId"
+      | "slug"
+      | "bulckDelete"
   ) => {
     let result: Joi.ValidationResult | null = null;
     switch (schema) {
@@ -44,8 +74,26 @@ export default class ProductController {
           response.status(400).json({ error: result.error.details[0].message });
         }
         break;
+      case "bulkUpdate":
+        result = bulkUpdateProductSchema.validate(request.body);
+        if (result.error) {
+          response.status(400).json({ error: result.error.details[0].message });
+        }
+        break;
       case "paramId":
         result = paramSchema.validate(request.params);
+        if (result.error) {
+          response.status(400).json({ error: result.error.details[0].message });
+        }
+        break;
+      case "slug":
+        result = slugSchema.validate(request.params);
+        if (result.error) {
+          response.status(400).json({ error: result.error.details[0].message });
+        }
+        break;
+      case "bulckDelete":
+        result = bulkDeleteSchema.validate(request.body);
         if (result.error) {
           response.status(400).json({ error: result.error.details[0].message });
         }
@@ -63,7 +111,7 @@ export default class ProductController {
     request: Request<
       object,
       object,
-      Omit<Product, "id"> & { categoryId: number }
+      Omit<Product, "id" | "createdAt"> & { categoryId: number }
     >,
     response: Response
   ) => {
@@ -114,6 +162,30 @@ export default class ProductController {
     }
   };
 
+  updateBulkProduct = async (
+    request: Request<
+      object,
+      { product: Partial<Product>[]; categoryId?: number; status?: boolean }
+    >,
+    response: Response
+  ) => {
+    if (!this.validate(request, response, "bulkUpdate")) return;
+    try {
+      const updatedProduct = await productLogic.updateBulkProduct(
+        request.body.product,
+        request.body.categoryId,
+        request.body.status
+      );
+      response.status(200).json(updatedProduct);
+    } catch (err) {
+      throw new CustomError(
+        "Failed to update product",
+        undefined,
+        err as Error
+      );
+    }
+  };
+
   getProducts = async (request: Request, response: Response) => {
     try {
       const products = await productLogic.getAllProducts();
@@ -142,6 +214,21 @@ export default class ProductController {
     }
   };
 
+  getSlugProduct = async (request: Request, response: Response) => {
+    const { slug } = request.params;
+    if (!this.validate(request, response, "slug")) return;
+    try {
+      const products = await productLogic.getProductBySlug(slug);
+      response.status(200).json(products);
+    } catch (err) {
+      throw new CustomError(
+        "Failed to fetch products",
+        undefined,
+        err as Error
+      );
+    }
+  };
+
   deleteProduct = async (
     request: Request<{ id: string }>,
     response: Response
@@ -153,6 +240,24 @@ export default class ProductController {
     } catch (err) {
       throw new CustomError(
         "Failed to delete product",
+        undefined,
+        err as Error
+      );
+    }
+  };
+
+  bulkDeleteProduct = async (
+    request: Request<object, object, { ids: number[] }>,
+    response: Response
+  ) => {
+    if (!this.validate(request, response, "bulckDelete")) return;
+    const { ids } = request.body;
+    try {
+      await productLogic.deleteBulkProduct(ids);
+      response.status(204).send();
+    } catch (err) {
+      throw new CustomError(
+        "Failed to delete products",
         undefined,
         err as Error
       );

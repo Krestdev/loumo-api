@@ -8,12 +8,16 @@ const orderLogic = new OrderLogic();
 
 const createOrderSchema = Joi.object({
   note: Joi.string(),
+  status: Joi.string(),
+  weight: Joi.number(),
   addressId: Joi.number().optional(),
   userId: Joi.number().optional(),
 });
 
 const updateOrderSchema = Joi.object({
   note: Joi.string().optional(),
+  status: Joi.string().optional(),
+  weight: Joi.number().optional(),
   addressId: Joi.number().optional(),
   userId: Joi.number().optional(),
 });
@@ -107,6 +111,17 @@ export default class OrderController {
   getOrders = async (request: Request, response: Response) => {
     try {
       const orders = await orderLogic.getAllOrders();
+      response.status(200).json(orders);
+    } catch (err) {
+      throw new CustomError("Failed to fetch orders", undefined, err as Error);
+    }
+  };
+
+  getOneOrder = async (request: Request, response: Response) => {
+    if (!this.validate(request, response, "paramId")) return;
+    const id = Number(request.params.id);
+    try {
+      const orders = await orderLogic.getOrderById(id);
       response.status(200).json(orders);
     } catch (err) {
       throw new CustomError("Failed to fetch orders", undefined, err as Error);

@@ -106,6 +106,17 @@ export default class FaqController {
     }
   };
 
+  getAnFaq = async (request: Request, response: Response) => {
+    if (!this.validate(request, response, "paramId")) return;
+    const id = Number(request.params.id);
+    try {
+      const faqs = await faqLogic.getFaqById(id);
+      response.status(200).json(faqs);
+    } catch (err) {
+      throw new CustomError("Failed to fetch faqs", undefined, err as Error);
+    }
+  };
+
   deleteFaq = async (request: Request<{ id: string }>, response: Response) => {
     const { id } = request.params;
     try {

@@ -8,11 +8,13 @@ const agentLogic = new AgentLogic();
 
 const createAgentSchema = Joi.object({
   code: Joi.string(),
+  status: Joi.string(),
   userId: Joi.number().optional(),
 });
 
 const updateAgentSchema = Joi.object({
   code: Joi.string().optional(),
+  status: Joi.string(),
 });
 
 const paramSchema = Joi.object({
@@ -96,6 +98,17 @@ export default class AgentController {
   getAgents = async (request: Request, response: Response) => {
     try {
       const agents = await agentLogic.getAllAgents();
+      response.status(200).json(agents);
+    } catch (err) {
+      throw new CustomError("Failed to fetch agents", undefined, err as Error);
+    }
+  };
+
+  getOneAgent = async (request: Request, response: Response) => {
+    if (!this.validate(request, response, "paramId")) return;
+    const id = Number(request.params.id);
+    try {
+      const agents = await agentLogic.getAgentById(id);
       response.status(200).json(agents);
     } catch (err) {
       throw new CustomError("Failed to fetch agents", undefined, err as Error);

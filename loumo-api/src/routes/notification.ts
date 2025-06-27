@@ -11,6 +11,7 @@ export default class NotificationRouter {
 
   registerRoutes() {
     this.routes.get("/", this.notificationController.getNotifications);
+    this.routes.get("/:id", this.notificationController.getANotification);
     this.routes.post("/", this.notificationController.createNotification);
     this.routes.put("/:id", this.notificationController.updateNotification);
     this.routes.delete("/:id", this.notificationController.deleteNotification);

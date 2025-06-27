@@ -74,7 +74,6 @@ export default class PermissionController {
       );
       response.status(201).json(newPermission);
     } catch (err) {
-      console.log(err);
       throw new CustomError(
         "Failed to create permission",
         undefined,
@@ -112,6 +111,24 @@ export default class PermissionController {
   getPermissions = async (request: Request, response: Response) => {
     try {
       const permissions = await permissionLogic.getAllPermissions();
+      response.status(200).json(permissions);
+    } catch (err) {
+      throw new CustomError(
+        "Failed to fetch permissions",
+        undefined,
+        err as Error
+      );
+    }
+  };
+
+  getOnePermission = async (
+    request: Request<{ id: string }>,
+    response: Response
+  ) => {
+    if (!this.validate(request, response, "paramId")) return;
+    const id = Number(request.params.id);
+    try {
+      const permissions = await permissionLogic.getPermissionById(id);
       response.status(200).json(permissions);
     } catch (err) {
       throw new CustomError(

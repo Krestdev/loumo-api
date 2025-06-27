@@ -1,0 +1,8 @@
+node_modules
+build
+nodemon.json
+jest.configs.mjs
+eslint.config.mjs
+error.test.log
+.env
+test.rest

@@ -26,6 +26,7 @@ import helmet from "helmet";
 import FaqRouter from "./routes/faq";
 import TopicRouter from "./routes/topic";
 import rateLimit from "express-rate-limit";
+import "./cron/paymentStatusChecker";
 
 /**
  * Represents the main application server for the Loumo API.
@@ -69,7 +70,8 @@ export class Server {
     this.app.use(helmet());
     this.app.use(
       cors({
-        origin: ["http://localhost:3000", "*"], // your frontend's origin
+        origin: "*", // your frontend's origin
+        // origin: ["http://localhost:3000", "*"], // your frontend's origin
         credentials: true, // if you use cookies/auth headers
       })
     );

@@ -1,6 +1,4 @@
-import config from "./general-conf/configs";
-import ResCode from "./repose-code/responseCode";
-import ServiceError from "./service-error/service_error";
-import ServiceResponse from "./service-success/service-response";
+import config from "./configs";
+import ResCode from "./responseCode";
 
-export { config, ResCode, ServiceError, ServiceResponse };
+export { config, ResCode };

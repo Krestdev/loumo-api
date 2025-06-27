@@ -100,8 +100,8 @@ export default class SettingController {
     response: Response
   ) => {
     const { id } = request.params;
-    this.validate(request, response, "paramId");
-    this.validate(request, response, "update");
+    if (!this.validate(request, response, "paramId")) return;
+    if (!this.validate(request, response, "update")) return;
 
     try {
       const updatedSetting = await settingLogic.updateSetting(
@@ -122,10 +122,28 @@ export default class SettingController {
     request: Request<object, object, object, { section: string }>,
     response: Response
   ) => {
-    this.validate(request, response, "query");
+    if (!this.validate(request, response, "query")) return;
     const { section } = request.query;
     try {
       const settings = await settingLogic.getAllSettings(section);
+      response.status(200).json(settings);
+    } catch (err) {
+      throw new CustomError(
+        "Failed to fetch settings",
+        undefined,
+        err as Error
+      );
+    }
+  };
+
+  getOneSetting = async (
+    request: Request<{ id: string }, object, object>,
+    response: Response
+  ) => {
+    if (!this.validate(request, response, "paramId")) return;
+    const id = Number(request.params.id);
+    try {
+      const settings = await settingLogic.getSettingById(id);
       response.status(200).json(settings);
     } catch (err) {
       throw new CustomError(

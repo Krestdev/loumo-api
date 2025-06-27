@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import Joi from "joi";
-import { CustomError } from "../middleware/errorHandler";
 import { Shop } from "../../generated/prisma";
 import { ShopLogic } from "../logic/shop";
+import { CustomError } from "../middleware/errorHandler";
 
 const shopLogic = new ShopLogic();
 
@@ -98,6 +98,17 @@ export default class ShopController {
   getShops = async (request: Request, response: Response) => {
     try {
       const shops = await shopLogic.getAllShops();
+      response.status(200).json(shops);
+    } catch (err) {
+      throw new CustomError("Failed to fetch shops", undefined, err as Error);
+    }
+  };
+
+  getOneShop = async (request: Request, response: Response) => {
+    if (!this.validate(request, response, "paramId")) return;
+    const id = Number(request.params.id);
+    try {
+      const shops = await shopLogic.getShopById(id);
       response.status(200).json(shops);
     } catch (err) {
       throw new CustomError("Failed to fetch shops", undefined, err as Error);

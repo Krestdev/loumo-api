@@ -11,6 +11,7 @@ export default class PaymentRouter {
 
   registerRoutes() {
     this.routes.get("/", this.paymentController.getPayment);
+    this.routes.get("/:id", this.paymentController.getOnePayment);
     this.routes.post("/", this.paymentController.createPayment);
     this.routes.put("/:id", this.paymentController.updatePayment);
     this.routes.delete("/:id", this.paymentController.deletePayment);

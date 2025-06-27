@@ -12,6 +12,7 @@ const createUserSchema = Joi.object({
   tel: Joi.string().required(),
   password: Joi.string().min(6).required(),
   address: Joi.array().items(Joi.number()),
+  imgUrl: Joi.string(),
   // Add other fields as needed
 });
 
@@ -26,7 +27,7 @@ const updateUserSchema = Joi.object({
   tel: Joi.string().optional(),
   password: Joi.string().min(6).optional(),
   address: Joi.array().items(Joi.number()).optional(),
-  // verified: Joi.boolean().optional(),
+  verified: Joi.boolean().optional(),
   // Add other fields as needed
 }).min(1);
 
@@ -41,6 +42,12 @@ const paramSchema = Joi.object({
 const loginSchema = Joi.object({
   email: Joi.string().email(),
   password: Joi.string(),
+});
+
+const verifyAccountSchema = Joi.object({
+  email: Joi.string().email(),
+  otp: Joi.string(),
+  newPassword: Joi.string().min(6).optional(),
 });
 
 const querySchema = Joi.object({
@@ -69,6 +76,7 @@ export default class UserController {
       | "assignRole"
       | "login"
       | "fav"
+      | "verify"
   ) => {
     let result: Joi.ValidationResult | null = null;
     switch (schema) {
@@ -108,6 +116,12 @@ export default class UserController {
           response.status(400).json({ error: result.error.details[0].message });
         }
         break;
+      case "verify":
+        result = verifyAccountSchema.validate(request.body);
+        if (result.error) {
+          response.status(400).json({ error: result.error.details[0].message });
+        }
+        break;
       case "fav":
         result = addToFavSchema.validate(request.body);
         if (result.error) {
@@ -134,7 +148,83 @@ export default class UserController {
       const user = await userLogic.register(request.body);
       response.status(201).json(user);
     } catch (error) {
-      throw new CustomError("Failed to Create SHop", undefined, error as Error);
+      throw new CustomError("Failed to Create User", undefined, error as Error);
+    }
+  };
+
+  verifyEmail = async (
+    request: Request<object, object, { email: string; otp: string }>,
+    response: Response
+  ) => {
+    if (!this.validate(request, response, "verify")) return;
+    const { email, otp } = request.body;
+    try {
+      const user = await userLogic.verifyAccount(email, otp);
+      response.status(201).json(user);
+    } catch (error) {
+      throw new CustomError(
+        "Failed to verify account",
+        undefined,
+        error as Error
+      );
+    }
+  };
+
+  requestPasswordRecovery = async (
+    request: Request<object, object, { email: string; otp: string }>,
+    response: Response
+  ) => {
+    if (!this.validate(request, response, "verify")) return;
+    const { email } = request.body;
+    try {
+      const user = await userLogic.requestPasswordRecovery(email);
+      response.status(201).json(user);
+    } catch (error) {
+      throw new CustomError(
+        "Failed to validate pasword recover request",
+        undefined,
+        error as Error
+      );
+    }
+  };
+
+  validatePasswordRecoveryToken = async (
+    request: Request<object, object, { email: string; otp: string }>,
+    response: Response
+  ) => {
+    if (!this.validate(request, response, "verify")) return;
+    const { email, otp } = request.body;
+    try {
+      const user = await userLogic.validateOtpRecovery(email, otp);
+      response.status(201).json(user);
+    } catch (error) {
+      throw new CustomError(
+        "Failed to validate pasword recover request",
+        undefined,
+        error as Error
+      );
+    }
+  };
+
+  resetPassword = async (
+    request: Request<
+      object,
+      object,
+      { email: string; otp: string; newPassword: string }
+    >,
+    response: Response
+  ) => {
+    if (!this.validate(request, response, "verify")) return;
+    const { email, otp, newPassword } = request.body;
+    try {
+      const user = await userLogic.resetPassword(email, otp, newPassword);
+      response.status(201).json(user);
+    } catch (error) {
+      throw new CustomError(
+        "Failed to validate pasword recover request",
+        undefined,
+        error as Error
+      );
     }
   };
 

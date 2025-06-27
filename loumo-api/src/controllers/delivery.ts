@@ -11,12 +11,16 @@ const createDeliverySchema = Joi.object({
   status: Joi.string(),
   agentId: Joi.number(),
   orderItemsIds: Joi.array().items(Joi.number()).optional(),
+  scheduledTime: Joi.string(),
+  estimatedArrival: Joi.string(),
   orderId: Joi.number(),
 });
 
 const updateDeliverySchema = Joi.object({
   status: Joi.string().optional(),
   agentId: Joi.number().optional(),
+  scheduledTime: Joi.string().optional(),
+  estimatedArrival: Joi.string().optional(),
 });
 
 const paramSchema = Joi.object({

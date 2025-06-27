@@ -9,6 +9,7 @@ const categoryLogic = new CategoryLogic();
 // Category schemas
 const createCategorySchema = Joi.object({
   name: Joi.string(),
+  umgUrl: Joi.string(),
   weight: Joi.number(),
   status: Joi.boolean().optional(),
   ids: Joi.array().items(Joi.number()),
@@ -16,6 +17,7 @@ const createCategorySchema = Joi.object({
 
 const updateCategorySchema = Joi.object({
   name: Joi.string().optional(),
+  umgUrl: Joi.string().optional(),
   weight: Joi.number().optional(),
   status: Joi.boolean().optional(),
   productIds: Joi.array().items(Joi.number()).optional(),

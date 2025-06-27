@@ -11,6 +11,7 @@ export default class SettingRouter {
 
   registerRoutes() {
     this.routes.get("/", this.settingController.getSettings);
+    this.routes.get("/:id", this.settingController.getOneSetting);
     this.routes.post("/", this.settingController.createSetting);
     this.routes.put("/:id", this.settingController.updateSetting);
     this.routes.delete("/:id", this.settingController.deleteSetting);

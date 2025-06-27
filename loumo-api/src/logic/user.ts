@@ -2,7 +2,8 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { PrismaClient, User } from "../../generated/prisma";
 import { config } from "../configs";
-import { sendMail } from "../services/email";
+import Mailer from "../services/email";
+import { name } from "ejs";
 
 const prisma = new PrismaClient();
 
@@ -13,6 +14,7 @@ function generateOTP(length = 6): string {
 }
 
 export class UserLogic {
+  email = new Mailer();
   // Register a new user (with account verification OTP)
   async register(
     data: Omit<User, "id"> & {
@@ -28,6 +30,14 @@ export class UserLogic {
     const hashedPassword = await bcrypt.hash(password, 10);
     const otp = generateOTP();
     // Save OTP and set verified to false
+
+    this.email.sendWelcomeEmail({
+      name,
+      email,
+      appName: "Loumo APP",
+      loginUrl: `${config.FRONTEND_URL}/auth/register/${otp}?email=${email}`,
+    });
+
     return prisma.user.create({
       data: {
         email: email,
@@ -35,6 +45,7 @@ export class UserLogic {
         name: name,
         verified: false,
         verificationOtp: otp,
+        fidelity: 10,
         verificationOtpExpires: new Date(Date.now() + 10 * 60 * 1000), // 10 min expiry
         addresses: addressList
           ? {
@@ -72,20 +83,52 @@ export class UserLogic {
   async requestPasswordRecovery(email: string): Promise<boolean> {
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user) return false;
+    if (
+      user.passwordResetOtpExpires &&
+      new Date(user.passwordResetOtpExpires) > new Date("now")
+    ) {
+      await this.email.sendPasswordRestOtp({
+        name: name,
+        email: user.email,
+        resetUrl: `${config.FRONTEND_URL}/auth/${user.passwordResetOtp}?email=${user.email}`,
+      });
+      return true;
+    }
     const otp = generateOTP();
-    await prisma.user.update({
+
+    const data = await prisma.user.update({
       where: { email },
       data: {
         passwordResetOtp: otp,
         passwordResetOtpExpires: new Date(Date.now() + 10 * 60 * 1000), // 10 min expiry
       },
     });
+
     // Send OTP via email here (implementation omitted)
-    await sendMail({
-      to: "kenfackjordanjunior@gmail.com",
-      subject: "This is your password",
-      html: `<h1>Hello!</h1><p>Your account was created successfully.</p>`,
+    await this.email.sendPasswordRestOtp({
+      name: name,
+      email: data.email,
+      resetUrl: `${config.FRONTEND_URL}/auth/${otp}?email=${user.email}`,
     });
+    return true;
+  }
+
+  // Request password recovery (send OTP)
+  async validateOtpRecovery(email: string, otp: string): Promise<boolean> {
+    const user = await prisma.user.findFirst({
+      where: {
+        email,
+        passwordResetOtp: otp,
+      },
+    });
+
+    if (!user) return false;
+
+    const now = new Date();
+
+    if (!user.passwordResetOtpExpires || user.passwordResetOtpExpires < now) {
+      return false; // OTP has expired
+    }
 
     return true;
   }
@@ -242,7 +285,13 @@ export class UserLogic {
             },
           },
         }),
-        ...(addressD && { addresses: true }),
+        ...(addressD && {
+          addresses: {
+            include: {
+              zone: true,
+            },
+          },
+        }),
         ...(notifD && { notifications: true }),
         ...(logD && { logs: true }),
         ...(ordersD && { orders: true }),

@@ -1,4 +1,5 @@
-import { Order, PrismaClient, Payment } from "../../generated/prisma";
+import { v4 as uuidv4 } from "uuid";
+import { Payment, PrismaClient } from "../../generated/prisma";
 import { PawapayService } from "../services/payment";
 
 const prisma = new PrismaClient();
@@ -9,10 +10,11 @@ export class PaymentLogic {
     data: Omit<Payment, "id"> & { orderId: number }
   ): Promise<Payment> {
     const { orderId, ...paymentData } = data;
-
+    const payoutId = uuidv4();
     const payOutData = await prisma.payment.create({
       data: {
         ...paymentData,
+        payoutId: payoutId,
         order: orderId
           ? {
               connect: {
@@ -32,6 +34,7 @@ export class PaymentLogic {
 
     try {
       const payout = await pawapay.requestPayout({
+        payoutId: payoutId,
         amount: payOutData.total.toString(),
         currency: "XAF",
         country: "CMR",
@@ -70,12 +73,9 @@ export class PaymentLogic {
     });
   }
 
-  async getPaymentById(
-    id: number
-  ): Promise<(Payment & { order: Order }) | null> {
+  async getPaymentById(id: number): Promise<Payment | null> {
     return prisma.payment.findUnique({
       where: { id },
-      include: { order: true },
     });
   }
 
@@ -107,7 +107,7 @@ export class PaymentLogic {
   //   });
   // }
 
-  async listPayments(): Promise<(Payment & { order: Order })[]> {
+  async listPayments(): Promise<Payment[]> {
     return prisma.payment.findMany({
       include: { order: true },
     });
