@@ -12,6 +12,8 @@ const createOrderSchema = Joi.object({
   weight: Joi.number(),
   addressId: Joi.number().optional(),
   userId: Joi.number().optional(),
+  total: Joi.number().required(),
+  deliveryFee: Joi.number(),
 });
 
 const updateOrderSchema = Joi.object({
@@ -20,6 +22,7 @@ const updateOrderSchema = Joi.object({
   weight: Joi.number().optional(),
   addressId: Joi.number().optional(),
   userId: Joi.number().optional(),
+  total: Joi.number(),
 });
 
 const paramSchema = Joi.object({

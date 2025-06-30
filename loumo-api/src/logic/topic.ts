@@ -22,7 +22,11 @@ export class TopicLogic {
 
   // Get all topics, including their roles
   async getAllTopics(): Promise<Topic[]> {
-    return prisma.topic.findMany();
+    return prisma.topic.findMany({
+      include: {
+        faqs: true,
+      },
+    });
   }
 
   // Update a topic and optionally update its roles

@@ -199,7 +199,12 @@ export class UserLogic {
 
   // Get user by email
   async getUserByEmail(email: string): Promise<User | null> {
-    return prisma.user.findUnique({ where: { email } });
+    return prisma.user.findUnique({
+      where: { email },
+      include: {
+        orders: true,
+      },
+    });
   }
 
   // Update user

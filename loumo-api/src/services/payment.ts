@@ -9,20 +9,72 @@ interface Recipient {
 }
 
 interface PayoutRequest {
-  payoutId?: string;
-  status?: string;
+  depositId: string;
+  payer: {
+    type: string;
+    accountDetails: {
+      phoneNumber: string;
+      provider: string;
+    };
+  };
+  clientReferenceId: string;
+  amount: string;
+  currency: string;
+}
+
+type DepositStatus = "COMPLETED" | "ACCEPTED" | "IN_RECONCILIATION" | "FAILED";
+
+type DepositData = {
+  depositId: string;
+  status: DepositStatus;
   amount: string;
   currency: string;
   country: string;
-  correspondent: string;
-  recipient: Recipient;
-  customerTimestamp: string;
-  statementDescription?: string;
-  metadata?: Record<string, string>;
-  receivedByRecipient?: string;
-  correspondentIds?: Record<string, string>;
+  payer: {
+    type: string;
+    accountDetails: {
+      phoneNUmber: string;
+      provider: string;
+    };
+  };
+  customerMessage: string;
+  clientReferenceId: string;
   created: string;
-}
+  providerTransactionId?: string; // Only appears in some cases
+  failureReason?: {
+    failureCode: string;
+    failureMessage: string;
+  };
+  metadata: {
+    orderId: string;
+    customerId: string;
+  };
+};
+
+type ApiResponse =
+  | {
+      status: "FOUND";
+      data: DepositData;
+    }
+  | {
+      status: "NOT_FOUND";
+    };
+
+type FailureReason = {
+  failureCode: string;
+  failureMessage: string;
+};
+
+type DepositSimpleResponse =
+  | {
+      depositId: string;
+      status: "REJECTED";
+      failureReason: FailureReason;
+    }
+  | {
+      depositId: string;
+      status: "ACCEPTED";
+    };
 
 interface ResendRequest {
   payoutId: string;
@@ -36,7 +88,8 @@ export class PawapayService {
   private authToken: string;
 
   constructor() {
-    this.baseUrl = config.PAWAPAY.BASE_URL || "https://api.sandbox.pawapay.io";
+    this.baseUrl =
+      config.PAWAPAY.BASE_URL || "https://api.sandbox.pawapay.io/v2";
     this.authToken = config.PAWAPAY.API_TOKEN || "";
     this.client = axios.create({
       baseURL: this.baseUrl,
@@ -50,24 +103,18 @@ export class PawapayService {
   /**
    * Request a new payout
    */
-  public async requestPayout(data: PayoutRequest): Promise<{
-    payoutId: string;
-    status: string;
-    created: string;
-    rejectionReason?: {
-      rejectionCode: string;
-      rejectionMessage: string;
-    };
-  }> {
-    const response = await this.client.post("/payouts", data);
+  public async requestPayout(data: PayoutRequest): Promise<ApiResponse> {
+    const response = await this.client.post("/deposits", data);
     return response.data;
   }
 
   /**
    * Check the status of an existing payout
    */
-  public async checkPayoutStatus(payoutId: string): Promise<PayoutRequest[]> {
-    const response = await this.client.get(`/payouts/${payoutId}`);
+  public async checkDepositstatus(
+    payoutId: string
+  ): Promise<DepositSimpleResponse> {
+    const response = await this.client.get(`/deposits/${payoutId}`);
     return response.data;
   }
 
@@ -76,7 +123,7 @@ export class PawapayService {
    */
   public async resendPayoutCallback(payoutId: string): Promise<ResendRequest> {
     const response = await this.client.post(
-      `/payouts/${payoutId}/resend-callback`
+      `/deposits/${payoutId}/resend-callback`
     );
     return response.data;
   }
@@ -85,7 +132,7 @@ export class PawapayService {
    * Cancel a payout (only works for ENQUEUED status)
    */
   public async cancelPayout(payoutId: string): Promise<ResendRequest> {
-    const response = await this.client.post(`/payouts/${payoutId}/cancel`);
+    const response = await this.client.post(`/deposits/${payoutId}/cancel`);
     return response.data;
   }
 }

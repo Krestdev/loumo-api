@@ -11,6 +11,7 @@ export class OrderLogic {
     return prisma.order.create({
       data: {
         ...orderData,
+        status: "PENDING",
         address: addressId
           ? {
               connect: {
@@ -21,7 +22,7 @@ export class OrderLogic {
         user: userId
           ? {
               connect: {
-                id: addressId,
+                id: userId,
               },
             }
           : {},

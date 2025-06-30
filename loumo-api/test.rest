@@ -6,8 +6,8 @@ post {{host}}/api/users/login
 Content-Type: application/json
 
 {
-  "email": "etarcos@gmail.com",
-  "password": "Etarcos123"
+  "email": "etarcos3@gmail.com",
+  "password": "user.password"
 }
 
 # {
@@ -164,6 +164,8 @@ Content-Type: application/json
 
 {
   "name": "Zone D",
+  "description": "markret",
+  "status": "active",
   "price": 2500
 }
 
@@ -295,7 +297,7 @@ Content-Type: application/json
   "name": "iPhone 15",
   "weight": 200,
   "status": true,
-  "categoryId": 1
+  "categoryId": 4
 }
 
 ### Update a product by ID
@@ -331,7 +333,7 @@ Content-Type: application/json
   "name": "256GB",
   "weight": 215,
   "status": true,
-  "productId": 1
+  "productId": 13
 }
 
 ### Update a product variant by ID
@@ -395,8 +397,11 @@ Content-Type: application/json
 
 {
   "note": "Please deliver between 9am-12pm",
-  "addressId": 2,
-  "userId": 1
+  "addressId": 9,
+  "weight": 30,
+  "userId": 1,
+  "total": 300000,
+  "deliveryFee": 0
 }
 
 ### Update an order by ID
@@ -406,7 +411,8 @@ Content-Type: application/json
 {
   "note": "Leave at the front desk",
   "addressId": 2,
-  "userId": 1
+  "userId": 1,
+  "total": 200000
 }
 
 ### Delete an order by ID
@@ -443,8 +449,7 @@ Content-Type: application/json
 {
   "name": "Debit Card",
   "status": "pending",
-  "ref": "PAY654321",
-  "orderId": 1
+  "ref": "PAY654321"
 }
 
 ### Delete a payment by ID

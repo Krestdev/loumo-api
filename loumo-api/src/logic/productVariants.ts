@@ -31,7 +31,11 @@ export class ProductVariantLogic {
 
   // Get all products, including their roles
   async getAllProducts(): Promise<ProductVariant[]> {
-    return prisma.productVariant.findMany();
+    return prisma.productVariant.findMany({
+      include: {
+        stock: true,
+      },
+    });
   }
 
   // Update a product and optionally update its roles

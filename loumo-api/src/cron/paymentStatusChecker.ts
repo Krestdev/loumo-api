@@ -18,12 +18,12 @@ cron.schedule("*/1 * * * *", async () => {
     }
 
     for (const payment of pendingPayments) {
-      if (!payment.payoutId) continue; // Ensure payoutId exists
+      if (!payment.depositId) continue; // Ensure depositId exists
 
       await pawapay
-        .checkPayoutStatus(payment.payoutId)
+        .checkDepositstatus(payment.depositId)
         .then(async (payoutStatusArr) => {
-          const payoutStatus = payoutStatusArr[0]?.status;
+          const payoutStatus = payoutStatusArr.status;
           if (payoutStatus && payoutStatus !== payment.status) {
             await prisma.payment.update({
               where: { id: payment.id },
@@ -36,7 +36,7 @@ cron.schedule("*/1 * * * *", async () => {
             console.info(payoutStatusArr);
           }
         })
-        .catch((error) => {
+        .catch((error: Error) => {
           console.error(
             `Failed to check/update status for payment ${payment.id}:`,
             error
