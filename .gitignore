@@ -9,3 +9,5 @@ generated
 logfiles/*
 
 tsconfig.tsbuildinfo
+
+./loumo-api/test.rest

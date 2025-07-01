@@ -1,5 +1,6 @@
 import { Router } from "express";
 import ProductController from "../controllers/products";
+import upload from "../utils/upload";
 
 export default class ProductRouter {
   routes: Router = Router();

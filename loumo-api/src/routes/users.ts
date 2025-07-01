@@ -15,6 +15,7 @@ export default class UserRouter {
   registerRoutes() {
     this.routes.get("/", this.userController.getAllUsers);
     this.routes.post("/verify", this.userController.verifyEmail);
+    this.routes.post("/verifypass", this.userController.verifyPass);
     this.routes.post("/request", this.userController.requestPasswordRecovery);
     this.routes.post(
       "/verifyReset",

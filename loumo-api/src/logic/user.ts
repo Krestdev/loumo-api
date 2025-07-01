@@ -175,11 +175,20 @@ export class UserLogic {
     return { user, token };
   }
 
+  // Authenticate user (login)
+  async passwordCompare(email: string, password: string): Promise<boolean> {
+    const user = await this.getUserByEmail(email);
+    if (!user || !user.verified) return false;
+    const valid = await bcrypt.compare(password, user.password);
+    if (!valid) return false;
+    return true;
+  }
+
   // Get user by ID
   async getUserById(id: number): Promise<User | null> {
     return prisma.user.findUnique({
       where: { id },
-      include: { favorite: true, orders: true },
+      include: { favorite: true, orders: true, addresses: true },
     });
   }
 
@@ -193,6 +202,7 @@ export class UserLogic {
             permissions: true,
           },
         },
+        addresses: true,
       },
     });
   }
@@ -203,6 +213,7 @@ export class UserLogic {
       where: { email },
       include: {
         orders: true,
+        addresses: true,
       },
     });
   }
@@ -210,12 +221,12 @@ export class UserLogic {
   // Update user
   async updateUser(
     id: number,
-    data: Partial<User> & { productIds?: number[] }
+    data: Partial<User> & { productIds?: number[]; addressIds?: number[] }
   ): Promise<User | null> {
     if (data.password) {
       data.password = await bcrypt.hash(data.password, 10);
     }
-    const { productIds, ...userData } = data;
+    const { productIds, addressIds, ...userData } = data;
     return prisma.user.update({
       where: { id },
       data: {
@@ -223,6 +234,11 @@ export class UserLogic {
         favorite: productIds
           ? {
               connect: productIds.map((id) => ({ id })),
+            }
+          : {},
+        addresses: addressIds
+          ? {
+              connect: addressIds.map((addressId) => ({ id: addressId })),
             }
           : {},
       },

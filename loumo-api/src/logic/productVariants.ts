@@ -1,3 +1,4 @@
+import slugify from "slugify";
 import { PrismaClient, ProductVariant } from "../../generated/prisma";
 
 const prisma = new PrismaClient();

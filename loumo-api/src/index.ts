@@ -137,6 +137,7 @@ export class Server {
     this.app.use("/api/notifications", this.notification.routes);
     this.app.use("/api/faqs", this.faq.routes);
     this.app.use("/api/topics", this.topic.routes);
+    this.app.use("/uploads", express.static("uploads"));
   }
 
   errorMiddleware() {

@@ -31,7 +31,11 @@ export class ProductLogic {
     return prisma.product.findUnique({
       where: { id },
       include: {
-        variants: true,
+        variants: {
+          include: {
+            stock: true,
+          },
+        },
       },
     });
   }
@@ -43,7 +47,11 @@ export class ProductLogic {
         slug,
       },
       include: {
-        variants: true,
+        variants: {
+          include: {
+            stock: true,
+          },
+        },
       },
     });
   }
@@ -51,7 +59,14 @@ export class ProductLogic {
   // Get all products, including their roles
   async getAllProducts(): Promise<Product[]> {
     return prisma.product.findMany({
-      include: { variants: true, category: true },
+      include: {
+        variants: {
+          include: {
+            stock: true,
+          },
+        },
+        category: true,
+      },
     });
   }
 
