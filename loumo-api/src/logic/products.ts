@@ -62,7 +62,15 @@ export class ProductLogic {
       include: {
         variants: {
           include: {
-            stock: true,
+            stock: {
+              include: {
+                shop: {
+                  include: {
+                    address: true,
+                  },
+                },
+              },
+            },
           },
         },
         category: true,

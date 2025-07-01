@@ -10,5 +10,4 @@ logfiles/*
 
 tsconfig.tsbuildinfo
 
-./loumo-api/test.rest
 loumo-api/test.rest
