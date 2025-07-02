@@ -36,7 +36,19 @@ export class CategoryLogic {
       include: {
         products: {
           include: {
-            variants: true,
+            variants: {
+              include: {
+                stock: {
+                  include: {
+                    shop: {
+                      include: {
+                        address: true,
+                      },
+                    },
+                  },
+                },
+              },
+            },
           },
         },
       },

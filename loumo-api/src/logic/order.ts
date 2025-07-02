@@ -1,17 +1,22 @@
-import { PrismaClient, Order } from "../../generated/prisma";
+import { PrismaClient, Order, OrderItem } from "../../generated/prisma";
 
 const prisma = new PrismaClient();
 
 export class OrderLogic {
   // Create a log and optionally connect to roles
   async createOrder(
-    data: Omit<Order, "id"> & { addressId: number; userId: number }
+    data: Omit<Order, "id"> & {
+      addressId: number;
+      userId: number;
+      orderItems: Omit<OrderItem, "id">[];
+    }
   ): Promise<Order> {
-    const { addressId, userId, ...orderData } = data;
+    const { addressId, orderItems, userId, ...orderData } = data;
     return prisma.order.create({
       data: {
         ...orderData,
         status: "PENDING",
+        createdAt: new Date(),
         address: addressId
           ? {
               connect: {
@@ -26,6 +31,9 @@ export class OrderLogic {
               },
             }
           : {},
+        orderItems: {
+          create: orderItems,
+        },
       },
     });
   }

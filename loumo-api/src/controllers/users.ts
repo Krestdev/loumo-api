@@ -30,6 +30,7 @@ const updateUserSchema = Joi.object({
   verified: Joi.boolean().optional(),
   addressIds: Joi.array().items(Joi.number()),
   productIds: Joi.array().items(Joi.number()),
+  active: Joi.boolean(),
   // Add other fields as needed
 }).min(1);
 
@@ -64,6 +65,7 @@ const querySchema = Joi.object({
   notifD: Joi.boolean().optional(),
   logD: Joi.boolean().optional(),
   ordersD: Joi.boolean().optional(),
+  clients: Joi.boolean().optional(),
 });
 
 export default class UserController {

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Joi from "joi";
 import { CustomError } from "../middleware/errorHandler";
-import { Order } from "../../generated/prisma";
+import { Order, OrderItem } from "../../generated/prisma";
 import { OrderLogic } from "../logic/order";
 
 const orderLogic = new OrderLogic();
@@ -9,11 +9,21 @@ const orderLogic = new OrderLogic();
 const createOrderSchema = Joi.object({
   note: Joi.string(),
   status: Joi.string(),
-  weight: Joi.number(),
+  weight: Joi.number().required().required(),
   addressId: Joi.number().optional(),
   userId: Joi.number().optional(),
-  total: Joi.number().required(),
-  deliveryFee: Joi.number(),
+  total: Joi.number().required().required(),
+  deliveryFee: Joi.number().required(),
+  orderItems: Joi.array().items(
+    Joi.object({
+      note: Joi.string().min(0),
+      total: Joi.number(),
+      orderId: Joi.number(),
+      productVariantId: Joi.number(),
+      quantity: Joi.number(),
+      deliveryId: Joi.number(),
+    })
+  ),
 });
 
 const updateOrderSchema = Joi.object({
@@ -68,7 +78,11 @@ export default class OrderController {
     request: Request<
       object,
       object,
-      Omit<Order, "id"> & { addressId: number; userId: number }
+      Omit<Order, "id"> & {
+        addressId: number;
+        userId: number;
+        orderItems: Omit<OrderItem, "id">[];
+      }
     >,
     response: Response
   ) => {

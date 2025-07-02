@@ -103,7 +103,9 @@ export class PawapayService {
   /**
    * Request a new payout
    */
-  public async requestPayout(data: PayoutRequest): Promise<ApiResponse> {
+  public async requestPayout(
+    data: PayoutRequest
+  ): Promise<DepositSimpleResponse> {
     const response = await this.client.post("/deposits", data);
     return response.data;
   }
@@ -111,9 +113,7 @@ export class PawapayService {
   /**
    * Check the status of an existing payout
    */
-  public async checkDepositstatus(
-    payoutId: string
-  ): Promise<DepositSimpleResponse> {
+  public async checkDepositstatus(payoutId: string): Promise<ApiResponse> {
     const response = await this.client.get(`/deposits/${payoutId}`);
     return response.data;
   }
