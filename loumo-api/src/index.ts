@@ -78,7 +78,11 @@ export class Server {
 
     this.rateLimiter();
     // console logger
-    this.app.use(morgan("dev"));
+    this.app.use(
+      morgan(
+        `:remote-addr - :remote-user [:date] :method :url HTTP/:http-version" :status :res[content-length] ":referrer"`
+      )
+    );
 
     // error and warning save to server
     this.app.use(this.winstonLogger.warningLogger());
@@ -109,7 +113,7 @@ export class Server {
     // Set up rate limiter: maximum of 100 requests per 15 minutes per IP
     const limiter = rateLimit({
       windowMs: 15 * 60 * 1000, // 15 minutes
-      max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+      max: 200, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
       message:
         "Too many requests from this IP, please try again after 15 minutes",
     });
@@ -137,6 +141,7 @@ export class Server {
     this.app.use("/api/notifications", this.notification.routes);
     this.app.use("/api/faqs", this.faq.routes);
     this.app.use("/api/topics", this.topic.routes);
+    this.app.use("/uploads", express.static("uploads"));
   }
 
   errorMiddleware() {

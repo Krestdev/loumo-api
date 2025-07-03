@@ -10,11 +10,11 @@ export class PaymentLogic {
     data: Omit<Payment, "id"> & { orderId: number }
   ): Promise<Payment> {
     const { orderId, ...paymentData } = data;
-    const payoutId = uuidv4();
+    const depositId = uuidv4();
     const payOutData = await prisma.payment.create({
       data: {
         ...paymentData,
-        payoutId: payoutId,
+        depositId: depositId,
         order: orderId
           ? {
               connect: {
@@ -32,23 +32,27 @@ export class PaymentLogic {
       },
     });
 
-    try {
-      const payout = await pawapay.requestPayout({
-        payoutId: payoutId,
-        amount: payOutData.total.toString(),
-        currency: "XAF",
-        country: "CMR",
-        created: new Date().toISOString(),
-        correspondent: payOutData.method, // "ORANGE_CM" | "MTN_MOMO_CMR"
-        customerTimestamp: new Date().toISOString(),
-        recipient: {
-          type: "MSISDN",
-          address: { value: payOutData.tel },
+    const payment = {
+      depositId: depositId,
+      payer: {
+        type: "MMO",
+        accountDetails: {
+          phoneNumber: payOutData.tel,
+          provider: payOutData.method,
         },
-        statementDescription: "Order 1234",
-      });
+      },
+      clientReferenceId: payOutData.id.toString(),
+      // customerMessage: "Note of 4 to 22 chars",
+      amount: payOutData.total.toString(),
+      currency: "XAF",
+      // metadata: [
+      //   { orderId: "ORD-123456789" },
+      //   { customerId: "customer@email.com", isPII: true },
+      // ],
+    };
 
-      // this.updatePayment(payOutData.id,{...payOutData,status:payout.status})
+    try {
+      const payout = await pawapay.requestPayout(payment);
       console.log(payout);
     } catch (err) {
       console.log("Could not procid with Payment", err);

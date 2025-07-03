@@ -78,6 +78,7 @@ export default class ProductVariantController {
       return;
     }
     try {
+      request.body.imgUrl = request.file?.filename ?? null;
       const newProductVariant = await productVariantLogic.createProduct(
         request.body
       );
@@ -106,6 +107,7 @@ export default class ProductVariantController {
       return;
     }
     try {
+      if (request.body.imgUrl) request.body.imgUrl = request.file?.filename;
       const updatedProductVariant = await productVariantLogic.updateProduct(
         Number(id),
         request.body

@@ -175,11 +175,32 @@ export class UserLogic {
     return { user, token };
   }
 
+  // Authenticate user (login)
+  async passwordCompare(email: string, password: string): Promise<boolean> {
+    const user = await this.getUserByEmail(email);
+    if (!user || !user.verified) return false;
+    const valid = await bcrypt.compare(password, user.password);
+    if (!valid) return false;
+    return true;
+  }
+
   // Get user by ID
   async getUserById(id: number): Promise<User | null> {
     return prisma.user.findUnique({
       where: { id },
-      include: { favorite: true, orders: true },
+      include: {
+        favorite: {
+          include: {
+            variants: true,
+          },
+        },
+        orders: {
+          include: {
+            orderItems: true,
+          },
+        },
+        addresses: true,
+      },
     });
   }
 
@@ -193,24 +214,32 @@ export class UserLogic {
             permissions: true,
           },
         },
+        addresses: true,
       },
     });
   }
 
   // Get user by email
   async getUserByEmail(email: string): Promise<User | null> {
-    return prisma.user.findUnique({ where: { email } });
+    return prisma.user.findUnique({
+      where: { email },
+      include: {
+        orders: true,
+        addresses: true,
+      },
+    });
   }
 
   // Update user
   async updateUser(
     id: number,
-    data: Partial<User> & { productIds?: number[] }
+    data: Partial<User> & { productIds?: number[]; addressIds?: number[] }
   ): Promise<User | null> {
-    if (data.password) {
+    console.log(data);
+    if (data.password !== undefined) {
       data.password = await bcrypt.hash(data.password, 10);
     }
-    const { productIds, ...userData } = data;
+    const { productIds, addressIds, ...userData } = data;
     return prisma.user.update({
       where: { id },
       data: {
@@ -218,6 +247,11 @@ export class UserLogic {
         favorite: productIds
           ? {
               connect: productIds.map((id) => ({ id })),
+            }
+          : {},
+        addresses: addressIds
+          ? {
+              connect: addressIds.map((addressId) => ({ id: addressId })),
             }
           : {},
       },
@@ -255,6 +289,7 @@ export class UserLogic {
     notifD?: boolean;
     logD?: boolean;
     ordersD?: boolean;
+    clinets?: boolean;
   }): Promise<User[]> {
     const {
       email,
@@ -268,12 +303,14 @@ export class UserLogic {
       notifD,
       logD,
       ordersD,
+      clinets,
     } = query || {};
     return prisma.user.findMany({
       where: {
         ...(email && { email: { contains: email } }),
         ...(name && { name: { contains: name } }),
         ...(typeof verified === "boolean" && { verified }),
+        ...(clinets && { agent: { is: null } }),
       },
       skip,
       take,

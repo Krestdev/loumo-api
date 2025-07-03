@@ -9,6 +9,7 @@ const productLogic = new ProductLogic();
 const createProductSchema = Joi.object({
   name: Joi.string(),
   slug: Joi.string(),
+  description: Joi.string(),
   weight: Joi.number(),
   status: Joi.boolean(),
   categoryId: Joi.number().optional(),

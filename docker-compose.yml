@@ -22,6 +22,7 @@ services:
 
       SMTP_USER: "info@le-carino.com"
       SMTP_PASS: "admin@carino2024"
+      MYSQLDB: "mysql://root:krest@mysql:3306/loumo"
     ports:
       - "5000:5000"
     networks:
@@ -37,6 +38,22 @@ services:
       - mongo-data:/data/db
     ports:
       - "27017:27017"
+    networks:
+      - app-network
+
+  mysql:
+    container_name: mysql
+    image: mysql:8
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: loumo_db
+      MYSQL_USER: loumo_user
+      MYSQL_PASSWORD: loumo_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
     networks:
       - app-network
 

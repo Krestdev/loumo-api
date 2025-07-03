@@ -13,7 +13,7 @@ services:
 
       FRONTEND_URL: "http://localhost:3000"
 
-      PAWAPAY_BASE_URL: "https://api.sandbox.pawapay.io"
+      PAWAPAY_BASE_URL: "https://api.sandbox.pawapay.io/v2"
       PAWAPAY_API_TOKEN: "eyJraWQiOiIxIiwiYWxnIjoiRVMyNTYifQ.eyJ0dCI6IkFBVCIsInN1YiI6IjUzMTciLCJtYXYiOiIxIiwiZXhwIjoyMDY1ODU2NzU1LCJpYXQiOjE3NTAzMjM5NTUsInBtIjoiREFGLFBBRiIsImp0aSI6IjU0YWNlYzhlLWY5ZTMtNDE5YS1iOGIwLTM0NjQ5ZGI5MzU5MiJ9.f9EpjHcwXTbXoggaD5cCbkJ9rPoRm3M1k4q2eo1lbfYS4lHMOAI-2DV_6hxpX7Ula12P6BHSoPgi5UgNDiMgdw"
 
       MAIN_DATABASE_URL: "file:./dev.db"

@@ -28,6 +28,9 @@ const updateUserSchema = Joi.object({
   password: Joi.string().min(6).optional(),
   address: Joi.array().items(Joi.number()).optional(),
   verified: Joi.boolean().optional(),
+  addressIds: Joi.array().items(Joi.number()),
+  productIds: Joi.array().items(Joi.number()),
+  active: Joi.boolean(),
   // Add other fields as needed
 }).min(1);
 
@@ -62,6 +65,7 @@ const querySchema = Joi.object({
   notifD: Joi.boolean().optional(),
   logD: Joi.boolean().optional(),
   ordersD: Joi.boolean().optional(),
+  clients: Joi.boolean().optional(),
 });
 
 export default class UserController {
@@ -264,6 +268,28 @@ export default class UserController {
     }
   };
 
+  verifyPass = async (
+    request: Request<object, object, { email: string; password: string }>,
+    response: Response
+  ) => {
+    if (!this.validate(request, response, "login")) return;
+    try {
+      const { email, password } = request.body;
+      const valid = await userLogic.passwordCompare(email, password);
+      if (!valid) {
+        response.status(404).json({ error: "Password not correct" });
+        return;
+      }
+      response.json(valid);
+    } catch (error) {
+      throw new CustomError(
+        "Failed to verify user password",
+        undefined,
+        error as Error
+      );
+    }
+  };
+
   getAllUsers = async (request: Request, response: Response) => {
     if (!this.validate(request, response, "queryData")) return;
     try {
@@ -275,7 +301,14 @@ export default class UserController {
     }
   };
 
-  updateUser = async (request: Request, response: Response) => {
+  updateUser = async (
+    request: Request<
+      { id: string },
+      object,
+      Partial<User> & { addressIds?: number[]; productIds?: number[] }
+    >,
+    response: Response
+  ) => {
     if (!this.validate(request, response, "paramId")) return;
     if (!this.validate(request, response, "userUpdate")) return;
 

@@ -1,5 +1,6 @@
 import { Router } from "express";
 import ProductVariantController from "../controllers/productVariants";
+import upload from "../utils/upload";
 
 export default class ProductVariantRouter {
   routes: Router = Router();
@@ -12,8 +13,16 @@ export default class ProductVariantRouter {
   registerRoutes() {
     this.routes.get("/", this.productVariantController.getProductVariants);
     this.routes.get("/:id", this.productVariantController.getOneProductVariant);
-    this.routes.post("/", this.productVariantController.createProductVariant);
-    this.routes.put("/:id", this.productVariantController.updateProductVariant);
+    this.routes.post(
+      "/",
+      upload.single("imgUrl"),
+      this.productVariantController.createProductVariant
+    );
+    this.routes.put(
+      "/:id",
+      upload.single("imgUrl"),
+      this.productVariantController.updateProductVariant
+    );
     this.routes.delete(
       "/:id",
       this.productVariantController.deleteProductVariant

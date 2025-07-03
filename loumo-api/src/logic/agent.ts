@@ -5,13 +5,15 @@ const prisma = new PrismaClient();
 export class AgentLogic {
   // Create a log and optionally connect to roles
   async createAgent(
-    data: Omit<Agent, "id"> & { userId: number }
+    data: Omit<Agent, "id" | "code"> & { userId: number }
   ): Promise<Agent> {
     const { userId, zoneId, ...agentData } = data;
     // const { zoneId, ...restAgentData } = agentData as any;
+    const date = new Date();
     return prisma.agent.create({
       data: {
         ...agentData,
+        code: `#LMU-${date.getFullYear().toString()}${date.getMonth().toString()}${date.getDate().toString()}${date.getHours().toString()}${date.getMinutes().toString()}${date.getSeconds().toString()}`,
         user: userId
           ? {
               connect: {
@@ -39,13 +41,15 @@ export class AgentLogic {
 
   // Get all agents, including their roles
   async getAllAgents(): Promise<Agent[]> {
-    return prisma.agent.findMany({ include: { user: true, delivery: true } });
+    return prisma.agent.findMany({
+      include: { user: true, delivery: true, zone: true },
+    });
   }
 
   // Update a agent and optionally update its roles
   async updateAgent(
     id: number,
-    data: Partial<Omit<Agent, "id">>
+    data: Partial<Omit<Agent, "id" | "code">>
   ): Promise<Agent | null> {
     const { ...agentData } = data;
     return prisma.agent.update({

@@ -11,6 +11,7 @@ const createZoneSchema = Joi.object({
   name: Joi.string(),
   price: Joi.number(),
   ids: Joi.array().items(Joi.number()),
+  status: Joi.string().required(),
   description: Joi.string(),
 });
 
@@ -18,6 +19,7 @@ const updateZoneSchema = Joi.object({
   name: Joi.string().optional(),
   price: Joi.number().optional(),
   description: Joi.string().optional(),
+  status: Joi.string(),
   addressIds: Joi.array().items(Joi.number()).optional(),
 });
 
