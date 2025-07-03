@@ -28,6 +28,8 @@ services:
       - "5000:5000"
     networks:
       - caddy-net
+    depends_on:
+      - mysql
 
   mongo:
     container_name: mongo
@@ -41,6 +43,22 @@ services:
       - "27017:27017"
     networks:
       - caddy-net
+
+  mysql:
+    container_name: mysql
+    image: mysql:8
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: loumo_db
+      MYSQL_USER: loumo_user
+      MYSQL_PASSWORD: loumo_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/data/mysql
+    networks:
+      - app-network
 
 networks:
   caddy-net:
