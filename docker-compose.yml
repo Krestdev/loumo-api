@@ -53,7 +53,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - mysql-data:/var/lib/mysql
+      - mysql-data:/data/mysql
     networks:
       - app-network
 
@@ -64,4 +64,5 @@ networks:
 
 volumes:
   mongo-data: {}
+  mysql-data: {}
 # correct deployment
