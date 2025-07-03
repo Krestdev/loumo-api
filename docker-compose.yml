@@ -36,6 +36,8 @@ services:
       - "5000:5000"
     networks:
       - app-network
+    depends_on:
+      - mysql
 
   mongo:
     container_name: mongo
