@@ -1,4 +1,4 @@
-name: Deploy Loumo API
+name: Deploy Loumo API PROD
 
 on:
   push:
