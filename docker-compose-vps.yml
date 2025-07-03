@@ -54,7 +54,7 @@ services:
       MYSQL_USER: loumo_user
       MYSQL_PASSWORD: loumo_pass
     ports:
-      - "3306:3306"
+      - "3317:3306"
     volumes:
       - mysql-data:/data/mysql
     networks:
