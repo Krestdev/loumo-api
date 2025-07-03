@@ -24,13 +24,13 @@ services:
       PAWAPAY_API_TOKEN: "eyJraWQiOiIxIiwiYWxnIjoiRVMyNTYifQ.eyJ0dCI6IkFBVCIsInN1YiI6IjUzMTciLCJtYXYiOiIxIiwiZXhwIjoyMDY1ODU2NzU1LCJpYXQiOjE3NTAzMjM5NTUsInBtIjoiREFGLFBBRiIsImp0aSI6IjU0YWNlYzhlLWY5ZTMtNDE5YS1iOGIwLTM0NjQ5ZGI5MzU5MiJ9.f9EpjHcwXTbXoggaD5cCbkJ9rPoRm3M1k4q2eo1lbfYS4lHMOAI-2DV_6hxpX7Ula12P6BHSoPgi5UgNDiMgdw"
 
       # MAIN_DATABASE_URL: "file:./dev.db"
-      MAIN_DATABASE_URL: "mysql://root:krest@mysql:3306/loumo"
+      MAIN_DATABASE_URL: "mysql://loumo_user:krest@mysql:3306/loumo"
       LOG_DATABASE_URL: "mongodb://mongo:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.5.2"
       JWT_SECRET: "your_jwt_secret"
 
       SMTP_USER: "info@le-carino.com"
       SMTP_PASS: "admin@carino2024"
-      MYSQLDB: "mysql://root:krest@mysql:3306/loumo"
+      MYSQLDB: "mysql://loumo_user:krest@mysql:3306/loumo"
     ports:
       - "5000:5000"
     networks:
@@ -56,7 +56,6 @@ services:
     image: mysql:8
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: loumo
       MYSQL_USER: loumo_user
       MYSQL_PASSWORD: krest
