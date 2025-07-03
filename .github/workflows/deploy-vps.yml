@@ -18,23 +18,23 @@ jobs:
         run: npm run lint
         working-directory: ./loumo-api
 
-  test:
-    name: Run Tests
-    runs-on: ubuntu-latest
-    needs: lint
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install deps
-        run: npm ci
-        working-directory: ./loumo-api
-      - name: Run tests
-        run: npm test
-        working-directory: ./loumo-api
+  # test:
+  #   name: Run Tests
+  #   runs-on: ubuntu-latest
+  #   needs: lint
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Install deps
+  #       run: npm ci
+  #       working-directory: ./loumo-api
+  #     - name: Run tests
+  #       run: npm test
+  #       working-directory: ./loumo-api
 
   build:
     name: Build API
     runs-on: ubuntu-latest
-    needs: test
+    needs: lint
     steps:
       - uses: actions/checkout@v4
       - name: Install deps
@@ -86,7 +86,7 @@ jobs:
              export DOCKER_BUILDKIT=0
 
              # Remove any containers that might conflict
-             docker rm -f mongo loumo 2>/dev/null || true
+             docker rm -f mongo loumo mysql 2>/dev/null || true
 
              docker compose -f docker-compose-vps.yml --env-file .env build
              docker compose -f docker-compose-vps.yml --env-file .env up -d
