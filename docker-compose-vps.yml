@@ -49,10 +49,10 @@ services:
     image: mysql:8
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: loumo_db
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: loumo
       MYSQL_USER: loumo_user
-      MYSQL_PASSWORD: loumo_pass
+      MYSQL_PASSWORD: krest
     ports:
       - "3317:3306"
     volumes:
