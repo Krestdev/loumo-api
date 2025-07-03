@@ -67,4 +67,5 @@ networks:
 
 volumes:
   mongo-data: {}
+  mysql-data: {}
 # correct deployment
