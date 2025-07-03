@@ -1,4 +1,5 @@
 import { PrismaClient, ProductVariant } from "../../generated/prisma";
+import deleteImage from "../utils/deleteImage";
 
 const prisma = new PrismaClient();
 
@@ -7,14 +8,19 @@ export class ProductVariantLogic {
   async createProduct(
     data: Omit<ProductVariant, "id"> & { productId?: number }
   ): Promise<ProductVariant> {
-    const { productId, ...productVariantData } = data;
+    const { productId, weight, price, status, imgUrl, ...productVariantData } =
+      data;
     return prisma.productVariant.create({
       data: {
         ...productVariantData,
+        imgUrl: `uploads/${imgUrl}`,
+        weight: Number(weight),
+        price: Number(price),
+        status: Boolean(status),
         product: productId
           ? {
               connect: {
-                id: productId,
+                id: Number(productId),
               },
             }
           : {},
@@ -61,6 +67,14 @@ export class ProductVariantLogic {
 
   // Delete a product (removes from join table as well)
   async deleteProduct(id: number): Promise<ProductVariant | null> {
+    const product = await prisma.productVariant.findUnique({
+      where: { id: id },
+    });
+
+    if (!product) throw Error("Delete Product not found");
+
+    if (product.imgUrl) deleteImage(product.imgUrl.split("/")[1]);
+
     return prisma.productVariant.delete({
       where: { id },
     });
