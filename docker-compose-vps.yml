@@ -4,7 +4,14 @@ services:
     build:
       context: ./loumo-api
       dockerfile: Dockerfile
-    command: sh -c "npx prisma migrate dev --name init && npx prisma generate && npm run build && npm run start"
+    command: sh -c "
+      until nc -z mysql 3306; do
+        echo '⏳ Waiting for MySQL...';
+        sleep 2;
+      done &&
+      npx prisma migrate dev --name init &&
+      npx prisma generate &&
+      npm run build && npm run start"
     restart: unless-stopped
     environment:
       NODE_ENV: "dev"
