@@ -58,7 +58,7 @@ services:
     volumes:
       - mysql-data:/data/mysql
     networks:
-      - app-network
+      - caddy-net
 
 networks:
   caddy-net:
