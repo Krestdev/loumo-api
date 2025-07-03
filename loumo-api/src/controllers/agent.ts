@@ -7,13 +7,13 @@ import { AgentLogic } from "../logic/agent";
 const agentLogic = new AgentLogic();
 
 const createAgentSchema = Joi.object({
-  code: Joi.string(),
   status: Joi.string(),
+  zoneId: Joi.number(),
   userId: Joi.number().optional(),
 });
 
 const updateAgentSchema = Joi.object({
-  code: Joi.string().optional(),
+  zoneId: Joi.number().optional(),
   status: Joi.string(),
 });
 
@@ -57,7 +57,11 @@ export default class AgentController {
     return true;
   };
   createAgent = async (
-    request: Request<object, object, Omit<Agent, "id"> & { userId: number }>,
+    request: Request<
+      object,
+      object,
+      Omit<Agent, "id" | "code"> & { userId: number }
+    >,
     response: Response
   ) => {
     if (!this.validate(request, response, "create")) return;
@@ -75,7 +79,11 @@ export default class AgentController {
   };
 
   updateAgent = async (
-    request: Request<{ id: string }, object, Partial<Omit<Agent, "id">>>,
+    request: Request<
+      { id: string },
+      object,
+      Partial<Omit<Agent, "id" | "code">>
+    >,
     response: Response
   ) => {
     const { id } = request.params;

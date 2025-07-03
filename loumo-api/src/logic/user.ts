@@ -189,7 +189,11 @@ export class UserLogic {
     return prisma.user.findUnique({
       where: { id },
       include: {
-        favorite: true,
+        favorite: {
+          include: {
+            variants: true,
+          },
+        },
         orders: {
           include: {
             orderItems: true,

@@ -51,14 +51,10 @@ type DepositData = {
   };
 };
 
-type ApiResponse =
-  | {
-      status: "FOUND";
-      data: DepositData;
-    }
-  | {
-      status: "NOT_FOUND";
-    };
+type ApiResponse = {
+  status: "FOUND";
+  data?: DepositData;
+};
 
 type FailureReason = {
   failureCode: string;

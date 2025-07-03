@@ -53,11 +53,6 @@ export class PaymentLogic {
 
     try {
       const payout = await pawapay.requestPayout(payment);
-
-      await this.updatePayment(payOutData.id, {
-        ...payOutData,
-        status: payout.status,
-      });
       console.log(payout);
     } catch (err) {
       console.log("Could not procid with Payment", err);
