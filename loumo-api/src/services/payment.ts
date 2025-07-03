@@ -1,13 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { config } from "../configs";
 
-interface Recipient {
-  type: "MSISDN";
-  address: {
-    value: string;
-  };
-}
-
 interface PayoutRequest {
   depositId: string;
   payer: {
