@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE `agent` ADD COLUMN `max` INTEGER NOT NULL DEFAULT 5;
