@@ -86,7 +86,7 @@ jobs:
              export DOCKER_BUILDKIT=0
 
              # Remove any containers that might conflict
-             docker rm -f mongo loumo mysql 2>/dev/null || true
+             docker rm -f mongo_loumo loumo mysql_loumo 2>/dev/null || true
 
              docker compose -f docker-compose-vps.yml --env-file .env build
              docker compose -f docker-compose-vps.yml --env-file .env up -d
