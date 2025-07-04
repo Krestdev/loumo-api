@@ -6,8 +6,8 @@ services:
       dockerfile: Dockerfile
     command: sh -c "
       until nc -z mysql 3306; do
-        echo '⏳ Waiting for MySQL...';
-        sleep 2;
+      echo '⏳ Waiting for MySQL...';
+      sleep 2;
       done &&
       npx prisma migrate deploy &&
       npx prisma generate &&
@@ -45,7 +45,7 @@ services:
     environment:
       MONGO_INITDB_DATABASE: loumo-db
     volumes:
-      - mongo-data:/data/db
+      - /root/backup/loumo/mongo-data:/data/db
     ports:
       - "27017:27017"
     networks:
@@ -62,7 +62,7 @@ services:
     ports:
       - "3317:3306"
     volumes:
-      - mysql-data:/data/mysql
+      - /root/backup/loumo/mysql-data:/data/mysql
     networks:
       - caddy-net
 
@@ -71,7 +71,7 @@ networks:
     name: caddy-net
     external: true
 
-volumes:
-  mongo-data: {}
-  mysql-data: {}
+# volumes:
+#   mongo-data: {}
+#   mysql-data: {}
 # correct deployment
