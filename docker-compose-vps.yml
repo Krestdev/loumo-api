@@ -6,8 +6,8 @@ services:
       dockerfile: Dockerfile
     command: sh -c "
       until nc -z mysql 3306; do
-      echo '⏳ Waiting for MySQL...';
-      sleep 2;
+        echo '⏳ Waiting for MySQL...';
+        sleep 2;
       done &&
       npx prisma migrate dev --name init &&
       npx prisma generate &&
@@ -58,6 +58,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: krest
       MYSQL_DATABASE: loumo
+      MYSQL_PASSWORD: krest
     ports:
       - "3317:3306"
     volumes:

@@ -126,6 +126,7 @@ CREATE TABLE `ProductVariant` (
     `status` BOOLEAN NOT NULL,
     `price` INTEGER NOT NULL DEFAULT 0,
     `productId` INTEGER NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -149,6 +150,7 @@ CREATE TABLE `Product` (
 CREATE TABLE `Category` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
+    `slug` VARCHAR(191) NOT NULL DEFAULT '_',
     `imgUrl` VARCHAR(191) NULL,
     `status` BOOLEAN NOT NULL DEFAULT true,
 
@@ -220,6 +222,7 @@ CREATE TABLE `Agent` (
     `code` VARCHAR(191) NOT NULL,
     `userId` INTEGER NOT NULL,
     `status` VARCHAR(191) NOT NULL DEFAULT 'inactive',
+    `max` INTEGER NOT NULL DEFAULT 5,
     `zoneId` INTEGER NOT NULL,
 
     UNIQUE INDEX `Agent_userId_key`(`userId`),
@@ -364,3 +367,4 @@ ALTER TABLE `_ProductToUser` ADD CONSTRAINT `_ProductToUser_A_fkey` FOREIGN KEY 
 
 -- AddForeignKey
 ALTER TABLE `_ProductToUser` ADD CONSTRAINT `_ProductToUser_B_fkey` FOREIGN KEY (`B`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
