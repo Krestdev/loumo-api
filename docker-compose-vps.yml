@@ -36,7 +36,7 @@ services:
     networks:
       - caddy-net
     depends_on:
-      - mysql
+      - mysql_loumo
 
   mongo_loumo:
     container_name: mongo_loumo
