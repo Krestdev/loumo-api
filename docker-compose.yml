@@ -5,7 +5,7 @@ services:
       context: ./loumo-api
       dockerfile: Dockerfile
     command: sh -c "
-      until nc -z mysql 3306; do
+      until nc -z mysql_loumo 3306; do
         echo '⏳ Waiting for MySQL...';
         sleep 2;
       done &&
