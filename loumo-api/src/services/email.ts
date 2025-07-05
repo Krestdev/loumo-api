@@ -33,7 +33,7 @@ export default class Mailer {
 
     // Render EJS template
     const html = await ejs.renderFile(
-      path.join(__dirname, "./templates/welcome.ejs"),
+      path.join(__dirname, "../../emailtemplates/welcome.ejs"),
       { name, email, appName, loginUrl, year }
     );
 
@@ -61,7 +61,7 @@ export default class Mailer {
 
     // Render HTML from EJS template
     const html = await ejs.renderFile(
-      path.join(__dirname, "./templates/passwordReset.ejs"),
+      path.join(__dirname, "../../emailtemplates/passwordReset.ejs"),
       { name, email, appName: config.APP_NAME, resetUrl, year }
     );
 
