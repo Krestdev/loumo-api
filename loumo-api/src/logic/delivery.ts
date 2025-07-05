@@ -15,6 +15,7 @@ export class DeliveryLogic {
       data: {
         ...deliveryData,
         trackingCode: `TRK${uuidv4().replace(/-/g, "").slice(0, 10)}`,
+        status: "NOTSTARTED", // "NOTSTARTED","STARTED","COMPLETED","CANCELED"
         order: orderId
           ? {
               connect: {
