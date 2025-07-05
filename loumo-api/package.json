@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "tsc --build && cd ./scripts/ && copyTemplates.sh",
+    "build": "tsc --build",
     "start": "node ./build/index.js",
     "dev": "nodemon ./src/index.ts",
     "lint": "eslint",
