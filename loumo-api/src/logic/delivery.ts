@@ -5,12 +5,12 @@ const prisma = new PrismaClient();
 
 export class DeliveryLogic {
   async createDelivery(
-    data: Omit<Delivery, "id" | "agentId" | "trackingCode"> & {
+    data: Omit<Delivery, "id" | "trackingCode"> & {
       orderId: number;
       orderItemsIds?: number[];
     }
   ): Promise<Delivery> {
-    const { orderId, orderItemsIds, priority, ...deliveryData } = data;
+    const { orderId, agentId, orderItemsIds, priority, ...deliveryData } = data;
     return prisma.delivery.create({
       data: {
         ...deliveryData,
@@ -20,6 +20,13 @@ export class DeliveryLogic {
           ? {
               connect: {
                 id: orderId,
+              },
+            }
+          : {},
+        agent: agentId
+          ? {
+              connect: {
+                id: agentId,
               },
             }
           : {},
