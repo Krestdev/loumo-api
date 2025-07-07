@@ -111,7 +111,7 @@ export default class DeliveryController {
     request: Request<
       object,
       object,
-      Omit<Delivery, "id" | "agentId"> & {
+      Omit<Delivery, "id"> & {
         orderId: number;
         orderItemsIds?: number[];
       }
