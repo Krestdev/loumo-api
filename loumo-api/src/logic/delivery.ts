@@ -10,7 +10,7 @@ export class DeliveryLogic {
       orderItemsIds?: number[];
     }
   ): Promise<Delivery> {
-    const { orderId, orderItemsIds, ...deliveryData } = data;
+    const { orderId, orderItemsIds, priority, ...deliveryData } = data;
     return prisma.delivery.create({
       data: {
         ...deliveryData,
@@ -28,6 +28,7 @@ export class DeliveryLogic {
               connect: orderItemsIds.map((id) => ({ id })),
             }
           : {},
+        priority: priority ? priority : "NORMAL",
       },
     });
   }
