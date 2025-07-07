@@ -27,6 +27,7 @@ export class DeliveryLogic {
           ? {
               connect: {
                 id: agentId,
+                status: "PROCESSING",
               },
             }
           : {},
