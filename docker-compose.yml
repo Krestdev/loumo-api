@@ -20,13 +20,13 @@ services:
       PAWAPAY_API_TOKEN: "eyJraWQiOiIxIiwiYWxnIjoiRVMyNTYifQ.eyJ0dCI6IkFBVCIsInN1YiI6IjUzMTciLCJtYXYiOiIxIiwiZXhwIjoyMDY1ODU2NzU1LCJpYXQiOjE3NTAzMjM5NTUsInBtIjoiREFGLFBBRiIsImp0aSI6IjU0YWNlYzhlLWY5ZTMtNDE5YS1iOGIwLTM0NjQ5ZGI5MzU5MiJ9.f9EpjHcwXTbXoggaD5cCbkJ9rPoRm3M1k4q2eo1lbfYS4lHMOAI-2DV_6hxpX7Ula12P6BHSoPgi5UgNDiMgdw"
 
       # MAIN_DATABASE_URL: "file:./dev.db"
-      MAIN_DATABASE_URL: "mysql://u241574545_loumoServer:Krest.Loumo1@mysql_loumo:3306/u241574545_loumoshop"
+      MAIN_DATABASE_URL: "mysql://u241574545_loumoServer:Krest.Loumo1@62.72.35.227:3306/u241574545_loumoshop"
       LOG_DATABASE_URL: "mongodb://mongo_loumo:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.5.2"
       JWT_SECRET: "your_jwt_secret"
 
       SMTP_USER: "info@loumo.com"
       SMTP_PASS: "admin@loumo2024"
-      MYSQLDB: "mysql://u241574545_loumoServer:Krest.Loumo1@mysql_loumo:3306/u241574545_loumoshop"
+      MYSQLDB: "mysql://u241574545_loumoServer:Krest.Loumo1@62.72.35.227:3306/u241574545_loumoshop"
     ports:
       - "5001:5000"
     networks:
