@@ -30,7 +30,7 @@ services:
     ports:
       - "5001:5000"
     networks:
-      - app-network
+      - caddy-net
 
   mongo_loumo:
     container_name: mongo_loumo
