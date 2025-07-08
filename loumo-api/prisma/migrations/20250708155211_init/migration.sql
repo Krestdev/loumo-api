@@ -103,6 +103,7 @@ CREATE TABLE `Stock` (
     `productVariantId` INTEGER NOT NULL,
     `shopId` INTEGER NOT NULL,
     `promotionId` INTEGER NULL,
+    `restockDate` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -367,4 +368,3 @@ ALTER TABLE `_ProductToUser` ADD CONSTRAINT `_ProductToUser_A_fkey` FOREIGN KEY 
 
 -- AddForeignKey
 ALTER TABLE `_ProductToUser` ADD CONSTRAINT `_ProductToUser_B_fkey` FOREIGN KEY (`B`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
