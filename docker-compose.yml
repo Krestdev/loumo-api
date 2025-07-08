@@ -5,10 +5,6 @@ services:
       context: ./loumo-api
       dockerfile: Dockerfile
     command: sh -c "
-      until nc -z mysql_loumo 3306; do
-      echo '⏳ Waiting for MySQL...';
-      sleep 2;
-      done &&
       npx prisma migrate deploy &&
       npx prisma generate &&
       npm run build && npm run start"
@@ -24,19 +20,17 @@ services:
       PAWAPAY_API_TOKEN: "eyJraWQiOiIxIiwiYWxnIjoiRVMyNTYifQ.eyJ0dCI6IkFBVCIsInN1YiI6IjUzMTciLCJtYXYiOiIxIiwiZXhwIjoyMDY1ODU2NzU1LCJpYXQiOjE3NTAzMjM5NTUsInBtIjoiREFGLFBBRiIsImp0aSI6IjU0YWNlYzhlLWY5ZTMtNDE5YS1iOGIwLTM0NjQ5ZGI5MzU5MiJ9.f9EpjHcwXTbXoggaD5cCbkJ9rPoRm3M1k4q2eo1lbfYS4lHMOAI-2DV_6hxpX7Ula12P6BHSoPgi5UgNDiMgdw"
 
       # MAIN_DATABASE_URL: "file:./dev.db"
-      MAIN_DATABASE_URL: "mysql://root:krest@mysql_loumo:3306/loumo"
+      MAIN_DATABASE_URL: "mysql://u241574545_loumoServer:Krest.Loumo1@mysql_loumo:3306/u241574545_loumoshop"
       LOG_DATABASE_URL: "mongodb://mongo_loumo:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.5.2"
       JWT_SECRET: "your_jwt_secret"
 
-      SMTP_USER: "info@le-carino.com"
-      SMTP_PASS: "admin@carino2024"
-      MYSQLDB: "mysql://root:krest@mysql:3306/loumo"
+      SMTP_USER: "info@loumo.com"
+      SMTP_PASS: "admin@loumo2024"
+      MYSQLDB: "mysql://u241574545_loumoServer:Krest.Loumo1@mysql_loumo:3306/u241574545_loumoshop"
     ports:
-      - "5000:5000"
+      - "5001:5000"
     networks:
       - app-network
-    depends_on:
-      - mysql_loumo
 
   mongo_loumo:
     container_name: mongo_loumo
@@ -49,25 +43,25 @@ services:
     ports:
       - "27017:27017"
     networks:
-      - app-network
+      - caddy-net
 
-  mysql_loumo:
-    container_name: mysql_loumo
-    image: mysql:8
-    restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: krest
-      MYSQL_DATABASE: loumo
-      MYSQL_PASSWORD: krest
-    ports:
-      - "3317:3306"
-    volumes:
-      - /root/backup/loumo/mysql-data:/var/lib/mysql
-    networks:
-      - app-network
+  # mysql_loumo:
+  #   container_name: mysql_loumo
+  #   image: mysql:8
+  #   restart: unless-stopped
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: krest
+  #     MYSQL_DATABASE: loumo
+  #     MYSQL_PASSWORD: krest
+  #   ports:
+  #     - "3317:3306"
+  #   # volumes:
+  #   #   - /root/backup/loumo/mysql-data:/var/lib/mysql
+  #   networks:
+  #     - app-network
 
 networks:
-  app-network:
+  caddy-net:
     driver: bridge
     attachable: true
 # volumes:

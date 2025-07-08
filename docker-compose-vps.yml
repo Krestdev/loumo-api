@@ -32,7 +32,7 @@ services:
       SMTP_PASS: "admin@carino2024"
       MYSQLDB: "mysql://root:krest@mysql:3306/loumo"
     ports:
-      - "5000:5000"
+      - "5001:5000"
     networks:
       - caddy-net
     depends_on:

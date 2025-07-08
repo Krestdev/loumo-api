@@ -6,3 +6,4 @@ eslint.config.mjs
 error.test.log
 .env
 test.rest
+__tests__
