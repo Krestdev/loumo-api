@@ -123,6 +123,34 @@ export default class StockController {
     }
   };
 
+  // Create a new stock
+  reStock = async (
+    request: Request<
+      { id: string },
+      object,
+      Partial<Omit<Stock, "id" | "promotionId">>
+    >,
+    response: Response
+  ) => {
+    if (!this.validate(request, response, "paramId")) return;
+    if (!this.validate(request, response, "update")) return;
+
+    const id = Number(request.params.id);
+    try {
+      const updatedStock = await stockLogic.updateStock(id, request.body);
+      if (!updatedStock) {
+        response.status(404).json({ message: "Stock not found" });
+      }
+      response.status(200).json(updatedStock);
+    } catch (error) {
+      throw new CustomError(
+        "Failed to create stock",
+        undefined,
+        error as Error
+      );
+    }
+  };
+
   // Update an existing stock
   updateStock = async (
     request: Request<

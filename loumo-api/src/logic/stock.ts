@@ -54,6 +54,33 @@ export class StockLogic {
     });
   }
 
+  async reStock(
+    id: number,
+    data: Partial<Omit<Stock, "id" | "shopId" | "productVariantId">> & {
+      promotionId?: number;
+    }
+  ): Promise<Stock> {
+    const { promotionId, quantity, ...stockData } = data;
+    const stock = await prisma.stock.findUnique({ where: { id } });
+    return prisma.stock.update({
+      where: {
+        id,
+      },
+      data: {
+        ...stockData,
+        quantity: (quantity ?? 0) + (stock ? stock.quantity : 0),
+        promotion: promotionId
+          ? {
+              connect: {
+                id: promotionId,
+              },
+            }
+          : {},
+        restockDate: new Date().toISOString(),
+      },
+    });
+  }
+
   async getStockById(
     id: number
   ): Promise<(Stock & { productVariant: ProductVariant | null }) | null> {
