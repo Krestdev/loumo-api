@@ -82,14 +82,16 @@ jobs:
              mv temp-clone/* temp-clone/.* . 2>/dev/null || true
              rm -rf temp-clone
 
-             cp ~/deployments/loumo-app/shared/.env .env
+             # cp ~/deployments/loumo-app/shared/.env .env
              export DOCKER_BUILDKIT=0
 
              # Remove any containers that might conflict
              docker rm -f mongo_loumo loumo mysql_loumo 2>/dev/null || true
 
-             docker compose -f docker-compose.yml --env-file .env build
-             docker compose -f docker-compose.yml --env-file .env up -d
+             #docker compose -f docker-compose.yml --env-file .env build
+             docker compose -f docker-compose.yml build
+             #docker compose -f docker-compose.yml --env-file .env up -d
+             docker compose -f docker-compose.yml up -d
 
              # Health check loop
              for i in {1..10}; do
@@ -108,9 +110,11 @@ jobs:
                echo "❌ Health check failed, rolling back"
                if [ -L ~/deployments/loumo-app/current ]; then
                  PREV=$(readlink ~/deployments/loumo-app/current)
-                 docker compose -f $RELEASE_DIR/docker-compose.yml --env-file .env down || true
+                 # docker compose -f $RELEASE_DIR/docker-compose.yml --env-file .env down || true
+                 docker compose -f $RELEASE_DIR/docker-compose.yml down || true
                  ln -sfn $PREV ~/deployments/loumo-app/current
-                 docker compose -f $PREV/docker-compose.yml --env-file $PREV/.env up -d
+                 # docker compose -f $PREV/docker-compose.yml --env-file $PREV/.env up -d
+                 docker compose -f $PREV/docker-compose.yml up -d
                else
                  echo "⚠️ No previous release to roll back to"
                fi
