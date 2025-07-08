@@ -27,7 +27,7 @@ export class DeliveryLogic {
           ? {
               connect: {
                 id: agentId,
-                status: "PROCESSING",
+                status: "PROCESSING", // "PROCESSING"
               },
             }
           : {},
@@ -45,7 +45,7 @@ export class DeliveryLogic {
     id: number,
     data: Partial<Omit<Delivery, "id" | "orderId">> & { agentId?: number }
   ): Promise<Delivery> {
-    const { agentId, ...deliveryData } = data;
+    const { agentId, priority, ...deliveryData } = data;
     return prisma.delivery.update({
       where: {
         id,
@@ -59,6 +59,7 @@ export class DeliveryLogic {
               },
             }
           : {},
+        priority: priority ? priority : "NORMAL",
       },
     });
   }
