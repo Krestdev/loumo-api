@@ -27,6 +27,8 @@ services:
       SMTP_USER: "info@loumo.com"
       SMTP_PASS: "admin@loumo2024"
       MYSQLDB: "mysql://u241574545_loumoServer:Krest.Loumo1@193.203.168.39:3306/u241574545_loumoshop"
+    volumes:
+      - /root/backup/loumo/api-data:/app/uploads
     ports:
       - "5001:5000"
     networks:
