@@ -290,7 +290,16 @@ export class UserLogic {
     logD?: boolean;
     ordersD?: boolean;
     clinets?: boolean;
-  }): Promise<User[]> {
+  }): Promise<
+    Omit<
+      User,
+      | "password"
+      | "verificationOtp"
+      | "verificationOtpExpires"
+      | "passwordResetOtp"
+      | "passwordResetOtpExpires"
+    >[]
+  > {
     const {
       email,
       name,
@@ -332,6 +341,13 @@ export class UserLogic {
         ...(notifD && { notifications: true }),
         ...(logD && { logs: true }),
         ...(ordersD && { orders: true }),
+      },
+      omit: {
+        password: true,
+        verificationOtp: true,
+        verificationOtpExpires: true,
+        passwordResetOtp: true,
+        passwordResetOtpExpires: true,
       },
     });
   }
