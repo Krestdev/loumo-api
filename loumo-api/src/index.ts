@@ -1,4 +1,4 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import morgan from "morgan";
 import bodyParser from "body-parser";
 import usersRouter from "./routes/users";
@@ -101,6 +101,9 @@ export class Server {
 
     // Error Handler
     this.app.use(errorHandler);
+    this.app.use((req: Request, res: Response) => {
+      res.status(404).json({ error: "Route not found" });
+    });
   }
 
   health() {

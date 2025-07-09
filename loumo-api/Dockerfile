@@ -1,23 +1,48 @@
-# Dockerfile
-# Use an official Node.js runtime as the base image
-FROM node:22-alpine
+# ---- Build Stage ----
+FROM node:22-alpine AS builder
 
-# Set the working directory
 WORKDIR /app
 
-# Copy the package.json and package-lock.json files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+# Install production dependencies and devDependencies for build
+RUN npm ci
 
-# Copy the rest of the application files
+# copy folders to container image
 COPY . .
 
-# Build the Next.js app
+# Generate Prisma types for TypeScript build
+RUN npx prisma generate && \
+  npm run build
 
-# Expose the port Next.js runs on
-EXPOSE 3000
+# ---- Runtime Stage ----
+FROM node:22-alpine AS runtime
 
-# Start the Next.js app
-# CMD ["npm", "start"]
+WORKDIR /app
+
+# Copy built files
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/generated/prisma ./generated/prisma
+COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/build ./build
+COPY --from=builder /app/emailtemplates ./emailtemplates
+
+# Copy runtime code if needed
+COPY --from=builder /app/src ./src
+
+# Install production-only dependencies
+# (optional if you've already installed them above)
+# RUN npm ci --omit=dev
+
+# Wait-for script (can also be added via volume or Dockerfile ADD)
+ADD https://raw.githubusercontent.com/eficode/wait-for/v2.2.3/wait-for /wait-for
+RUN chmod +x /wait-for
+
+EXPOSE 5000
+
+# Run prisma migrations and start app after MySQL is up
+CMD sh -c "/wait-for ${DB_HOST:-localhost}:${DB_PORT:-3306} --timeout=360 -- \
+  npx prisma migrate deploy && \
+  npm run start"
+

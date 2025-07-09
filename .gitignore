@@ -1,6 +1,7 @@
 node_modules
 # Keep environment variables out of version control
 .env
+.env.prod
 .early.coverage
 build
 coverage
@@ -13,3 +14,4 @@ tsconfig.tsbuildinfo
 loumo-api/test.rest
 
 __test__
+test.rest
