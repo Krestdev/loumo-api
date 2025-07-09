@@ -97,11 +97,11 @@ jobs:
                echo "❌ Health check failed, rolling back"
                if [ -L ~/deployments/loumo-app/current ]; then
                  PREV=$(readlink ~/deployments/loumo-app/current)
-                 # docker compose -f $RELEASE_DIR/docker-compose.yml --env-file .env.prod down || true
-                 docker compose -f $RELEASE_DIR/docker-compose.yml down || true
+                 docker compose -f $RELEASE_DIR/docker-compose.yml --env-file .env.prod down || true
+                #  docker compose -f $RELEASE_DIR/docker-compose.yml down || true
                  ln -sfn $PREV ~/deployments/loumo-app/current
-                 # docker compose -f $PREV/docker-compose.yml --env-file $PREV/.env.prod up -d
-                 docker compose -f $PREV/docker-compose.yml up -d
+                 docker compose -f $PREV/docker-compose.yml --env-file $PREV/.env.prod up -d
+                #  docker compose -f $PREV/docker-compose.yml up -d
                else
                  echo "⚠️ No previous release to roll back to"
                fi
