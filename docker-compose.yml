@@ -4,33 +4,27 @@ services:
     build:
       context: ./loumo-api
       dockerfile: Dockerfile
-    command: sh -c "
-      npx prisma migrate deploy &&
-      npx prisma generate &&
-      npm run build && npm run start"
     restart: unless-stopped
     environment:
-      NODE_ENV: "dev"
-      PORT: 5000
-      BASE_URL: "http://localhost"
-
-      FRONTEND_URL: "http://localhost:3000"
-
-      PAWAPAY_BASE_URL: "https://api.sandbox.pawapay.io"
-      PAWAPAY_API_TOKEN: "eyJraWQiOiIxIiwiYWxnIjoiRVMyNTYifQ.eyJ0dCI6IkFBVCIsInN1YiI6IjUzMTciLCJtYXYiOiIxIiwiZXhwIjoyMDY1ODU2NzU1LCJpYXQiOjE3NTAzMjM5NTUsInBtIjoiREFGLFBBRiIsImp0aSI6IjU0YWNlYzhlLWY5ZTMtNDE5YS1iOGIwLTM0NjQ5ZGI5MzU5MiJ9.f9EpjHcwXTbXoggaD5cCbkJ9rPoRm3M1k4q2eo1lbfYS4lHMOAI-2DV_6hxpX7Ula12P6BHSoPgi5UgNDiMgdw"
-
-      # MAIN_DATABASE_URL: "file:./dev.db"
-      MAIN_DATABASE_URL: "mysql://u241574545_loumoServer:Krest.Loumo1@193.203.168.39:3306/u241574545_loumoshop"
-      LOG_DATABASE_URL: "mongodb://mongo_loumo:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.5.2"
-      JWT_SECRET: "your_jwt_secret"
-
-      SMTP_USER: "info@loumo.com"
-      SMTP_PASS: "admin@loumo2024"
-      MYSQLDB: "mysql://u241574545_loumoServer:Krest.Loumo1@193.203.168.39:3306/u241574545_loumoshop"
+      NODE_ENV: ${NODE_ENV}
+      PORT: ${PORT}
+      BASE_URL: ${BASE_URL}
+      FRONTEND_URL: ${FRONTEND_URL}
+      PAWAPAY_BASE_URL: ${PAWAPAY_BASE_URL}
+      PAWAPAY_API_TOKEN: ${PAWAPAY_API_TOKEN}
+      MAIN_DATABASE_URL: ${MAIN_DATABASE_URL}
+      LOG_DATABASE_URL: ${LOG_DATABASE_URL}
+      JWT_SECRET: ${JWT_SECRET}
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASS: ${SMTP_PASS}
+      DB_HOST: ${DB_HOST}
     volumes:
       - /root/backup/loumo/api-data:/app/uploads
     ports:
       - "5001:5000"
+    # depends_on:
+    #   mysql:
+    #     condition: service_healthy
     networks:
       - caddy-net
 
@@ -61,6 +55,26 @@ services:
   #   #   - /root/backup/loumo/mysql-data:/var/lib/mysql
   #   networks:
   #     - app-network
+
+  # mysql:
+  #   image: mysql:8
+  #   container_name: mysql
+  #   restart: unless-stopped
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: pass
+  #     MYSQL_DATABASE: loumo
+  #     MYSQL_USER: user
+  #     MYSQL_PASSWORD: pass
+  #   ports:
+  #     - "3307:3306"
+  #   healthcheck:
+  #     test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+  #     interval: 5s
+  #     timeout: 5s
+  #     retries: 10
+  #   networks:
+  #     - caddy-net
+
 
 networks:
   caddy-net:
