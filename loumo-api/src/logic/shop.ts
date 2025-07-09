@@ -8,6 +8,18 @@ export class ShopLogic {
     data: Omit<Shop, "id"> & { addressId?: number }
   ): Promise<Shop> {
     const { addressId, ...shopData } = data;
+    if (addressId) {
+      const zone = await prisma.address.findUnique({
+        where: { id: addressId },
+        include: { zone: true },
+      });
+      const shops = await prisma.address.findMany({
+        where: { zoneId: zone?.id },
+        include: { shops: true },
+      });
+      if (shops.length > 0)
+        throw new Error("You can not creat another shop in this zone");
+    }
     return prisma.shop.create({
       data: {
         ...shopData,
@@ -40,6 +52,19 @@ export class ShopLogic {
     data: Partial<Omit<Shop, "id">> & { addressId?: number }
   ): Promise<Shop | null> {
     const { addressId, ...shopData } = data;
+    if (addressId) {
+      const zone = await prisma.address.findUnique({
+        where: { id: addressId },
+        include: { zone: true },
+      });
+      const shops = await prisma.address.findMany({
+        where: { zoneId: zone?.id },
+        include: { shops: true },
+      });
+      if (shops.length > 0 && id === shops[0].id)
+        throw new Error("You can not relocate the shop to this zone");
+    }
+
     return prisma.shop.update({
       where: { id },
       data: {

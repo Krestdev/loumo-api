@@ -1,9 +1,25 @@
-node_modules
-build
+# Node
+node_modules/
+build/
 nodemon.json
+
 jest.configs.mjs
 eslint.config.mjs
 error.test.log
 .env
+
+#test
 test.rest
 __tests__
+coverage/
+
+#Version Controlle
+.git
+.gitignore
+.github
+
+# DB & Models
+generated/
+
+# Dockerfile
+Dockerfile
