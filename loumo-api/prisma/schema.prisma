@@ -245,14 +245,14 @@ model Faq {
   id       Int    @id @default(autoincrement())
   question String
   answer   String
-  topic    Topic  @relation(fields: [topicId], references: [id])
+  topic    Topic  @relation(fields: [topicId], references: [id], onDelete: Cascade)
   topicId  Int
 }
 
 model Setting {
   id      Int       @id @default(autoincrement())
   name    String
-  content String?
+  content String?   @db.Text
   value   Int?
   note    String?
   section String

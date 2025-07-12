@@ -27,6 +27,7 @@ import TopicRouter from "./routes/topic";
 import usersRouter from "./routes/users";
 import ZoneRouter from "./routes/zone";
 import WinstonLogger from "./utils/logger";
+import SettingRouter from "./routes/setting";
 
 /**
  * Represents the main application server for the Loumo API.
@@ -64,6 +65,7 @@ export class Server {
   private promotion = new PromotionRouter();
   private faq = new FaqRouter();
   private topic = new TopicRouter();
+  private setting = new SettingRouter();
 
   private winstonLogger = new WinstonLogger();
   constructor() {
@@ -144,6 +146,7 @@ export class Server {
     this.app.use("/api/notifications", this.notification.routes);
     this.app.use("/api/faqs", this.faq.routes);
     this.app.use("/api/topics", this.topic.routes);
+    this.app.use("/api/settings", this.setting.routes);
     this.app.use("/api/uploads", express.static("uploads"));
   }
 
