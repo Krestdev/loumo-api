@@ -11,11 +11,13 @@ const createStockSchema = Joi.object({
   quantity: Joi.number(),
   productVariantId: Joi.number(),
   shopId: Joi.number(),
+  threshold: Joi.number(),
 });
 
 const updateStockSchema = Joi.object({
   quantity: Joi.number().optional(),
   promotionId: Joi.number().optional(),
+  threshold: Joi.number().optional(),
 });
 
 const paramSchema = Joi.object({
