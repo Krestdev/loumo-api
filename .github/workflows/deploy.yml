@@ -75,7 +75,7 @@ jobs:
              # Remove any containers that might conflict
              docker rm -f mongo_loumo loumo 2>/dev/null || true
 
-             docker compose -f docker-compose.yml --env-file .env.prod build
+             COMPOSE_PROJECT_NAME=default docker compose -f docker-compose.yml --env-file .env.prod build
             #  docker compose -f docker-compose.yml build
              COMPOSE_PROJECT_NAME=default docker compose -f docker-compose.yml --env-file .env.prod up -d
             #  docker compose -f docker-compose.yml up -d
