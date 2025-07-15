@@ -10,6 +10,7 @@ const promotionLogic = new PromotionLogic();
 const createPromotionSchema = Joi.object({
   code: Joi.string(),
   percentage: Joi.number(),
+  amount: Joi.number(),
   expireAt: Joi.date().optional(),
   stockIds: Joi.array().items(Joi.number()),
 });
@@ -17,6 +18,7 @@ const createPromotionSchema = Joi.object({
 const updatePromotionSchema = Joi.object({
   code: Joi.string().optional(),
   percentage: Joi.number().optional(),
+  amount: Joi.number().optional(),
   expireAt: Joi.date().optional(),
   stockIds: Joi.array().items(Joi.number()),
 });

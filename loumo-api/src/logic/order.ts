@@ -48,7 +48,16 @@ export class OrderLogic {
   // Get all orders, including their roles
   async getAllOrders(): Promise<Order[]> {
     return prisma.order.findMany({
-      include: { address: true, user: true, orderItems: true, payment: true },
+      include: {
+        address: true,
+        user: true,
+        orderItems: {
+          include: {
+            productVariant: true,
+          },
+        },
+        payment: true,
+      },
     });
   }
 

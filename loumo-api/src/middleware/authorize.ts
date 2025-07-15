@@ -30,7 +30,10 @@ export function authorize(requiredPermission: string) {
 
     const permissions = user.role?.permissions.map((rp) => rp.action);
 
-    if (!permissions?.includes(requiredPermission)) {
+    if (
+      !permissions?.includes(requiredPermission) ||
+      !user.role?.name.includes(requiredPermission)
+    ) {
       res.status(403).json({ message: "Forbidden: Access denied" });
       return;
     }

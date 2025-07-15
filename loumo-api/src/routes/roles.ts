@@ -11,25 +11,13 @@ export default class RoleRouter {
   }
 
   registerRoutes() {
-    this.routes.get("/", authorize("read:role"), this.roleController.getRole);
-    this.routes.get(
-      "/:id",
-      authorize("read:role"),
-      this.roleController.getOneRole
-    );
-    this.routes.post(
-      "/",
-      authorize("create:role"),
-      this.roleController.createRole
-    );
-    this.routes.put(
-      "/:id",
-      authorize("update:role"),
-      this.roleController.updateRole
-    );
+    this.routes.get("/", authorize("admin"), this.roleController.getRole);
+    this.routes.get("/:id", authorize("admin"), this.roleController.getOneRole);
+    this.routes.post("/", authorize("admin"), this.roleController.createRole);
+    this.routes.put("/:id", authorize("admin"), this.roleController.updateRole);
     this.routes.delete(
       "/:id",
-      authorize("delete:role"),
+      authorize("admin"),
       this.roleController.deleteRole
     );
   }
