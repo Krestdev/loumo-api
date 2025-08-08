@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import Joi from "joi";
 import { UserLogic } from "../logic/user";
 import { CustomError } from "../middleware/errorHandler";
-import { User } from "../../generated/prisma";
+import { User } from "@prisma/client";
 const userLogic = new UserLogic();
 
 // Joi schemas

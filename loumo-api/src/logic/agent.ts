@@ -1,4 +1,4 @@
-import { PrismaClient, Agent } from "../../generated/prisma";
+import { PrismaClient, Agent } from "@prisma/client";
 
 const prisma = new PrismaClient();
 

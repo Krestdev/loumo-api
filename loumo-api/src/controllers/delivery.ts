@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Joi from "joi";
-import { Delivery } from "../../generated/prisma";
+import { Delivery } from "@prisma/client";
 import { CustomError } from "../middleware/errorHandler";
 import { DeliveryLogic } from "../logic/delivery";
 

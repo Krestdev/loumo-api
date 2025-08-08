@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Joi from "joi";
-import { Zone } from "../../generated/prisma";
+import { Zone } from "@prisma/client";
 import { ZoneLogic } from "../logic/zone";
 import { CustomError } from "../middleware/errorHandler";
 

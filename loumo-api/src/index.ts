@@ -28,6 +28,7 @@ import usersRouter from "./routes/users";
 import ZoneRouter from "./routes/zone";
 import WinstonLogger from "./utils/logger";
 import SettingRouter from "./routes/setting";
+import { RBACMiddleware } from "./middleware/rbac";
 
 /**
  * Represents the main application server for the Loumo API.
@@ -85,6 +86,7 @@ export class Server {
         `:remote-addr - :remote-user [:date] :method :url HTTP/:http-version" :status :res[content-length] ":referrer"`
       )
     );
+    this.app.use(RBACMiddleware);
 
     // error and warning save to server
     this.app.use(this.winstonLogger.warningLogger());

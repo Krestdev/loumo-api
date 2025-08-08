@@ -1,5 +1,6 @@
 import { Router } from "express";
 import UserController from "../controllers/users";
+import { operationLoggerMiddleware } from "../middleware/operationLogger";
 // import { authorize } from "../middleware/authorize";
 
 // authorize("read:user")
@@ -26,9 +27,21 @@ export default class UserRouter {
     this.routes.get("/", this.userController.getAllUsers);
     this.routes.get("/:id", this.userController.getUserById);
     this.routes.patch("/:id", this.userController.addProductToFavorites);
-    this.routes.post("/", this.userController.createUser);
-    this.routes.put("/:id", this.userController.updateUser);
+    this.routes.post(
+      "/",
+      operationLoggerMiddleware("User"),
+      this.userController.createUser
+    );
+    this.routes.put(
+      "/:id",
+      operationLoggerMiddleware("User"),
+      this.userController.updateUser
+    );
     this.routes.put("/role/:id", this.userController.assignRole);
-    this.routes.delete("/:id", this.userController.deleteUser);
+    this.routes.delete(
+      "/:id",
+      operationLoggerMiddleware("User"),
+      this.userController.deleteUser
+    );
   }
 }

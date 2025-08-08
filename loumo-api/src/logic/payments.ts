@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { Payment, PrismaClient } from "../../generated/prisma";
+import { Payment, PrismaClient } from "@prisma/client";
 import { PawapayService } from "../services/payment";
 
 const prisma = new PrismaClient();

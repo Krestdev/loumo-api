@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { PrismaClient, User } from "../../generated/prisma";
+import { PrismaClient, User } from "@prisma/client";
 import { config } from "../configs";
 import Mailer from "../services/email";
 import { name } from "ejs";
@@ -52,6 +52,11 @@ export class UserLogic {
               connect: addressList.map((roleId) => ({ id: roleId })),
             }
           : {},
+        role: {
+          connect: {
+            id: 1,
+          },
+        },
       },
     });
   }

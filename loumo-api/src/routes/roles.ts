@@ -1,6 +1,6 @@
 import { Router } from "express";
 import RoleController from "../controllers/roles";
-import { authorize } from "../middleware/authorize";
+import { requireRole } from "../middleware/rbac";
 
 export default class RoleRouter {
   routes: Router = Router();
@@ -11,13 +11,25 @@ export default class RoleRouter {
   }
 
   registerRoutes() {
-    this.routes.get("/", authorize("admin"), this.roleController.getRole);
-    this.routes.get("/:id", authorize("admin"), this.roleController.getOneRole);
-    this.routes.post("/", authorize("admin"), this.roleController.createRole);
-    this.routes.put("/:id", authorize("admin"), this.roleController.updateRole);
+    this.routes.get("/", requireRole(["admin"]), this.roleController.getRole);
+    this.routes.get(
+      "/:id",
+      requireRole(["admin"]),
+      this.roleController.getOneRole
+    );
+    this.routes.post(
+      "/",
+      requireRole(["admin"]),
+      this.roleController.createRole
+    );
+    this.routes.put(
+      "/:id",
+      requireRole(["admin"]),
+      this.roleController.updateRole
+    );
     this.routes.delete(
       "/:id",
-      authorize("admin"),
+      requireRole(["admin"]),
       this.roleController.deleteRole
     );
   }

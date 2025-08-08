@@ -1,4 +1,4 @@
-import { Address, PrismaClient, Zone } from "../../generated/prisma";
+import { Address, PrismaClient, Zone } from "@prisma/client";
 
 const prisma = new PrismaClient();
 

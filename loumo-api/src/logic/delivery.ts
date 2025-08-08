@@ -1,4 +1,4 @@
-import { Agent, PrismaClient, Delivery } from "../../generated/prisma";
+import { Agent, PrismaClient, Delivery } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
 
 const prisma = new PrismaClient();

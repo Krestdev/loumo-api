@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Joi from "joi";
 import { CustomError } from "../middleware/errorHandler";
-import { Agent } from "../../generated/prisma";
+import { Agent } from "@prisma/client";
 import { AgentLogic } from "../logic/agent";
 
 const agentLogic = new AgentLogic();

@@ -1,4 +1,4 @@
-import { PrismaClient, ProductVariant } from "../../generated/prisma";
+import { PrismaClient, ProductVariant } from "@prisma/client";
 import deleteImage from "../utils/deleteImage";
 
 const prisma = new PrismaClient();
@@ -16,7 +16,7 @@ export class ProductVariantLogic {
         imgUrl: `uploads/${imgUrl}`,
         weight: Number(weight),
         price: Number(price),
-        status: Boolean(status),
+        status: (status as unknown as string).includes("true") ? true : false,
         product: productId
           ? {
               connect: {
@@ -49,11 +49,19 @@ export class ProductVariantLogic {
     id: number,
     data: Partial<Omit<ProductVariant, "id">> & { productId?: number }
   ): Promise<ProductVariant | null> {
-    const { productId, ...productVariantData } = data;
+    const { productId, weight, price, imgUrl, ...productVariantData } = data;
     return prisma.productVariant.update({
       where: { id },
       data: {
         ...productVariantData,
+        imgUrl: imgUrl
+          ? imgUrl.startsWith("upload")
+            ? imgUrl
+            : `uploads/${imgUrl}`
+          : null,
+        weight: Number(weight),
+        price: Number(price),
+        status: (status as unknown as string).includes("true") ? true : false,
         product: productId
           ? {
               connect: {

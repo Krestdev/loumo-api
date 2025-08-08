@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Joi from "joi";
-import { Shop } from "../../generated/prisma";
+import { Shop } from "@prisma/client";
 import { ShopLogic } from "../logic/shop";
 import { CustomError } from "../middleware/errorHandler";
 

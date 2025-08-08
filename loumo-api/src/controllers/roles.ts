@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Joi from "joi";
-import { Role } from "../../generated/prisma";
+import { Role } from "@prisma/client";
 import { RoleLogic } from "../logic/role";
 import { CustomError } from "../middleware/errorHandler";
 

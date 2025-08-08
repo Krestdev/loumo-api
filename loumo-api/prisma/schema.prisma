@@ -3,7 +3,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -28,8 +27,8 @@ model User {
   active   Boolean @default(true)
   imageUrl String?
 
-  role          Role?          @relation(fields: [roleId], references: [id])
-  roleId        Int?
+  role          Role           @relation(fields: [roleId], references: [id])
+  roleId        Int
   addresses     Address[]
   notifications Notification[]
   logs          Log[]
@@ -120,12 +119,19 @@ model Stock {
 }
 
 model Promotion {
-  id         Int      @id @default(autoincrement())
-  code       String
-  percentage Int
-  amount     Int      @default(0)
-  expireAt   DateTime
-  stock      Stock[]
+  id          Int       @id @default(autoincrement())
+  code        String
+  percentage  Int
+  amount      Int       @default(0)
+  expireAt    DateTime?
+  description String?
+  status      String
+  usedCount   Int       @default(0)
+  maxUses     Int       @default(1)
+  startAt     DateTime  @default(now())
+  updatedAt   DateTime  @default(now())
+  createdAt   DateTime  @default(now())
+  stock       Stock[]
 }
 
 model ProductVariant {
@@ -161,6 +167,7 @@ model Category {
   id       Int       @id @default(autoincrement())
   name     String
   slug     String    @default("_")
+  display  Boolean   @default(false)
   imgUrl   String?
   status   Boolean   @default(true)
   products Product[]
@@ -258,4 +265,16 @@ model Setting {
   note    String?
   section String
   date    DateTime?
+}
+
+model OperationLog {
+  id           Int      @id @default(autoincrement())
+  entity_type  String // e.g., 'User', 'Product', etc.
+  entity_ids   String // e.g., '123' or comma-separated for multiple
+  action       String // e.g., 'create', 'update', 'delete'
+  performed_by String // user_id as string or 'system'
+  timestamp    DateTime @default(now())
+  ip_address   String?
+  changes      Json?
+  description  String?
 }

@@ -1,4 +1,4 @@
-import { PrismaClient, Product } from "../../generated/prisma";
+import { PrismaClient, Product, ProductVariant, Stock } from "@prisma/client";
 import slugify from "slugify";
 
 const prisma = new PrismaClient();
@@ -6,10 +6,14 @@ const prisma = new PrismaClient();
 export class ProductLogic {
   // Create a log and optionally connect to roles
   async createProduct(
-    data: Omit<Product, "id" | "createdAt"> & { categoryId?: number }
+    data: Omit<Product, "id" | "createdAt"> & {
+      categoryId?: number;
+      variants?: (ProductVariant & { stock: Stock[] })[];
+    }
   ): Promise<Product> {
     const { categoryId, ...productData } = data;
     const slug = slugify(data.name, { lower: true });
+
     return prisma.product.create({
       data: {
         ...productData,
@@ -20,6 +24,16 @@ export class ProductLogic {
               connect: {
                 id: categoryId,
               },
+            }
+          : {},
+        variants: data.variants
+          ? {
+              create: data.variants.map((variant) => ({
+                ...variant,
+                stock: {
+                  create: variant.stock,
+                },
+              })),
             }
           : {},
       },

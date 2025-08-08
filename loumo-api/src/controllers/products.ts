@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Joi from "joi";
-import { Product } from "../../generated/prisma";
+import { Product } from "@prisma/client";
 import { ProductLogic } from "../logic/products";
 import { CustomError } from "../middleware/errorHandler";
 
@@ -13,6 +13,20 @@ const createProductSchema = Joi.object({
   weight: Joi.number(),
   status: Joi.boolean(),
   categoryId: Joi.number().optional(),
+  variants: Joi.object({
+    name: Joi.string(),
+    weight: Joi.number(),
+    price: Joi.number(),
+    status: Joi.boolean(),
+    imgUrl: Joi.string(),
+    productId: Joi.number().optional(),
+    stock: Joi.object({
+      quantity: Joi.number(),
+      productVariantId: Joi.number(),
+      shopId: Joi.number(),
+      threshold: Joi.number(),
+    }),
+  }),
 });
 
 const updateProductSchema = Joi.object({

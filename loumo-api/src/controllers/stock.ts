@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Joi from "joi";
-import { Stock } from "../../generated/prisma";
+import { Stock } from "@prisma/client";
 import { CustomError } from "../middleware/errorHandler";
 import { StockLogic } from "../logic/stock";
 

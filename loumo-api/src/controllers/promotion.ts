@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Joi from "joi";
-import { Promotion } from "../../generated/prisma";
+import { Promotion } from "@prisma/client";
 import { CustomError } from "../middleware/errorHandler";
 import { PromotionLogic } from "../logic/promotion";
 
@@ -12,6 +12,9 @@ const createPromotionSchema = Joi.object({
   percentage: Joi.number(),
   amount: Joi.number(),
   expireAt: Joi.date().optional(),
+  status: Joi.string().required(),
+  maxUses: Joi.number(),
+  startAt: Joi.string(),
   stockIds: Joi.array().items(Joi.number()),
 });
 
@@ -20,6 +23,10 @@ const updatePromotionSchema = Joi.object({
   percentage: Joi.number().optional(),
   amount: Joi.number().optional(),
   expireAt: Joi.date().optional(),
+  usedCount: Joi.number(),
+  status: Joi.string(),
+  maxUses: Joi.number(),
+  startAt: Joi.string(),
   stockIds: Joi.array().items(Joi.number()),
 });
 

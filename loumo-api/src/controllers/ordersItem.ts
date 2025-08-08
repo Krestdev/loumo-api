@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Joi from "joi";
 import { CustomError } from "../middleware/errorHandler";
-import { OrderItem } from "../../generated/prisma";
+import { OrderItem } from "@prisma/client";
 import { OrderItemLogic } from "../logic/orderItem";
 
 const orderItemLogic = new OrderItemLogic();

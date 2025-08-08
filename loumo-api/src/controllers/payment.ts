@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Joi from "joi";
-import { Payment } from "../../generated/prisma";
+import { Payment } from "@prisma/client";
 import { CustomError } from "../middleware/errorHandler";
 import { PaymentLogic } from "../logic/payments";
 

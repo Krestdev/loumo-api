@@ -1,4 +1,4 @@
-import { PrismaClient, Category, Product } from "../../generated/prisma";
+import { PrismaClient, Category, Product } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -7,10 +7,13 @@ export class CategoryLogic {
   async createCategory(
     data: Omit<Category, "id"> & { productIds?: number[] }
   ): Promise<Category> {
-    const { productIds, ...categoryData } = data;
+    const { productIds, status, display, imgUrl, ...categoryData } = data;
     return prisma.category.create({
       data: {
         ...categoryData,
+        status: (status as unknown as string).includes("true") ? true : false,
+        imgUrl: `uploads/${imgUrl}`,
+        display: (display as unknown as string).includes("true") ? true : false,
         products: productIds
           ? {
               connect: productIds.map((productId) => ({ id: productId })),
@@ -60,11 +63,18 @@ export class CategoryLogic {
     id: number,
     data: Partial<Omit<Category, "id">> & { productIds?: number[] }
   ): Promise<(Category & { products: Product[] }) | null> {
-    const { productIds, ...categoryData } = data;
+    const { productIds, status, display, imgUrl, ...categoryData } = data;
     return prisma.category.update({
       where: { id },
       data: {
         ...categoryData,
+        status: (status as unknown as string).includes("true") ? true : false,
+        display: (display as unknown as string).includes("true") ? true : false,
+        imgUrl: imgUrl
+          ? imgUrl.startsWith("upload")
+            ? imgUrl
+            : `uploads/${imgUrl}`
+          : null,
         products: productIds
           ? {
               connect: productIds.map((roleId) => ({ id: roleId })),

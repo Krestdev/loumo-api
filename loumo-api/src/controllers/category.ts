@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Joi from "joi";
-import { Category } from "../../generated/prisma";
+import { Category } from "@prisma/client";
 import { CustomError } from "../middleware/errorHandler";
 import { CategoryLogic } from "../logic/category";
 
@@ -11,14 +11,16 @@ const createCategorySchema = Joi.object({
   name: Joi.string(),
   umgUrl: Joi.string(),
   weight: Joi.number(),
+  display: Joi.boolean(),
   status: Joi.boolean().optional(),
   ids: Joi.array().items(Joi.number()),
 });
 
 const updateCategorySchema = Joi.object({
-  name: Joi.string().optional(),
+  name: Joi.string().required(),
   umgUrl: Joi.string().optional(),
   weight: Joi.number().optional(),
+  display: Joi.boolean(),
   status: Joi.boolean().optional(),
   productIds: Joi.array().items(Joi.number()).optional(),
 });
@@ -118,6 +120,7 @@ export default class CategoryController {
     if (!this.validate(request, response, "create")) return;
 
     try {
+      request.body.imgUrl = request.file?.filename ?? null;
       const newCategory = await categoryLogic.createCategory(request.body);
       response.status(201).json(newCategory);
     } catch (error) {
@@ -143,6 +146,7 @@ export default class CategoryController {
 
     const id = Number(request.params.id);
     try {
+      if (request.body.imgUrl) request.body.imgUrl = request.file?.filename;
       const updatedCategory = await categoryLogic.updateCategory(
         id,
         request.body

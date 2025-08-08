@@ -1,4 +1,4 @@
-import { PrismaClient, Promotion, Stock } from "../../generated/prisma";
+import { PrismaClient, Promotion, Stock } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -52,6 +52,7 @@ export class PromotionLogic {
               connect: stockIds.map((roleId) => ({ id: roleId })),
             }
           : {},
+        updatedAt: new Date().toISOString(),
       },
       include: { stock: true },
     });

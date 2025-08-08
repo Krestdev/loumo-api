@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Joi from "joi";
 import { CustomError } from "../middleware/errorHandler";
-import { Log } from "../../generated/prisma";
+import { Log } from "@prisma/client";
 import { LogLogic } from "../logic/log";
 
 const logLogic = new LogLogic();

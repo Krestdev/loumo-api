@@ -1,4 +1,4 @@
-import { PrismaClient, Log } from "../../generated/prisma";
+import { PrismaClient, Log } from "@prisma/client";
 
 const prisma = new PrismaClient();
 

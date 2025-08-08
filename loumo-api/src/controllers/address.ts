@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import Joi from "joi";
 import { AddressLogic } from "../logic/address";
 import { CustomError } from "../middleware/errorHandler";
-import { Address } from "../../generated/prisma";
+import { Address } from "@prisma/client";
 
 const addressLogic = new AddressLogic();
 

@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import Joi from "joi";
 import { PermissionLogic } from "../logic/permission";
 import { CustomError } from "../middleware/errorHandler";
-import { Permission } from "../../generated/prisma";
+import { Permission } from "@prisma/client";
 
 const permissionLogic = new PermissionLogic();
 

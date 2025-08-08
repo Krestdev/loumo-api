@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import Joi from "joi";
 import { CustomError } from "../middleware/errorHandler";
 import { NotificationLogic } from "../logic/notification";
-import { Notification } from "../../generated/prisma";
+import { Notification } from "@prisma/client";
 
 const notificationLogic = new NotificationLogic();
 

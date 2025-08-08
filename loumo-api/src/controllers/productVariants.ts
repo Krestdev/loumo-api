@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Joi from "joi";
 import { CustomError } from "../middleware/errorHandler";
-import { ProductVariant } from "../../generated/prisma";
+import { ProductVariant } from "@prisma/client";
 import { ProductVariantLogic } from "../logic/productVariants";
 
 const productVariantLogic = new ProductVariantLogic();
