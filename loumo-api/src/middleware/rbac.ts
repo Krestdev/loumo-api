@@ -164,6 +164,10 @@ const requireOwnership = (resourceUserIdField: string = "userId") => {
 // Public routes that don't require authentication
 const publicRoutes = [
   "/api/address",
+  "/api/promotions",
+  "/api/categories",
+  "/api/settings",
+  "/api/address",
   "/api/products",
   "/api/uploads",
   "/api/blogs",
