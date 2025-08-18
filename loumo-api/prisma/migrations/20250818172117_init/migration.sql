@@ -13,7 +13,7 @@ CREATE TABLE `User` (
     `verificationOtpExpires` DATETIME(3) NULL,
     `active` BOOLEAN NOT NULL DEFAULT true,
     `imageUrl` VARCHAR(191) NULL,
-    `roleId` INTEGER NULL,
+    `roleId` INTEGER NOT NULL,
     `lastLogin` DATETIME(3) NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
@@ -79,7 +79,7 @@ CREATE TABLE `Notification` (
 CREATE TABLE `Zone` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
-    `description` VARCHAR(191) NOT NULL,
+    `description` VARCHAR(191) NULL,
     `price` INTEGER NOT NULL,
     `status` VARCHAR(191) NOT NULL,
 
@@ -113,7 +113,15 @@ CREATE TABLE `Promotion` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `code` VARCHAR(191) NOT NULL,
     `percentage` INTEGER NOT NULL,
-    `expireAt` DATETIME(3) NOT NULL,
+    `amount` INTEGER NOT NULL DEFAULT 0,
+    `expireAt` DATETIME(3) NULL,
+    `description` VARCHAR(191) NULL,
+    `status` VARCHAR(191) NOT NULL,
+    `usedCount` INTEGER NOT NULL DEFAULT 0,
+    `maxUses` INTEGER NOT NULL DEFAULT 1,
+    `startAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -136,7 +144,7 @@ CREATE TABLE `ProductVariant` (
 CREATE TABLE `Product` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
-    `description` VARCHAR(191) NOT NULL,
+    `description` VARCHAR(191) NULL,
     `slug` VARCHAR(191) NOT NULL,
     `weight` INTEGER NOT NULL,
     `status` BOOLEAN NOT NULL,
@@ -152,6 +160,7 @@ CREATE TABLE `Category` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
     `slug` VARCHAR(191) NOT NULL DEFAULT '_',
+    `display` BOOLEAN NOT NULL DEFAULT false,
     `imgUrl` VARCHAR(191) NULL,
     `status` BOOLEAN NOT NULL DEFAULT true,
 
@@ -224,7 +233,6 @@ CREATE TABLE `Agent` (
     `userId` INTEGER NOT NULL,
     `status` VARCHAR(191) NOT NULL DEFAULT 'inactive',
     `max` INTEGER NOT NULL DEFAULT 5,
-    `zoneId` INTEGER NOT NULL,
 
     UNIQUE INDEX `Agent_userId_key`(`userId`),
     PRIMARY KEY (`id`)
@@ -262,6 +270,21 @@ CREATE TABLE `Setting` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+CREATE TABLE `OperationLog` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `entity_type` VARCHAR(191) NOT NULL,
+    `entity_ids` VARCHAR(191) NOT NULL,
+    `action` VARCHAR(191) NOT NULL,
+    `performed_by` VARCHAR(191) NOT NULL,
+    `timestamp` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `ip_address` VARCHAR(191) NULL,
+    `changes` JSON NULL,
+    `description` VARCHAR(191) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `_AddressToUser` (
     `A` INTEGER NOT NULL,
     `B` INTEGER NOT NULL,
@@ -288,8 +311,17 @@ CREATE TABLE `_ProductToUser` (
     INDEX `_ProductToUser_B_index`(`B`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
+CREATE TABLE `_AgentToZone` (
+    `A` INTEGER NOT NULL,
+    `B` INTEGER NOT NULL,
+
+    UNIQUE INDEX `_AgentToZone_AB_unique`(`A`, `B`),
+    INDEX `_AgentToZone_B_index`(`B`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- AddForeignKey
-ALTER TABLE `User` ADD CONSTRAINT `User_roleId_fkey` FOREIGN KEY (`roleId`) REFERENCES `Role`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `User` ADD CONSTRAINT `User_roleId_fkey` FOREIGN KEY (`roleId`) REFERENCES `Role`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Address` ADD CONSTRAINT `Address_zoneId_fkey` FOREIGN KEY (`zoneId`) REFERENCES `Zone`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
@@ -346,9 +378,6 @@ ALTER TABLE `Delivery` ADD CONSTRAINT `Delivery_agentId_fkey` FOREIGN KEY (`agen
 ALTER TABLE `Agent` ADD CONSTRAINT `Agent_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Agent` ADD CONSTRAINT `Agent_zoneId_fkey` FOREIGN KEY (`zoneId`) REFERENCES `Zone`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE `Faq` ADD CONSTRAINT `Faq_topicId_fkey` FOREIGN KEY (`topicId`) REFERENCES `Topic`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -368,3 +397,9 @@ ALTER TABLE `_ProductToUser` ADD CONSTRAINT `_ProductToUser_A_fkey` FOREIGN KEY 
 
 -- AddForeignKey
 ALTER TABLE `_ProductToUser` ADD CONSTRAINT `_ProductToUser_B_fkey` FOREIGN KEY (`B`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `_AgentToZone` ADD CONSTRAINT `_AgentToZone_A_fkey` FOREIGN KEY (`A`) REFERENCES `Agent`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `_AgentToZone` ADD CONSTRAINT `_AgentToZone_B_fkey` FOREIGN KEY (`B`) REFERENCES `Zone`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
