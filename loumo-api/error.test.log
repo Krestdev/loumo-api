@@ -1,0 +1,774 @@
+{
+  level: 'error',
+  message: 'HTTP POST /api/shops',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/shops',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '34',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NTUwNzA3MywiZXhwIjoxNzU1NTkzNDczfQ.YfvaVSGNEOUOxnRRO-HcZ3Ydc090s8p76iGZvzxXOas',
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'application/json',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'POST',
+        httpVersion: '1.1',
+        originalUrl: '/api/shops',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 14
+    },
+    timestamp: '2025-08-18T10:21:09.660Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP POST /api/shops',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/shops',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '34',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NTUwNzA3MywiZXhwIjoxNzU1NTkzNDczfQ.YfvaVSGNEOUOxnRRO-HcZ3Ydc090s8p76iGZvzxXOas',
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'application/json',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'POST',
+        httpVersion: '1.1',
+        originalUrl: '/api/shops',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 14
+    },
+    timestamp: '2025-08-18T10:21:09.663Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP POST /api/shops',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/shops',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '34',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NTUwNzA3MywiZXhwIjoxNzU1NTkzNDczfQ.YfvaVSGNEOUOxnRRO-HcZ3Ydc090s8p76iGZvzxXOas',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'application/json',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'POST',
+        httpVersion: '1.1',
+        originalUrl: '/api/shops',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 6
+    },
+    timestamp: '2025-08-18T10:21:31.987Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP POST /api/shops',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/shops',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '34',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NTUwNzA3MywiZXhwIjoxNzU1NTkzNDczfQ.YfvaVSGNEOUOxnRRO-HcZ3Ydc090s8p76iGZvzxXOas',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'application/json',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'POST',
+        httpVersion: '1.1',
+        originalUrl: '/api/shops',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 6
+    },
+    timestamp: '2025-08-18T10:21:31.988Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP POST /api/shops',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/shops',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '37',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NTUwNzA3MywiZXhwIjoxNzU1NTkzNDczfQ.YfvaVSGNEOUOxnRRO-HcZ3Ydc090s8p76iGZvzxXOas',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'application/json',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'POST',
+        httpVersion: '1.1',
+        originalUrl: '/api/shops',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 19
+    },
+    timestamp: '2025-08-18T10:29:13.748Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP POST /api/shops',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/shops',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '37',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NTUwNzA3MywiZXhwIjoxNzU1NTkzNDczfQ.YfvaVSGNEOUOxnRRO-HcZ3Ydc090s8p76iGZvzxXOas',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'application/json',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'POST',
+        httpVersion: '1.1',
+        originalUrl: '/api/shops',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 19
+    },
+    timestamp: '2025-08-18T10:29:13.749Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP POST /api/products',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/products',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '188592',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NTUwNzA3MywiZXhwIjoxNzU1NTkzNDczfQ.YfvaVSGNEOUOxnRRO-HcZ3Ydc090s8p76iGZvzxXOas',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryFAM5dndd3BRgg6Ix',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'POST',
+        httpVersion: '1.1',
+        originalUrl: '/api/products',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 64
+    },
+    timestamp: '2025-08-18T11:05:54.744Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP POST /api/products',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/products',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '188592',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NTUwNzA3MywiZXhwIjoxNzU1NTkzNDczfQ.YfvaVSGNEOUOxnRRO-HcZ3Ydc090s8p76iGZvzxXOas',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryFAM5dndd3BRgg6Ix',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'POST',
+        httpVersion: '1.1',
+        originalUrl: '/api/products',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 64
+    },
+    timestamp: '2025-08-18T11:05:54.745Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP POST /api/products',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/products',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '188592',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NTUwNzA3MywiZXhwIjoxNzU1NTkzNDczfQ.YfvaVSGNEOUOxnRRO-HcZ3Ydc090s8p76iGZvzxXOas',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryIzGhXw6kOu3RMHfb',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'POST',
+        httpVersion: '1.1',
+        originalUrl: '/api/products',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 14
+    },
+    timestamp: '2025-08-18T11:06:56.470Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP POST /api/products',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/products',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '188592',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NTUwNzA3MywiZXhwIjoxNzU1NTkzNDczfQ.YfvaVSGNEOUOxnRRO-HcZ3Ydc090s8p76iGZvzxXOas',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryIzGhXw6kOu3RMHfb',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'POST',
+        httpVersion: '1.1',
+        originalUrl: '/api/products',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 14
+    },
+    timestamp: '2025-08-18T11:06:56.471Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP POST /api/products',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/products',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '169612',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NTUwNzA3MywiZXhwIjoxNzU1NTkzNDczfQ.YfvaVSGNEOUOxnRRO-HcZ3Ydc090s8p76iGZvzxXOas',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryPBNBtOOgswkmLxrJ',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'POST',
+        httpVersion: '1.1',
+        originalUrl: '/api/products',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 55
+    },
+    timestamp: '2025-08-18T12:05:38.507Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP POST /api/products',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/products',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '169612',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NTUwNzA3MywiZXhwIjoxNzU1NTkzNDczfQ.YfvaVSGNEOUOxnRRO-HcZ3Ydc090s8p76iGZvzxXOas',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryPBNBtOOgswkmLxrJ',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'POST',
+        httpVersion: '1.1',
+        originalUrl: '/api/products',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 55
+    },
+    timestamp: '2025-08-18T12:05:38.509Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP POST /api/products',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/products',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '169612',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NTUwNzA3MywiZXhwIjoxNzU1NTkzNDczfQ.YfvaVSGNEOUOxnRRO-HcZ3Ydc090s8p76iGZvzxXOas',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary2xnJfpFlpeYOymWH',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'POST',
+        httpVersion: '1.1',
+        originalUrl: '/api/products',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 36
+    },
+    timestamp: '2025-08-18T12:24:54.467Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP POST /api/products',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/products',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '169612',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NTUwNzA3MywiZXhwIjoxNzU1NTkzNDczfQ.YfvaVSGNEOUOxnRRO-HcZ3Ydc090s8p76iGZvzxXOas',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary2xnJfpFlpeYOymWH',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'POST',
+        httpVersion: '1.1',
+        originalUrl: '/api/products',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 36
+    },
+    timestamp: '2025-08-18T12:24:54.469Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP POST /api/products',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/products',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '169612',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NTUwNzA3MywiZXhwIjoxNzU1NTkzNDczfQ.YfvaVSGNEOUOxnRRO-HcZ3Ydc090s8p76iGZvzxXOas',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary0BxGORotq1xCxlwz',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'POST',
+        httpVersion: '1.1',
+        originalUrl: '/api/products',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 33
+    },
+    timestamp: '2025-08-18T12:26:51.636Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP POST /api/products',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/products',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '169612',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NTUwNzA3MywiZXhwIjoxNzU1NTkzNDczfQ.YfvaVSGNEOUOxnRRO-HcZ3Ydc090s8p76iGZvzxXOas',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary0BxGORotq1xCxlwz',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'POST',
+        httpVersion: '1.1',
+        originalUrl: '/api/products',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 33
+    },
+    timestamp: '2025-08-18T12:26:51.638Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP POST /api/products',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/products',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '169612',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NTUwNzA3MywiZXhwIjoxNzU1NTkzNDczfQ.YfvaVSGNEOUOxnRRO-HcZ3Ydc090s8p76iGZvzxXOas',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary2qyjbNq4GyViNpp8',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'POST',
+        httpVersion: '1.1',
+        originalUrl: '/api/products',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 45
+    },
+    timestamp: '2025-08-18T12:33:56.808Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP POST /api/products',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/products',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '169612',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NTUwNzA3MywiZXhwIjoxNzU1NTkzNDczfQ.YfvaVSGNEOUOxnRRO-HcZ3Ydc090s8p76iGZvzxXOas',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary2qyjbNq4GyViNpp8',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'POST',
+        httpVersion: '1.1',
+        originalUrl: '/api/products',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 45
+    },
+    timestamp: '2025-08-18T12:33:56.811Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/null',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/null',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/null',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 23
+    },
+    timestamp: '2025-08-18T12:53:02.614Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/null',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/null',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/null',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 23
+    },
+    timestamp: '2025-08-18T12:53:02.616Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/null',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/null',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/null',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 30
+    },
+    timestamp: '2025-08-18T13:54:40.445Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/null',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/null',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/null',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 30
+    },
+    timestamp: '2025-08-18T13:54:40.448Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/null',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/null',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/null',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 5
+    },
+    timestamp: '2025-08-18T14:04:51.266Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/null',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/null',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/null',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 5
+    },
+    timestamp: '2025-08-18T14:04:51.267Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/null',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/null',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/null',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 9
+    },
+    timestamp: '2025-08-18T14:21:48.696Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/null',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/null',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/null',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 9
+    },
+    timestamp: '2025-08-18T14:21:48.696Z'
+  }
+}

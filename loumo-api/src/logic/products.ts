@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 export class ProductLogic {
   // Create a log and optionally connect to roles
   async createProduct(
-    data: Omit<Product, "id" | "createdAt"> & {
+    data: Omit<Product, "id" | "updatedAt" | "createdAt"> & {
       categoryId?: number;
       variants?: (ProductVariant & { stock: Stock[] })[];
     }

@@ -54,7 +54,7 @@ const authenticateToken = async (
       return;
     }
 
-    if (user.active) {
+    if (!user.active) {
       res.status(403).json({ error: "User account is not active" });
       return;
     }
@@ -164,6 +164,7 @@ const requireOwnership = (resourceUserIdField: string = "userId") => {
 // Public routes that don't require authentication
 const publicRoutes = [
   "/api/products",
+  "/api/uploads",
   "/api/blogs",
   "/api/events",
   "/api/faqs",
@@ -178,9 +179,9 @@ const publicRoutes = [
 
 // Auth routes that don't require authentication (all methods)
 const authRoutes = [
-  "/api/auth/login",
-  "/api/auth/register",
-  "/api/auth/password-reset",
+  "/api/users/login",
+  "/api/users/",
+  "/api/users/password-reset",
 ];
 
 // Check if route is public

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Joi from "joi";
-import { Shop } from "@prisma/client";
+import { Address, Shop, Zone } from "@prisma/client";
 import { ShopLogic } from "../logic/shop";
 import { CustomError } from "../middleware/errorHandler";
 
@@ -9,6 +9,20 @@ const shopLogic = new ShopLogic();
 const createShopSchema = Joi.object({
   name: Joi.string(),
   addressId: Joi.number().optional(),
+  zone: Joi.object({
+    name: Joi.string(),
+    description: Joi.string(),
+    price: Joi.number(),
+    status: Joi.string(),
+  }),
+  address: Joi.object({
+    description: Joi.string(),
+    local: Joi.string(),
+    street: Joi.string(),
+    published: Joi.boolean(),
+    createdAt: Joi.string(),
+    updatedAt: Joi.string(),
+  }),
 });
 
 const updateShopSchema = Joi.object({
@@ -56,7 +70,15 @@ export default class ShopController {
     return true;
   };
   createShop = async (
-    request: Request<object, object, Omit<Shop, "id"> & { addressId: number }>,
+    request: Request<
+      object,
+      object,
+      Omit<Shop, "id"> & {
+        addressId?: number;
+        zone?: Omit<Zone, "id">;
+        address?: Omit<Address, "id" | "zoneId">;
+      }
+    >,
     response: Response
   ) => {
     if (!this.validate(request, response, "create")) return;

@@ -1,6 +1,6 @@
 import expressWinston from "express-winston";
 import winston, { format } from "winston";
-import "winston-mongodb";
+// import "winston-mongodb";
 import { config } from "../configs";
 
 import { PrismaClient } from "@prisma/client";
@@ -54,10 +54,14 @@ export default class WinstonLogger {
     }
     return expressWinston.logger({
       transports: [
-        new winston.transports.MongoDB({
-          level: "warn",
-          db: config.LOG_DATABASE.URL,
-          collection: "logs",
+        // new winston.transports.MongoDB({
+        //   level: "warn",
+        //   db: config.LOG_DATABASE.URL,
+        //   collection: "logs",
+        // }),
+        new winston.transports.File({
+          level: "error",
+          filename: "error.test.log",
         }),
       ],
       format: winston.format.combine(

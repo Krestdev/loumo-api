@@ -1,25 +1,30 @@
-import { PrismaClient, Shop } from "@prisma/client";
+import { Address, PrismaClient, Shop, Zone } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 export class ShopLogic {
   // Create a log and optionally connect to roles
   async createShop(
-    data: Omit<Shop, "id"> & { addressId?: number }
+    data: Omit<Shop, "id"> & {
+      addressId?: number;
+      zone?: Omit<Zone, "id">;
+      address?: Omit<Address, "id" | "zoneId">;
+    }
   ): Promise<Shop> {
-    const { addressId, ...shopData } = data;
-    // if (addressId) {
-    //   const zone = await prisma.address.findUnique({
-    //     where: { id: addressId },
-    //     include: { zone: true },
-    //   });
-    //   const shops = await prisma.address.findMany({
-    //     where: { zoneId: zone?.id },
-    //     include: { shops: true },
-    //   });
-    //   if (shops.length > 0)
-    //     throw new Error("You can not creat another shop in this zone");
-    // }
+    const { addressId, address, zone, ...shopData } = data;
+    if (addressId) {
+      const address = await prisma.address.findUnique({
+        where: { id: addressId },
+        include: { zone: true },
+      });
+      const shops = await prisma.shop.findMany({
+        where: { addressId: address?.zone?.id },
+      });
+      console.log(address);
+      if (shops.length > 0)
+        throw new Error("You can not creat another shop in this zone");
+    }
+
     return prisma.shop.create({
       data: {
         ...shopData,
@@ -29,7 +34,18 @@ export class ShopLogic {
                 id: addressId,
               },
             }
-          : {},
+          : address
+            ? {
+                create: { ...address, zone: zone ? { create: zone } : {} },
+              }
+            : {},
+      },
+      include: {
+        address: {
+          include: {
+            zone: true,
+          },
+        },
       },
     });
   }

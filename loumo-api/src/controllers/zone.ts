@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Joi from "joi";
-import { Zone } from "@prisma/client";
+import { Address, Zone } from "@prisma/client";
 import { ZoneLogic } from "../logic/zone";
 import { CustomError } from "../middleware/errorHandler";
 
@@ -13,6 +13,17 @@ const createZoneSchema = Joi.object({
   ids: Joi.array().items(Joi.number()),
   status: Joi.string().required(),
   description: Joi.string(),
+  addressIds: Joi.array().items(Joi.number()),
+  addresses: Joi.array().items(
+    Joi.object({
+      description: Joi.string(),
+      local: Joi.string(),
+      street: Joi.string(),
+      published: Joi.boolean(),
+      createdAt: Joi.string(),
+      updatedAt: Joi.string(),
+    })
+  ),
 });
 
 const updateZoneSchema = Joi.object({
@@ -100,7 +111,7 @@ export default class ZoneController {
     request: Request<
       object,
       object,
-      Omit<Zone, "id"> & { addressIds?: number[] }
+      Omit<Zone, "id"> & { addressIds?: number[]; addresses?: Address[] }
     >,
     response: Response
   ) => {

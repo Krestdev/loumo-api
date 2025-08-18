@@ -5,9 +5,9 @@ const prisma = new PrismaClient();
 export class ZoneLogic {
   // Create a zone and optionally connect to addresses
   async createZone(
-    data: Omit<Zone, "id"> & { addressIds?: number[] }
+    data: Omit<Zone, "id"> & { addressIds?: number[]; addresses?: Address[] }
   ): Promise<Zone> {
-    const { addressIds, ...zoneData } = data;
+    const { addressIds, addresses, ...zoneData } = data;
     return prisma.zone.create({
       data: {
         ...zoneData,
@@ -15,7 +15,14 @@ export class ZoneLogic {
           ? {
               connect: addressIds.map((addressId) => ({ id: addressId })),
             }
-          : undefined,
+          : addresses
+            ? {
+                create: addresses.map((address) => ({ ...address })),
+              }
+            : undefined,
+      },
+      include: {
+        addresses: true,
       },
     });
   }

@@ -90,7 +90,7 @@ model Notification {
 model Zone {
   id          Int       @id @default(autoincrement())
   name        String
-  description String
+  description String?
   price       Int
   status      String
   addresses   Address[]
@@ -151,7 +151,7 @@ model ProductVariant {
 model Product {
   id          Int              @id @default(autoincrement())
   name        String
-  description String
+  description String?
   slug        String
   weight      Int
   status      Boolean
@@ -239,8 +239,7 @@ model Agent {
   status   String     @default("inactive")
   delivery Delivery[]
   max      Int        @default(5)
-  zone     Zone       @relation(fields: [zoneId], references: [id])
-  zoneId   Int
+  zone     Zone[]
 }
 
 model Topic {

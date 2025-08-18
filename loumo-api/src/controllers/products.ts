@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Joi from "joi";
-import { Product } from "@prisma/client";
+import { Product, ProductVariant, Stock } from "@prisma/client";
 import { ProductLogic } from "../logic/products";
 import { CustomError } from "../middleware/errorHandler";
 
@@ -13,20 +13,25 @@ const createProductSchema = Joi.object({
   weight: Joi.number(),
   status: Joi.boolean(),
   categoryId: Joi.number().optional(),
-  variants: Joi.object({
-    name: Joi.string(),
-    weight: Joi.number(),
-    price: Joi.number(),
-    status: Joi.boolean(),
-    imgUrl: Joi.string(),
-    productId: Joi.number().optional(),
-    stock: Joi.object({
-      quantity: Joi.number(),
-      productVariantId: Joi.number(),
-      shopId: Joi.number(),
-      threshold: Joi.number(),
-    }),
-  }),
+  variantImages: Joi.array().items(Joi.string()),
+  variants: Joi.array().items(
+    Joi.object({
+      name: Joi.string(),
+      weight: Joi.number(),
+      price: Joi.number(),
+      status: Joi.boolean(),
+      imgUrl: Joi.string(),
+      productId: Joi.number().optional(),
+      stock: Joi.array().items(
+        Joi.object({
+          quantity: Joi.number(),
+          productVariantId: Joi.number(),
+          shopId: Joi.number(),
+          threshold: Joi.number(),
+        })
+      ),
+    })
+  ),
 });
 
 const updateProductSchema = Joi.object({
@@ -78,7 +83,13 @@ export default class ProductController {
     let result: Joi.ValidationResult | null = null;
     switch (schema) {
       case "create":
-        result = createProductSchema.validate(request.body);
+        const { variants: variantsArray } = request.body;
+        result = createProductSchema.validate({
+          ...request.body,
+          variants: variantsArray
+            ? JSON.parse(variantsArray as unknown as string)
+            : undefined,
+        });
         if (result.error) {
           response.status(400).json({ error: result.error.details[0].message });
         }
@@ -126,18 +137,51 @@ export default class ProductController {
     request: Request<
       object,
       object,
-      Omit<Product, "id" | "createdAt"> & { categoryId: number }
+      Omit<Product, "id" | "updatedAt" | "createdAt"> & {
+        categoryId: number;
+        variantImages: string[];
+        variants?: (ProductVariant & { stock: Stock[] })[];
+      }
     >,
     response: Response
   ) => {
     if (!this.validate(request, response, "create")) return;
-    const { error } = createProductSchema.validate(request.body);
-    if (error) {
-      response.status(400).json({ error: error.details[0].message });
-      return;
-    }
+
     try {
-      const newProduct = await productLogic.createProduct(request.body);
+      let data: Omit<Product, "id" | "updatedAt" | "createdAt"> & {
+        categoryId?: number;
+        variants?: (ProductVariant & { stock: Stock[] })[];
+      };
+      let { variants } = request.body;
+      console.log(request.body);
+      if (variants) {
+        variants = JSON.parse(variants as unknown as string);
+        const files = request.files as Express.Multer.File[];
+        const enrichedVariants = variants?.map(
+          (variant: ProductVariant & { stock: Stock[] }, index: number) => {
+            return {
+              ...variant,
+              imgUrl: files[index].filename
+                ? `uploads/${files[index].filename}`
+                : null,
+            };
+          }
+        );
+        data = {
+          name: request.body.name,
+          slug: request.body.slug,
+          description: request.body.description,
+          weight: Number(request.body.weight),
+          status: Boolean(request.body.status),
+          categoryId: Number(request.body.categoryId),
+          variants: enrichedVariants,
+        };
+      } else {
+        data = {
+          ...request.body,
+        };
+      }
+      const newProduct = await productLogic.createProduct(data);
       response.status(201).json(newProduct);
     } catch (err) {
       throw new CustomError(

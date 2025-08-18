@@ -8,7 +8,7 @@ const agentLogic = new AgentLogic();
 
 const createAgentSchema = Joi.object({
   status: Joi.string(),
-  zoneId: Joi.number(),
+  zoneId: Joi.array().items(Joi.number()),
   userId: Joi.number().optional(),
 });
 
@@ -60,7 +60,7 @@ export default class AgentController {
     request: Request<
       object,
       object,
-      Omit<Agent, "id" | "code"> & { userId: number }
+      Omit<Agent, "id" | "code"> & { userId: number; zoneIds: number[] }
     >,
     response: Response
   ) => {
