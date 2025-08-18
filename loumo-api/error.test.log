@@ -772,3 +772,107 @@
     timestamp: '2025-08-18T14:21:48.696Z'
   }
 }
+{
+  level: 'error',
+  message: 'HTTP POST /api/users/',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/users/',
+        headers: {
+          'user-agent': 'vscode-restclient',
+          'content-type': 'application/json',
+          'accept-encoding': 'gzip, deflate',
+          'content-length': '110',
+          host: 'localhost:5000',
+          connection: 'close'
+        },
+        method: 'POST',
+        httpVersion: '1.1',
+        originalUrl: '/api/users/',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 2154
+    },
+    timestamp: '2025-08-18T20:23:51.274Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP POST /api/users/',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/users/',
+        headers: {
+          'user-agent': 'vscode-restclient',
+          'content-type': 'application/json',
+          'accept-encoding': 'gzip, deflate',
+          'content-length': '110',
+          host: 'localhost:5000',
+          connection: 'close'
+        },
+        method: 'POST',
+        httpVersion: '1.1',
+        originalUrl: '/api/users/',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 2154
+    },
+    timestamp: '2025-08-18T20:23:51.277Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP POST /api/users/',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/users/',
+        headers: {
+          'user-agent': 'vscode-restclient',
+          'content-type': 'application/json',
+          'accept-encoding': 'gzip, deflate',
+          'content-length': '110',
+          host: 'localhost:5000',
+          connection: 'close'
+        },
+        method: 'POST',
+        httpVersion: '1.1',
+        originalUrl: '/api/users/',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 203
+    },
+    timestamp: '2025-08-18T20:31:25.901Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP POST /api/users/',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/users/',
+        headers: {
+          'user-agent': 'vscode-restclient',
+          'content-type': 'application/json',
+          'accept-encoding': 'gzip, deflate',
+          'content-length': '110',
+          host: 'localhost:5000',
+          connection: 'close'
+        },
+        method: 'POST',
+        httpVersion: '1.1',
+        originalUrl: '/api/users/',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 203
+    },
+    timestamp: '2025-08-18T20:31:25.902Z'
+  }
+}

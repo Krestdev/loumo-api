@@ -185,7 +185,7 @@ const publicRoutes = [
 // Auth routes that don't require authentication (all methods)
 const authRoutes = [
   "/api/users/login",
-  "/api/users/",
+  "/api/users",
   "/api/users/password-reset",
 ];
 

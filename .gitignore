@@ -16,3 +16,5 @@ loumo-api/test.rest
 __test__
 test.rest
 uploads/
+
+error.test.log
