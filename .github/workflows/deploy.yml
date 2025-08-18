@@ -61,6 +61,7 @@ jobs:
 
              TIMESTAMP=${{ env.DEPLOY_TIME }}
              RELEASE_DIR=~/deployments/loumo-app/releases/$TIMESTAMP
+             pwd
 
              mkdir -p $RELEASE_DIR
              cd $RELEASE_DIR
