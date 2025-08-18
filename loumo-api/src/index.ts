@@ -31,7 +31,7 @@ import SettingRouter from "./routes/setting";
 import { RBACMiddleware } from "./middleware/rbac";
 
 /**
- * Represents the main application server for the Loumo API.
+ * Represents the main application server for the Loumo API. ok
  *
  * This class initializes and configures an Express application with middleware for security,
  * logging, CORS, and error handling. It registers all API route handlers for various resources,
