@@ -48,6 +48,7 @@ export function rbac({
     }
 
     // Optionally attach user to request for downstream use
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (req as any).user = {
       id: user.id,
       role: userRole,

@@ -83,11 +83,12 @@ export default class ProductController {
     let result: Joi.ValidationResult | null = null;
     switch (schema) {
       case "create":
-        const { variants: variantsArray } = request.body;
+        // eslint-disable-next-line no-case-declarations
+        const { variants: variantsA } = request.body;
         result = createProductSchema.validate({
           ...request.body,
-          variants: variantsArray
-            ? JSON.parse(variantsArray as unknown as string)
+          variants: variantsA
+            ? JSON.parse(variantsA as unknown as string)
             : undefined,
         });
         if (result.error) {

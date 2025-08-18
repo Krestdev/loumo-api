@@ -22,6 +22,7 @@ export class OperationLogger {
     action: string;
     performed_by: string;
     ip_address?: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     changes?: any;
     description?: string;
   }) {
