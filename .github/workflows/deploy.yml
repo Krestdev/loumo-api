@@ -46,7 +46,7 @@ jobs:
 
       - name: Add VPS to known_hosts
         run: |
-          ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets.PROD_VPS_HOST }} >> ~/.ssh/known_hosts
 
       - name: Create release folder on VPS
         run: |
@@ -56,7 +56,7 @@ jobs:
 
       - name: Deploy to VPS
         run: |
-          ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'bash -s' << EOF
+          ssh ${{ secrets.VPS_USER }}@${{ secrets.PROD_VPS_HOST }} 'bash -s' << EOF
              set -euo pipefail
 
              TIMESTAMP=${{ env.DEPLOY_TIME }}
@@ -114,4 +114,3 @@ jobs:
 
       - name: Confirm remote session is done
         run: echo "🧠 SSH session completed cleanly"
-        
