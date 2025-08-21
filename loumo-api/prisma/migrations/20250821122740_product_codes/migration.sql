@@ -11,18 +11,18 @@
 
 */
 -- AlterTable
-ALTER TABLE `agent` DROP COLUMN `code`,
+ALTER TABLE `Agent` DROP COLUMN `code`,
     ADD COLUMN `ref` VARCHAR(191) NOT NULL;
 
 -- AlterTable
-ALTER TABLE `delivery` DROP COLUMN `trackingCode`,
+ALTER TABLE `Delivery` DROP COLUMN `trackingCode`,
     ADD COLUMN `ref` VARCHAR(191) NOT NULL;
 
 -- AlterTable
-ALTER TABLE `order` ADD COLUMN `ref` VARCHAR(191) NOT NULL;
+ALTER TABLE `Order` ADD COLUMN `ref` VARCHAR(191) NOT NULL;
 
 -- AlterTable
-ALTER TABLE `product` ADD COLUMN `ref` VARCHAR(191) NOT NULL;
+ALTER TABLE `Product` ADD COLUMN `ref` VARCHAR(191) NOT NULL;
 
 -- AlterTable
-ALTER TABLE `promotion` ADD COLUMN `ref` VARCHAR(191) NOT NULL;
+ALTER TABLE `Promotion` ADD COLUMN `ref` VARCHAR(191) NOT NULL;
