@@ -8,9 +8,14 @@ export class PromotionLogic {
     data: Omit<Promotion, "id"> & { stockIds?: number[] }
   ): Promise<Promotion> {
     const { stockIds, ...promotionData } = data;
+    const now = new Date();
+    const day = now.toISOString().slice(0, 10).replace(/-/g, ""); // YYYYMMDD
+    const timePart = now.getTime().toString(36); // base36 for compactness
+    const ref = `LIV-${day}-${timePart}`;
     return prisma.promotion.create({
       data: {
         ...promotionData,
+        ref,
         stock: stockIds
           ? {
               connect: stockIds.map((stockId) => ({ id: stockId })),

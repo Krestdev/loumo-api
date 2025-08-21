@@ -120,6 +120,7 @@ model Stock {
 
 model Promotion {
   id          Int       @id @default(autoincrement())
+  ref         String
   code        String
   percentage  Int
   amount      Int       @default(0)
@@ -141,6 +142,8 @@ model ProductVariant {
   weight     Int
   status     Boolean
   price      Int         @default(0)
+  quantity   Int         @default(0)
+  unit       String      @default("kg")
   product    Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId  Int
   orderItems OrderItem[]
@@ -150,6 +153,7 @@ model ProductVariant {
 
 model Product {
   id          Int              @id @default(autoincrement())
+  ref         String
   name        String
   description String?
   slug        String
@@ -176,6 +180,7 @@ model Category {
 model Order {
   id          Int         @id @default(autoincrement())
   note        String
+  ref         String
   weight      Int
   total       Int
   deliveryFee Int
@@ -219,7 +224,7 @@ model Payment {
 model Delivery {
   id               Int         @id @default(autoincrement())
   status           String
-  trackingCode     String
+  ref              String
   order            Order       @relation(fields: [orderId], references: [id])
   orderId          Int
   orderItem        OrderItem[]
@@ -233,7 +238,7 @@ model Delivery {
 
 model Agent {
   id       Int        @id @default(autoincrement())
-  code     String
+  ref      String
   user     User       @relation(fields: [userId], references: [id])
   userId   Int        @unique
   status   String     @default("inactive")

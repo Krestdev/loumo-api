@@ -11,10 +11,16 @@ export class DeliveryLogic {
     }
   ): Promise<Delivery> {
     const { orderId, agentId, orderItemsIds, priority, ...deliveryData } = data;
+    // Generate tracking code using current timestamp and base64 encoding
+    const now = new Date();
+    const day = now.toISOString().slice(0, 10).replace(/-/g, ""); // YYYYMMDD
+    const timePart = now.getTime().toString(36); // base36 for compactness
+    const ref = `LIV-${day}-${timePart}`;
+
     return prisma.delivery.create({
       data: {
         ...deliveryData,
-        trackingCode: `TRK${uuidv4().replace(/-/g, "").slice(0, 10)}`,
+        ref,
         status: "NOTSTARTED", // "NOTSTARTED","STARTED","COMPLETED","CANCELED"
         order: orderId
           ? {

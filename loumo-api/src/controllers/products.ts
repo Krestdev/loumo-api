@@ -19,6 +19,8 @@ const createProductSchema = Joi.object({
       name: Joi.string(),
       weight: Joi.number(),
       price: Joi.number(),
+      quantity: Joi.number(),
+      unit: Joi.string(),
       status: Joi.boolean(),
       imgUrl: Joi.string(),
       productId: Joi.number().optional(),
@@ -149,7 +151,7 @@ export default class ProductController {
     if (!this.validate(request, response, "create")) return;
 
     try {
-      let data: Omit<Product, "id" | "updatedAt" | "createdAt"> & {
+      let data: Omit<Product, "id" | "updatedAt" | "createdAt" | "ref"> & {
         categoryId?: number;
         variants?: (ProductVariant & { stock: Stock[] })[];
       };
@@ -163,7 +165,7 @@ export default class ProductController {
             return {
               ...variant,
               imgUrl: files[index].filename
-                ? `uploads/${files[index].filename}`
+                ? `/uploads/${files[index].filename}`
                 : null,
             };
           }

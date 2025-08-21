@@ -6,19 +6,24 @@ const prisma = new PrismaClient();
 export class ProductLogic {
   // Create a log and optionally connect to roles
   async createProduct(
-    data: Omit<Product, "id" | "updatedAt" | "createdAt"> & {
+    data: Omit<Product, "id" | "updatedAt" | "createdAt" | "ref"> & {
       categoryId?: number;
       variants?: (ProductVariant & { stock: Stock[] })[];
     }
   ): Promise<Product> {
     const { categoryId, ...productData } = data;
     const slug = slugify(data.name, { lower: true });
+    const now = new Date();
+    const day = now.toISOString().slice(0, 10).replace(/-/g, ""); // YYYYMMDD
+    const timePart = now.getTime().toString(36); // base36 for compactness
+    const ref = `PRD-${day}-${timePart}`;
 
     return prisma.product.create({
       data: {
         ...productData,
         slug,
         createdAt: new Date(),
+        ref,
         category: categoryId
           ? {
               connect: {

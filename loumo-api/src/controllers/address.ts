@@ -19,6 +19,7 @@ const updateAddressSchema = Joi.object({
   street: Joi.string().optional(),
   published: Joi.boolean().optional(),
   zoneId: Joi.number().optional(),
+  description: Joi.string(),
 });
 
 const paramSchema = Joi.object({

@@ -9,11 +9,15 @@ export class AgentLogic {
   ): Promise<Agent> {
     const { userId, zoneIds, ...agentData } = data;
     // const { zoneId, ...restAgentData } = agentData as any;
-    const date = new Date();
+    const now = new Date();
+    const day = now.toISOString().slice(0, 10).replace(/-/g, ""); // YYYYMMDD
+    const timePart = now.getTime().toString(36); // base36 for compactness
+    const ref = `LIV-${day}-${timePart}`;
+
     return prisma.agent.create({
       data: {
         ...agentData,
-        code: `#LMU-${date.getFullYear().toString()}${date.getMonth().toString()}${date.getDate().toString()}${date.getHours().toString()}${date.getMinutes().toString()}${date.getSeconds().toString()}`,
+        ref,
         user: userId
           ? {
               connect: {
