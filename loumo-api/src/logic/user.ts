@@ -54,7 +54,7 @@ export class UserLogic {
           : {},
         role: {
           connect: {
-            id: 1,
+            id: 2,
           },
         },
       },
