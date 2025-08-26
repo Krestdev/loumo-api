@@ -1,5 +1,6 @@
 import { PrismaClient, ProductVariant } from "@prisma/client";
 import deleteImage from "../utils/deleteImage";
+import { boolean } from "joi";
 
 const prisma = new PrismaClient();
 
@@ -16,7 +17,12 @@ export class ProductVariantLogic {
         imgUrl: `uploads/${imgUrl}`,
         weight: Number(weight),
         price: Number(price),
-        status: (status as unknown as string).includes("true") ? true : false,
+        status:
+          typeof status == "boolean"
+            ? status
+            : (status as unknown as string).includes("true")
+              ? true
+              : false,
         product: productId
           ? {
               connect: {

@@ -109,7 +109,7 @@ model Stock {
   id               Int            @id @default(autoincrement())
   threshold        Int            @default(0)
   quantity         Int
-  productVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
+  productVariant   ProductVariant @relation(fields: [productVariantId], references: [id], onDelete: Cascade)
   productVariantId Int
   shop             Shop           @relation(fields: [shopId], references: [id])
   shopId           Int
@@ -198,13 +198,13 @@ model Order {
 model OrderItem {
   id               Int            @id @default(autoincrement())
   note             String
-  order            Order          @relation(fields: [orderId], references: [id])
+  order            Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
   orderId          Int
-  productVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
+  productVariant   ProductVariant @relation(fields: [productVariantId], references: [id], onDelete: Cascade)
   productVariantId Int
   quantity         Int
   total            Int
-  delivery         Delivery?      @relation(fields: [deliveryId], references: [id])
+  delivery         Delivery?      @relation(fields: [deliveryId], references: [id], onDelete: Cascade)
   deliveryId       Int?
 }
 

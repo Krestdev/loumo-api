@@ -38,6 +38,7 @@ const createProductSchema = Joi.object({
 
 const updateProductSchema = Joi.object({
   name: Joi.string().optional(),
+  description: Joi.string(),
   slug: Joi.string().optional(),
   weight: Joi.number().optional(),
   status: Joi.boolean().optional(),

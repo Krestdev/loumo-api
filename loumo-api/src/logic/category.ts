@@ -1,4 +1,5 @@
 import { PrismaClient, Category, Product } from "@prisma/client";
+import { boolean } from "joi";
 
 const prisma = new PrismaClient();
 
@@ -11,9 +12,20 @@ export class CategoryLogic {
     return prisma.category.create({
       data: {
         ...categoryData,
-        status: (status as unknown as string).includes("true") ? true : false,
+        status:
+          typeof status == "boolean"
+            ? status
+            : (status as unknown as string).includes("true")
+              ? true
+              : false,
         imgUrl: `uploads/${imgUrl}`,
-        display: (display as unknown as string).includes("true") ? true : false,
+        display:
+          typeof display == "boolean"
+            ? display
+            : display !== undefined &&
+                (display as unknown as string).includes("true")
+              ? true
+              : false,
         products: productIds
           ? {
               connect: productIds.map((productId) => ({ id: productId })),
@@ -71,7 +83,7 @@ export class CategoryLogic {
         status: (status as unknown as string).includes("true") ? true : false,
         display: (display as unknown as string).includes("true") ? true : false,
         imgUrl: imgUrl
-          ? imgUrl.startsWith("upload")
+          ? imgUrl.includes("uploads")
             ? imgUrl
             : `uploads/${imgUrl}`
           : null,
