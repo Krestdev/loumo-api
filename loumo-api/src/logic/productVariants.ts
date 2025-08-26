@@ -1,6 +1,5 @@
 import { PrismaClient, ProductVariant } from "@prisma/client";
 import deleteImage from "../utils/deleteImage";
-import { boolean } from "joi";
 
 const prisma = new PrismaClient();
 

@@ -1,5 +1,4 @@
-import { PrismaClient, Category, Product } from "@prisma/client";
-import { boolean } from "joi";
+import { Category, PrismaClient, Product } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
