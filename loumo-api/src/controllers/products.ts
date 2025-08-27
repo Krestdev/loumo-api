@@ -164,9 +164,10 @@ export default class ProductController {
         if (request.files) {
           files = request.files as Express.Multer.File[];
         }
+        console.log(files);
         const enrichedVariants = variants?.map(
           (variant: ProductVariant & { stock: Stock[] }, index: number) => {
-            if (files) {
+            if (files && files.length > 0) {
               return {
                 ...variant,
                 imgUrl: files[index].filename
