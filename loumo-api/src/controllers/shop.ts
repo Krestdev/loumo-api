@@ -14,6 +14,16 @@ const createShopSchema = Joi.object({
     description: Joi.string(),
     price: Joi.number(),
     status: Joi.string(),
+    addresses: Joi.array().items(
+      Joi.object({
+        description: Joi.string(),
+        local: Joi.string(),
+        street: Joi.string(),
+        published: Joi.boolean(),
+        createdAt: Joi.string(),
+        updatedAt: Joi.string(),
+      })
+    ),
   }),
   address: Joi.object({
     description: Joi.string(),
@@ -75,7 +85,10 @@ export default class ShopController {
       object,
       Omit<Shop, "id"> & {
         addressId?: number;
-        zone?: Omit<Zone, "id">;
+        zone?: Omit<Zone, "id"> & {
+          addressIds?: number[];
+          addresses?: Address[];
+        };
         address?: Omit<Address, "id" | "zoneId">;
       }
     >,

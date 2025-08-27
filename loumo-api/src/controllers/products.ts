@@ -160,17 +160,25 @@ export default class ProductController {
       console.log(request.body);
       if (variants) {
         variants = JSON.parse(variants as unknown as string);
-        const files = request.files as Express.Multer.File[];
+        let files = null;
+        if (request.files) {
+          files = request.files as Express.Multer.File[];
+        }
         const enrichedVariants = variants?.map(
           (variant: ProductVariant & { stock: Stock[] }, index: number) => {
-            return {
-              ...variant,
-              imgUrl: files[index].filename
-                ? `/uploads/${files[index].filename}`
-                : null,
-            };
+            if (files) {
+              return {
+                ...variant,
+                imgUrl: files[index].filename
+                  ? `/uploads/${files[index].filename}`
+                  : null,
+              };
+            } else {
+              return variant;
+            }
           }
         );
+
         data = {
           name: request.body.name,
           slug: request.body.slug,
