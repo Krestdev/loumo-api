@@ -17,7 +17,7 @@ export class ProductVariantLogic {
         weight: Number(weight),
         price: Number(price),
         status:
-          typeof status == "boolean"
+          typeof status === "boolean"
             ? status
             : (status as unknown as string).includes("true")
               ? true
@@ -54,7 +54,8 @@ export class ProductVariantLogic {
     id: number,
     data: Partial<Omit<ProductVariant, "id">> & { productId?: number }
   ): Promise<ProductVariant | null> {
-    const { productId, weight, price, imgUrl, ...productVariantData } = data;
+    const { productId, weight, price, status, imgUrl, ...productVariantData } =
+      data;
     return prisma.productVariant.update({
       where: { id },
       data: {
@@ -66,11 +67,16 @@ export class ProductVariantLogic {
           : null,
         weight: Number(weight),
         price: Number(price),
-        status: (status as unknown as string).includes("true") ? true : false,
+        status:
+          typeof status === "boolean"
+            ? status
+            : (status as unknown as string).includes("true")
+              ? true
+              : false,
         product: productId
           ? {
               connect: {
-                id: productId,
+                id: Number(productId),
               },
             }
           : {},
