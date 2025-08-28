@@ -111,7 +111,7 @@ export default class ProductVariantController {
       return;
     }
     try {
-      if (request.body.imgUrl) request.body.imgUrl = request.file?.filename;
+      if (request.file) request.body.imgUrl = request.file?.filename;
       const updatedProductVariant = await productVariantLogic.updateProduct(
         Number(id),
         request.body
