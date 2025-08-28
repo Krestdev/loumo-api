@@ -75,17 +75,15 @@ export class CategoryLogic {
     data: Partial<Omit<Category, "id">> & { productIds?: number[] }
   ): Promise<(Category & { products: Product[] }) | null> {
     const { productIds, status, display, imgUrl, ...categoryData } = data;
+    if (imgUrl) {
+      data.imgUrl = imgUrl.includes("uploads") ? imgUrl : `uploads/${imgUrl}`;
+    }
     return prisma.category.update({
       where: { id },
       data: {
         ...categoryData,
         status: (status as unknown as string).includes("true") ? true : false,
         display: (display as unknown as string).includes("true") ? true : false,
-        imgUrl: imgUrl
-          ? imgUrl.includes("uploads")
-            ? imgUrl
-            : `uploads/${imgUrl}`
-          : null,
         products: productIds
           ? {
               connect: productIds.map((roleId) => ({ id: roleId })),

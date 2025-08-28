@@ -876,3 +876,499 @@
     timestamp: '2025-08-18T20:31:25.902Z'
   }
 }
+{
+  level: 'error',
+  message: 'HTTP PUT /api/categories/1',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/categories/1',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '89392',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NjM5Nzc2NCwiZXhwIjoxNzU2NDg0MTY0fQ.Hq0dLYWW7sZxHL0WTOAQ-5J76ffjdO5Fbjcps6F7Hvs',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryrWnAnrBEYYI2QWVK',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'PUT',
+        httpVersion: '1.1',
+        originalUrl: '/api/categories/1',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 28
+    },
+    timestamp: '2025-08-28T16:20:02.844Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP PUT /api/categories/1',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/categories/1',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '89392',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NjM5Nzc2NCwiZXhwIjoxNzU2NDg0MTY0fQ.Hq0dLYWW7sZxHL0WTOAQ-5J76ffjdO5Fbjcps6F7Hvs',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryrWnAnrBEYYI2QWVK',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'PUT',
+        httpVersion: '1.1',
+        originalUrl: '/api/categories/1',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 28
+    },
+    timestamp: '2025-08-28T16:20:02.850Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP PUT /api/categories/1',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/categories/1',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '103079',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NjM5Nzc2NCwiZXhwIjoxNzU2NDg0MTY0fQ.Hq0dLYWW7sZxHL0WTOAQ-5J76ffjdO5Fbjcps6F7Hvs',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryl45VmKUXC5lVObti',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'PUT',
+        httpVersion: '1.1',
+        originalUrl: '/api/categories/1',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 15
+    },
+    timestamp: '2025-08-28T16:21:42.917Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP PUT /api/categories/1',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/categories/1',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '103079',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NjM5Nzc2NCwiZXhwIjoxNzU2NDg0MTY0fQ.Hq0dLYWW7sZxHL0WTOAQ-5J76ffjdO5Fbjcps6F7Hvs',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryl45VmKUXC5lVObti',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'PUT',
+        httpVersion: '1.1',
+        originalUrl: '/api/categories/1',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 15
+    },
+    timestamp: '2025-08-28T16:21:42.918Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP PUT /api/categories/1',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/categories/1',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '103079',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NjM5Nzc2NCwiZXhwIjoxNzU2NDg0MTY0fQ.Hq0dLYWW7sZxHL0WTOAQ-5J76ffjdO5Fbjcps6F7Hvs',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryC90cT9euhmxAJud2',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'PUT',
+        httpVersion: '1.1',
+        originalUrl: '/api/categories/1',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 24
+    },
+    timestamp: '2025-08-28T16:23:27.842Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP PUT /api/categories/1',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/categories/1',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '103079',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NjM5Nzc2NCwiZXhwIjoxNzU2NDg0MTY0fQ.Hq0dLYWW7sZxHL0WTOAQ-5J76ffjdO5Fbjcps6F7Hvs',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryC90cT9euhmxAJud2',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'PUT',
+        httpVersion: '1.1',
+        originalUrl: '/api/categories/1',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 24
+    },
+    timestamp: '2025-08-28T16:23:27.843Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP PUT /api/categories/1',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/categories/1',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '253',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NjM5Nzc2NCwiZXhwIjoxNzU2NDg0MTY0fQ.Hq0dLYWW7sZxHL0WTOAQ-5J76ffjdO5Fbjcps6F7Hvs',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryFUvKTyaMJEpPlZ2n',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'PUT',
+        httpVersion: '1.1',
+        originalUrl: '/api/categories/1',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 12
+    },
+    timestamp: '2025-08-28T16:28:58.353Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP PUT /api/categories/1',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/categories/1',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '253',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NjM5Nzc2NCwiZXhwIjoxNzU2NDg0MTY0fQ.Hq0dLYWW7sZxHL0WTOAQ-5J76ffjdO5Fbjcps6F7Hvs',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryFUvKTyaMJEpPlZ2n',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'PUT',
+        httpVersion: '1.1',
+        originalUrl: '/api/categories/1',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 12
+    },
+    timestamp: '2025-08-28T16:28:58.354Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP PUT /api/categories/1',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/categories/1',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '253',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NjM5Nzc2NCwiZXhwIjoxNzU2NDg0MTY0fQ.Hq0dLYWW7sZxHL0WTOAQ-5J76ffjdO5Fbjcps6F7Hvs',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryMgpzD5LJyGhNJKPs',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'PUT',
+        httpVersion: '1.1',
+        originalUrl: '/api/categories/1',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 3
+    },
+    timestamp: '2025-08-28T16:29:33.085Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP PUT /api/categories/1',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/categories/1',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '253',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NjM5Nzc2NCwiZXhwIjoxNzU2NDg0MTY0fQ.Hq0dLYWW7sZxHL0WTOAQ-5J76ffjdO5Fbjcps6F7Hvs',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryMgpzD5LJyGhNJKPs',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'PUT',
+        httpVersion: '1.1',
+        originalUrl: '/api/categories/1',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 3
+    },
+    timestamp: '2025-08-28T16:29:33.086Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP PUT /api/categories/1',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/categories/1',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '253',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NjM5Nzc2NCwiZXhwIjoxNzU2NDg0MTY0fQ.Hq0dLYWW7sZxHL0WTOAQ-5J76ffjdO5Fbjcps6F7Hvs',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryLAPgAhcd1opfigt4',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'PUT',
+        httpVersion: '1.1',
+        originalUrl: '/api/categories/1',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 3
+    },
+    timestamp: '2025-08-28T16:30:33.543Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP PUT /api/categories/1',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/categories/1',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '253',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NjM5Nzc2NCwiZXhwIjoxNzU2NDg0MTY0fQ.Hq0dLYWW7sZxHL0WTOAQ-5J76ffjdO5Fbjcps6F7Hvs',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryLAPgAhcd1opfigt4',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'PUT',
+        httpVersion: '1.1',
+        originalUrl: '/api/categories/1',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 3
+    },
+    timestamp: '2025-08-28T16:30:33.544Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP PUT /api/categories/1',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/categories/1',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '253',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NjM5Nzc2NCwiZXhwIjoxNzU2NDg0MTY0fQ.Hq0dLYWW7sZxHL0WTOAQ-5J76ffjdO5Fbjcps6F7Hvs',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundarypmU51BE6HqGMwVJ3',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'PUT',
+        httpVersion: '1.1',
+        originalUrl: '/api/categories/1',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 2
+    },
+    timestamp: '2025-08-28T16:30:46.660Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP PUT /api/categories/1',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/categories/1',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '253',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NjM5Nzc2NCwiZXhwIjoxNzU2NDg0MTY0fQ.Hq0dLYWW7sZxHL0WTOAQ-5J76ffjdO5Fbjcps6F7Hvs',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundarypmU51BE6HqGMwVJ3',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'PUT',
+        httpVersion: '1.1',
+        originalUrl: '/api/categories/1',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 2
+    },
+    timestamp: '2025-08-28T16:30:46.660Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP PUT /api/categories/1',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/categories/1',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '253',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NjM5Nzc2NCwiZXhwIjoxNzU2NDg0MTY0fQ.Hq0dLYWW7sZxHL0WTOAQ-5J76ffjdO5Fbjcps6F7Hvs',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryBgEdmoIlUn7lD1h3',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'PUT',
+        httpVersion: '1.1',
+        originalUrl: '/api/categories/1',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 3
+    },
+    timestamp: '2025-08-28T16:32:24.078Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP PUT /api/categories/1',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/categories/1',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'content-length': '253',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NjM5Nzc2NCwiZXhwIjoxNzU2NDg0MTY0fQ.Hq0dLYWW7sZxHL0WTOAQ-5J76ffjdO5Fbjcps6F7Hvs',
+          'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+          accept: 'application/json, text/plain, */*',
+          'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryBgEdmoIlUn7lD1h3',
+          origin: 'http://localhost:3000',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'PUT',
+        httpVersion: '1.1',
+        originalUrl: '/api/categories/1',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 3
+    },
+    timestamp: '2025-08-28T16:32:24.078Z'
+  }
+}

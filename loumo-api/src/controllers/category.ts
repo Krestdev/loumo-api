@@ -146,7 +146,7 @@ export default class CategoryController {
 
     const id = Number(request.params.id);
     try {
-      if (request.body.imgUrl) request.body.imgUrl = request.file?.filename;
+      if (request.file) request.body.imgUrl = request.file?.filename;
       const updatedCategory = await categoryLogic.updateCategory(
         id,
         request.body
