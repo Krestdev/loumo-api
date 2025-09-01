@@ -34,14 +34,6 @@ const updateProductVariantSchema = Joi.object({
   status: Joi.boolean(),
   imgUrl: Joi.string(),
   productId: Joi.number().optional(),
-  stock: Joi.array().items(
-    Joi.object({
-      quantity: Joi.number(),
-      productVariantId: Joi.number(),
-      shopId: Joi.number(),
-      threshold: Joi.number(),
-    })
-  ),
 });
 
 const paramSchema = Joi.object({
@@ -57,7 +49,9 @@ export default class ProductVariantController {
     let result: Joi.ValidationResult | null = null;
     switch (schema) {
       case "create":
-        result = createProductVariantSchema.validate(request.body);
+        result = createProductVariantSchema.validate({
+          ...request.body,
+        });
         if (result.error) {
           response.status(400).json({ error: result.error.details[0].message });
         }
@@ -91,6 +85,9 @@ export default class ProductVariantController {
     >,
     response: Response
   ) => {
+    request.body.stock = request.body.stock
+      ? JSON.parse(request.body.stock as unknown as string)
+      : [];
     if (!this.validate(request, response, "create")) return;
     const { error } = createProductVariantSchema.validate(request.body);
     if (error) {
@@ -118,7 +115,6 @@ export default class ProductVariantController {
       object,
       Partial<Omit<ProductVariant, "id">> & {
         productId?: number;
-        stock?: Stock[];
       }
     >,
     response: Response

@@ -13,6 +13,7 @@ export class ProductVariantLogic {
       weight,
       price,
       status,
+      quantity,
       imgUrl,
       stock,
       ...productVariantData
@@ -21,6 +22,7 @@ export class ProductVariantLogic {
       data: {
         ...productVariantData,
         imgUrl: `uploads/${imgUrl}`,
+        quantity: Number(quantity),
         weight: Number(weight),
         price: Number(price),
         status:
