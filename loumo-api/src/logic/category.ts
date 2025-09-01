@@ -76,10 +76,13 @@ export class CategoryLogic {
     id: number,
     data: Partial<Omit<Category, "id">> & { productIds?: number[] }
   ): Promise<(Category & { products: Product[] }) | null> {
-    const { productIds, status, display, imgUrl, ...categoryData } = data;
-    if (imgUrl) {
-      data.imgUrl = imgUrl.includes("uploads") ? imgUrl : `uploads/${imgUrl}`;
+    const { productIds, status, display, ...categoryData } = data;
+    if (categoryData.imgUrl) {
+      categoryData.imgUrl = categoryData.imgUrl.includes("uploads")
+        ? categoryData.imgUrl
+        : `uploads/${categoryData.imgUrl}`;
     }
+    console.log(categoryData.imgUrl);
     return prisma.category.update({
       where: { id },
       data: {

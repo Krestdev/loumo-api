@@ -1372,3 +1372,513 @@
     timestamp: '2025-08-28T16:32:24.078Z'
   }
 }
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/imgUrl-1756639967928-939364758.png',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/imgUrl-1756639967928-939364758.png',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          pragma: 'no-cache',
+          'cache-control': 'no-cache',
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-BE,fr-FR;q=0.9,fr;q=0.8'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/imgUrl-1756639967928-939364758.png',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 12
+    },
+    timestamp: '2025-09-01T14:59:22.966Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/imgUrl-1756639967928-939364758.png',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/imgUrl-1756639967928-939364758.png',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          pragma: 'no-cache',
+          'cache-control': 'no-cache',
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-BE,fr-FR;q=0.9,fr;q=0.8'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/imgUrl-1756639967928-939364758.png',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 12
+    },
+    timestamp: '2025-09-01T14:59:22.967Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/variantImages-1756737438334-325369517.png',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/variantImages-1756737438334-325369517.png',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          pragma: 'no-cache',
+          'cache-control': 'no-cache',
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-BE,fr-FR;q=0.9,fr;q=0.8'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/variantImages-1756737438334-325369517.png',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 1
+    },
+    timestamp: '2025-09-01T14:59:23.201Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/variantImages-1756737438334-325369517.png',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/variantImages-1756737438334-325369517.png',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          pragma: 'no-cache',
+          'cache-control': 'no-cache',
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-BE,fr-FR;q=0.9,fr;q=0.8'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/variantImages-1756737438334-325369517.png',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 1
+    },
+    timestamp: '2025-09-01T14:59:23.201Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/null',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/null',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          pragma: 'no-cache',
+          'cache-control': 'no-cache',
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-BE,fr-FR;q=0.9,fr;q=0.8'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/null',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 3
+    },
+    timestamp: '2025-09-01T14:59:24.787Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/null',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/null',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          pragma: 'no-cache',
+          'cache-control': 'no-cache',
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-BE,fr-FR;q=0.9,fr;q=0.8'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/null',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 3
+    },
+    timestamp: '2025-09-01T14:59:24.788Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/null',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/null',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          pragma: 'no-cache',
+          'cache-control': 'no-cache',
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-BE,fr-FR;q=0.9,fr;q=0.8'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/null',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 2
+    },
+    timestamp: '2025-09-01T14:59:24.806Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/null',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/null',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          pragma: 'no-cache',
+          'cache-control': 'no-cache',
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-BE,fr-FR;q=0.9,fr;q=0.8'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/null',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 2
+    },
+    timestamp: '2025-09-01T14:59:24.806Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/null',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/null',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          pragma: 'no-cache',
+          'cache-control': 'no-cache',
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-BE,fr-FR;q=0.9,fr;q=0.8'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/null',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 3
+    },
+    timestamp: '2025-09-01T14:59:25.258Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/null',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/null',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          pragma: 'no-cache',
+          'cache-control': 'no-cache',
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-BE,fr-FR;q=0.9,fr;q=0.8'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/null',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 3
+    },
+    timestamp: '2025-09-01T14:59:25.259Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/imgUrl-1756639967928-939364758.png',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/imgUrl-1756639967928-939364758.png',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          pragma: 'no-cache',
+          'cache-control': 'no-cache',
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-BE,fr-FR;q=0.9,fr;q=0.8'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/imgUrl-1756639967928-939364758.png',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 4
+    },
+    timestamp: '2025-09-01T14:59:25.264Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/imgUrl-1756639967928-939364758.png',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/imgUrl-1756639967928-939364758.png',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          pragma: 'no-cache',
+          'cache-control': 'no-cache',
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-BE,fr-FR;q=0.9,fr;q=0.8'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/imgUrl-1756639967928-939364758.png',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 4
+    },
+    timestamp: '2025-09-01T14:59:25.265Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/null',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/null',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/null',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 5
+    },
+    timestamp: '2025-09-01T15:01:58.404Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/null',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/null',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/null',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 5
+    },
+    timestamp: '2025-09-01T15:01:58.405Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/null',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/null',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/null',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 2
+    },
+    timestamp: '2025-09-01T15:02:01.387Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/null',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/null',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/null',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 2
+    },
+    timestamp: '2025-09-01T15:02:01.388Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/null',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/null',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/null',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 5
+    },
+    timestamp: '2025-09-01T15:04:40.865Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/uploads/null',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/uploads/null',
+        headers: {
+          host: '192.168.1.66:5000',
+          connection: 'keep-alive',
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36',
+          accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          referer: 'http://localhost:3000/',
+          'accept-encoding': 'gzip, deflate',
+          'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/uploads/null',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 5
+    },
+    timestamp: '2025-09-01T15:04:40.866Z'
+  }
+}
