@@ -1,4 +1,5 @@
 import { Category, PrismaClient, Product } from "@prisma/client";
+import slugify from "slugify";
 
 const prisma = new PrismaClient();
 
@@ -11,6 +12,7 @@ export class CategoryLogic {
     return prisma.category.create({
       data: {
         ...categoryData,
+        slug: slugify(data.name.toLocaleLowerCase()),
         status:
           typeof status == "boolean"
             ? status
@@ -82,6 +84,7 @@ export class CategoryLogic {
       where: { id },
       data: {
         ...categoryData,
+        slug: data.slug ?? slugify(data.name!.toLocaleLowerCase()),
         status: (status as unknown as string).includes("true") ? true : false,
         display: (display as unknown as string).includes("true") ? true : false,
         products: productIds
