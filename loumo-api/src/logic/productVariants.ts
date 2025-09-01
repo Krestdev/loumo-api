@@ -1,4 +1,4 @@
-import { PrismaClient, ProductVariant } from "@prisma/client";
+import { PrismaClient, ProductVariant, Stock } from "@prisma/client";
 import deleteImage from "../utils/deleteImage";
 
 const prisma = new PrismaClient();
@@ -6,10 +6,17 @@ const prisma = new PrismaClient();
 export class ProductVariantLogic {
   // Create a log and optionally connect to roles
   async createProduct(
-    data: Omit<ProductVariant, "id"> & { productId?: number }
+    data: Omit<ProductVariant, "id"> & { productId?: number; stock?: Stock[] }
   ): Promise<ProductVariant> {
-    const { productId, weight, price, status, imgUrl, ...productVariantData } =
-      data;
+    const {
+      productId,
+      weight,
+      price,
+      status,
+      imgUrl,
+      stock,
+      ...productVariantData
+    } = data;
     return prisma.productVariant.create({
       data: {
         ...productVariantData,
@@ -29,6 +36,12 @@ export class ProductVariantLogic {
               },
             }
           : {},
+        stock:
+          stock && stock.length > 0
+            ? {
+                create: stock,
+              }
+            : {},
       },
     });
   }
@@ -52,10 +65,20 @@ export class ProductVariantLogic {
   // Update a product and optionally update its roles
   async updateProduct(
     id: number,
-    data: Partial<Omit<ProductVariant, "id">> & { productId?: number }
+    data: Partial<Omit<ProductVariant, "id">> & {
+      productId?: number;
+      stock?: Stock[];
+    }
   ): Promise<ProductVariant | null> {
-    const { productId, weight, price, status, imgUrl, ...productVariantData } =
-      data;
+    const {
+      productId,
+      weight,
+      price,
+      status,
+      imgUrl,
+      stock,
+      ...productVariantData
+    } = data;
     return prisma.productVariant.update({
       where: { id },
       data: {
@@ -80,6 +103,12 @@ export class ProductVariantLogic {
               },
             }
           : {},
+        stock:
+          stock && stock.length > 0
+            ? {
+                create: stock,
+              }
+            : {},
       },
     });
   }

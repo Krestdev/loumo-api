@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Joi from "joi";
 import { CustomError } from "../middleware/errorHandler";
-import { ProductVariant } from "@prisma/client";
+import { ProductVariant, Stock } from "@prisma/client";
 import { ProductVariantLogic } from "../logic/productVariants";
 
 const productVariantLogic = new ProductVariantLogic();
@@ -15,17 +15,33 @@ const createProductVariantSchema = Joi.object({
   status: Joi.boolean(),
   imgUrl: Joi.string(),
   productId: Joi.number().optional(),
+  stock: Joi.array().items(
+    Joi.object({
+      quantity: Joi.number(),
+      productVariantId: Joi.number(),
+      shopId: Joi.number(),
+      threshold: Joi.number(),
+    })
+  ),
 });
 
 const updateProductVariantSchema = Joi.object({
-  name: Joi.string().optional(),
-  price: Joi.number().optional(),
-  weight: Joi.number().optional(),
+  name: Joi.string(),
+  weight: Joi.number(),
+  price: Joi.number(),
   quantity: Joi.number(),
   unit: Joi.string(),
-  imgUrl: Joi.string().optional(),
-  status: Joi.boolean().optional(),
+  status: Joi.boolean(),
+  imgUrl: Joi.string(),
   productId: Joi.number().optional(),
+  stock: Joi.array().items(
+    Joi.object({
+      quantity: Joi.number(),
+      productVariantId: Joi.number(),
+      shopId: Joi.number(),
+      threshold: Joi.number(),
+    })
+  ),
 });
 
 const paramSchema = Joi.object({
@@ -71,7 +87,7 @@ export default class ProductVariantController {
     request: Request<
       object,
       object,
-      Omit<ProductVariant, "id"> & { productId: number }
+      Omit<ProductVariant, "id"> & { productId: number; stock?: Stock[] }
     >,
     response: Response
   ) => {
@@ -100,7 +116,10 @@ export default class ProductVariantController {
     request: Request<
       { id: string },
       object,
-      Partial<Omit<ProductVariant, "id">> & { productId?: number }
+      Partial<Omit<ProductVariant, "id">> & {
+        productId?: number;
+        stock?: Stock[];
+      }
     >,
     response: Response
   ) => {
