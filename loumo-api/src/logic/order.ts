@@ -13,9 +13,9 @@ export class OrderLogic {
   ): Promise<Order> {
     const { addressId, orderItems, userId, ...orderData } = data;
     const now = new Date();
-    const day = now.toISOString().slice(0, 10).replace(/-/g, ""); // YYYYMMDD
-    const timePart = now.getTime().toString(36); // base36 for compactness
-    const ref = `ORD-${day}-${timePart}`;
+    // const day = now.toISOString().slice(0, 10).replace(/-/g, ""); // YYYYMMDD
+    // const timePart = now.getTime().toString(36); // base36 for compactness
+    const ref = `ORD-${now.getTime()}`;
     return prisma.order.create({
       data: {
         ...orderData,

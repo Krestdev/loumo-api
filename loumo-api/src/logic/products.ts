@@ -14,9 +14,9 @@ export class ProductLogic {
     const { categoryId, ...productData } = data;
     const slug = slugify(data.name, { lower: true });
     const now = new Date();
-    const day = now.toISOString().slice(0, 10).replace(/-/g, ""); // YYYYMMDD
-    const timePart = now.getTime().toString(36); // base36 for compactness
-    const ref = `PRD-${day}-${timePart}`;
+    // const day = now.toISOString().slice(0, 10).replace(/-/g, ""); // YYYYMMDD
+    // const timePart = now.getTime().toString(36); // base36 for compactness
+    const ref = `PRD-${now.getTime()}`;
 
     return prisma.product.create({
       data: {
