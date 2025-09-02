@@ -139,7 +139,7 @@ export default class StockController {
 
     const id = Number(request.params.id);
     try {
-      const updatedStock = await stockLogic.updateStock(id, request.body);
+      const updatedStock = await stockLogic.reStock(id, request.body);
       if (!updatedStock) {
         response.status(404).json({ message: "Stock not found" });
       }

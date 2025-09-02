@@ -14,7 +14,7 @@ export default class StockRouter {
     this.routes.get("/:id", this.stockController.getOneStock);
     this.routes.post("/", this.stockController.createStock);
     this.routes.put("/:id", this.stockController.updateStock);
-    this.routes.put("/restock/:id", this.stockController.updateStock);
+    this.routes.put("/restock/:id", this.stockController.reStock);
     this.routes.delete("/:id", this.stockController.deleteStock);
   }
 }
