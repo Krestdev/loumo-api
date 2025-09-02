@@ -14,14 +14,17 @@ export class ProductVariantLogic {
       price,
       status,
       quantity,
-      imgUrl,
       stock,
       ...productVariantData
     } = data;
+    if (productVariantData.imgUrl) {
+      productVariantData.imgUrl = productVariantData.imgUrl.includes("uploads")
+        ? productVariantData.imgUrl
+        : `uploads/${productVariantData.imgUrl}`;
+    }
     return prisma.productVariant.create({
       data: {
         ...productVariantData,
-        imgUrl: `uploads/${imgUrl}`,
         quantity: Number(quantity),
         weight: Number(weight),
         price: Number(price),
@@ -76,6 +79,7 @@ export class ProductVariantLogic {
       productId,
       weight,
       price,
+      quantity,
       status,
       imgUrl,
       stock,
@@ -91,6 +95,7 @@ export class ProductVariantLogic {
             : `uploads/${imgUrl}`
           : null,
         weight: Number(weight),
+        quantity: Number(quantity),
         price: Number(price),
         status:
           typeof status === "boolean"
