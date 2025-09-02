@@ -8,12 +8,12 @@ const agentLogic = new AgentLogic();
 
 const createAgentSchema = Joi.object({
   status: Joi.string(),
-  zoneId: Joi.array().items(Joi.number()),
+  zoneIds: Joi.array().items(Joi.number()),
   userId: Joi.number().optional(),
 });
 
 const updateAgentSchema = Joi.object({
-  zoneId: Joi.number().optional(),
+  zoneIds: Joi.number().optional(),
   status: Joi.string(),
 });
 
