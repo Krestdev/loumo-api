@@ -116,6 +116,8 @@ model Stock {
   promotion        Promotion?     @relation(fields: [promotionId], references: [id])
   promotionId      Int?
   restockDate      DateTime       @default(now())
+
+  @@unique([shopId, productVariantId])
 }
 
 model Promotion {
