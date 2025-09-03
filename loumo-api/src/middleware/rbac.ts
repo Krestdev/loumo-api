@@ -188,6 +188,8 @@ const publicRoutes = [
   "/api/uploads",
 ];
 
+const pawapay = ["/api/payments/order/updates"];
+
 // Auth routes that don't require authentication (all methods)
 const authRoutes = [
   "/api/users/login",
@@ -199,6 +201,10 @@ const authRoutes = [
 const isPublicRoute = (req: Request): boolean => {
   // Check if it's an auth route (all methods allowed)
   const isAuthRoute = authRoutes.some((route) => req.path === route);
+
+  // Check if it is an update from pawapay
+
+  const isPawapay = pawapay.some((route) => req.path === route);
 
   // Check if it's a public content route (GET requests only)
   const isPublicPath = publicRoutes.some(
@@ -217,6 +223,7 @@ const isPublicRoute = (req: Request): boolean => {
 
   return (
     isAuthRoute ||
+    isPawapay ||
     isPublicPath ||
     isNewsletterSubscription ||
     !!isPublicResource
