@@ -211,7 +211,7 @@ model OrderItem {
 }
 
 model Payment {
-  id        Int    @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   depositId String
   name      String
   status    String
@@ -219,8 +219,10 @@ model Payment {
   ref       String
   tel       String
   total     Int
-  order     Order? @relation(fields: [orderId], references: [id])
-  orderId   Int?   @unique
+  order     Order?   @relation(fields: [orderId], references: [id])
+  orderId   Int?     @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
 
 model Delivery {

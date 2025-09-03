@@ -73,6 +73,7 @@ export class PaymentLogic {
       },
       data: {
         ...paymentData,
+        updatedAt: new Date(),
       },
     });
   }
