@@ -114,11 +114,13 @@ export class CategoryLogic {
       data: {
         ...categoryData,
         parent:
-          parentId !== null
+          parentId && (parentId as unknown as string) !== "null"
             ? {
-                connect: { id: parentId },
+                connect: { id: Number(parentId) },
               }
-            : {},
+            : {
+                disconnect: true,
+              },
         slug: data.slug ?? slugify(data.name!.toLocaleLowerCase()),
         status: (status as unknown as string).includes("true") ? true : false,
         display: (display as unknown as string).includes("true") ? true : false,
