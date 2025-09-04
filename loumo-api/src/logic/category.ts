@@ -6,12 +6,29 @@ const prisma = new PrismaClient();
 export class CategoryLogic {
   // Create a category and optionally connect to products
   async createCategory(
-    data: Omit<Category, "id"> & { productIds?: number[] }
+    data: Omit<Category, "id"> & {
+      productIds?: number[];
+      childrenIds?: number[];
+    }
   ): Promise<Category> {
-    const { productIds, status, display, imgUrl, ...categoryData } = data;
+    const {
+      productIds,
+      childrenIds,
+      status,
+      display,
+      parentId,
+      imgUrl,
+      ...categoryData
+    } = data;
     return prisma.category.create({
       data: {
         ...categoryData,
+        parent: parentId
+          ? {
+              connect: { id: Number(parentId) },
+            }
+          : {},
+
         slug: slugify(data.name.toLocaleLowerCase()),
         status:
           typeof status == "boolean"
@@ -32,6 +49,14 @@ export class CategoryLogic {
               connect: productIds.map((productId) => ({ id: productId })),
             }
           : undefined,
+        children: childrenIds
+          ? {
+              connect: childrenIds.map((childrenId) => ({ id: childrenId })),
+            }
+          : undefined,
+      },
+      include: {
+        children: true,
       },
     });
   }
@@ -42,7 +67,7 @@ export class CategoryLogic {
   ): Promise<(Category & { products: Product[] }) | null> {
     return prisma.category.findUnique({
       where: { id },
-      include: { products: true },
+      include: { products: true, children: true },
     });
   }
 
@@ -67,6 +92,7 @@ export class CategoryLogic {
             },
           },
         },
+        children: true,
       },
     });
   }
@@ -76,7 +102,7 @@ export class CategoryLogic {
     id: number,
     data: Partial<Omit<Category, "id">> & { productIds?: number[] }
   ): Promise<(Category & { products: Product[] }) | null> {
-    const { productIds, status, display, ...categoryData } = data;
+    const { productIds, status, parentId, display, ...categoryData } = data;
     if (categoryData.imgUrl) {
       categoryData.imgUrl = categoryData.imgUrl.includes("uploads")
         ? categoryData.imgUrl
@@ -87,6 +113,12 @@ export class CategoryLogic {
       where: { id },
       data: {
         ...categoryData,
+        parent:
+          parentId !== null
+            ? {
+                connect: { id: parentId },
+              }
+            : {},
         slug: data.slug ?? slugify(data.name!.toLocaleLowerCase()),
         status: (status as unknown as string).includes("true") ? true : false,
         display: (display as unknown as string).includes("true") ? true : false,

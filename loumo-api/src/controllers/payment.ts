@@ -18,6 +18,18 @@ const createPaymentSchema = Joi.object({
   orderId: Joi.number(),
 });
 
+// Payment schemas
+const createCashPaymentSchema = Joi.object({
+  name: Joi.string(),
+  total: Joi.number(),
+  status: Joi.string(),
+  tel: Joi.string().required(),
+  method: Joi.string().optional(),
+  ref: Joi.string(),
+  ids: Joi.array().items(Joi.number()),
+  orderId: Joi.number(),
+});
+
 const updatePaymentSchema = Joi.object({
   name: Joi.string().optional(),
   total: Joi.number().optional(),
@@ -36,12 +48,20 @@ export default class PaymentController {
   validate = (
     request: Request<{ id?: string }>,
     response: Response,
-    schema: "create" | "update" | "paramId" | "queryData"
+    schema: "create" | "cash" | "update" | "paramId" | "queryData"
   ) => {
     let result: Joi.ValidationResult | null = null;
     switch (schema) {
       case "create":
         result = createPaymentSchema.validate(request.body);
+        if (result.error) {
+          response
+            .status(400)
+            .json({ result: result.error.details[0].message });
+        }
+        break;
+      case "cash":
+        result = createCashPaymentSchema.validate(request.body);
         if (result.error) {
           response
             .status(400)
@@ -113,7 +133,11 @@ export default class PaymentController {
 
   // Create a new payment
   createPayment = async (
-    request: Request<object, object, Omit<Payment, "id"> & { orderId: number }>,
+    request: Request<
+      object,
+      object,
+      Omit<Payment, "id" | "depositId" | "ref"> & { orderId: number }
+    >,
     response: Response
   ) => {
     if (!this.validate(request, response, "create")) return;
@@ -130,12 +154,35 @@ export default class PaymentController {
     }
   };
 
+  // Create a new payment
+  createCashPayment = async (
+    request: Request<
+      object,
+      object,
+      Omit<Payment, "id" | "depositId" | "ref" | "method"> & { orderId: number }
+    >,
+    response: Response
+  ) => {
+    if (!this.validate(request, response, "create")) return;
+
+    try {
+      const newPayment = await paymentLogic.createCashPayment(request.body);
+      response.status(201).json(newPayment);
+    } catch (error) {
+      throw new CustomError(
+        "Failed to create payment",
+        undefined,
+        error as Error
+      );
+    }
+  };
+
   // Update an existing payment
   updatePayment = async (
     request: Request<
       { id: string },
       object,
-      Partial<Omit<Payment, "id">> & { orderId: number }
+      Partial<Omit<Payment, "id" | "depositId">> & { orderId: number }
     >,
     response: Response
   ) => {

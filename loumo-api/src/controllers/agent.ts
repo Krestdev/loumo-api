@@ -13,7 +13,7 @@ const createAgentSchema = Joi.object({
 });
 
 const updateAgentSchema = Joi.object({
-  zoneIds: Joi.number().optional(),
+  zoneIds: Joi.array().items(Joi.number()),
   status: Joi.string(),
 });
 
@@ -82,7 +82,7 @@ export default class AgentController {
     request: Request<
       { id: string },
       object,
-      Partial<Omit<Agent, "id" | "code">>
+      Partial<Omit<Agent, "id" | "code"> & { zoneIds: number[] }>
     >,
     response: Response
   ) => {

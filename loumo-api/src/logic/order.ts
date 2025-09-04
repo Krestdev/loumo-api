@@ -50,6 +50,41 @@ export class OrderLogic {
     });
   }
 
+  // Get a order by id, including its roles
+  async terminateOrderById(id: number): Promise<Order | null> {
+    const order = await prisma.order.findUnique({
+      where: { id },
+    });
+
+    const delivery = await prisma.delivery.findMany({
+      where: {
+        orderId: id,
+      },
+    });
+
+    const payment = await prisma.payment.findMany({
+      where: {
+        orderId: id,
+      },
+    });
+
+    const isDelivered = delivery.every((x) => x.status === "COMPLETED");
+    const isPayed = payment.some((x) => x.status === "COMPLETED");
+
+    if (isDelivered && isPayed) {
+      return prisma.order.update({
+        where: {
+          id: id,
+        },
+        data: {
+          status: "COMPLETED",
+        },
+      });
+    } else {
+      throw new Error("Can not terminate command");
+    }
+  }
+
   // Get all orders, including their roles
   async getAllOrders(): Promise<Order[]> {
     return prisma.order.findMany({

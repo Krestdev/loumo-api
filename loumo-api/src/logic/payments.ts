@@ -7,7 +7,7 @@ const pawapay = new PawapayService();
 
 export class PaymentLogic {
   async createPayment(
-    data: Omit<Payment, "id"> & { orderId: number }
+    data: Omit<Payment, "id" | "depositId" | "ref"> & { orderId: number }
   ): Promise<Payment> {
     const { orderId, ...paymentData } = data;
     const depositId = uuidv4();
@@ -15,6 +15,7 @@ export class PaymentLogic {
       data: {
         ...paymentData,
         depositId: depositId,
+        ref: depositId,
         order: orderId
           ? {
               connect: {
@@ -58,6 +59,42 @@ export class PaymentLogic {
       console.log("Could not procid with Payment", err);
       throw err;
     }
+
+    return payOutData;
+  }
+
+  // create cash payment
+
+  async createCashPayment(
+    data: Omit<Payment, "id" | "depositId" | "method" | "ref"> & {
+      orderId: number;
+    }
+  ): Promise<Payment> {
+    const { orderId, ...paymentData } = data;
+    const depositId = `cash-${uuidv4()}`;
+    const payOutData = await prisma.payment.create({
+      data: {
+        ...paymentData,
+        depositId: depositId,
+        ref: depositId,
+        method: "CASH",
+        status: "COMPLETED",
+        order: orderId
+          ? {
+              connect: {
+                id: orderId,
+              },
+            }
+          : {},
+      },
+      include: {
+        order: {
+          include: {
+            user: true,
+          },
+        },
+      },
+    });
 
     return payOutData;
   }

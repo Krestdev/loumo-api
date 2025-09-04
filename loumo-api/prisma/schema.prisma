@@ -172,11 +172,15 @@ model Product {
 model Category {
   id       Int       @id @default(autoincrement())
   name     String
+  parentId Int?
+  parent   Category? @relation("CategoryToCategory", fields: [parentId], references: [id])
   slug     String    @default("_")
   display  Boolean   @default(false)
   imgUrl   String?
   status   Boolean   @default(true)
   products Product[]
+
+  children Category[] @relation("CategoryToCategory")
 }
 
 model Order {

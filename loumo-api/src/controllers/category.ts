@@ -9,15 +9,28 @@ const categoryLogic = new CategoryLogic();
 // Category schemas
 const createCategorySchema = Joi.object({
   name: Joi.string(),
+  parentId: Joi.number(),
   umgUrl: Joi.string(),
   weight: Joi.number(),
   display: Joi.boolean(),
   status: Joi.boolean().optional(),
   ids: Joi.array().items(Joi.number()),
+  children: Joi.array().items(
+    Joi.object({
+      name: Joi.string(),
+      umgUrl: Joi.string(),
+      weight: Joi.number(),
+      display: Joi.boolean(),
+      status: Joi.boolean().optional(),
+      ids: Joi.array().items(Joi.number()),
+    })
+  ),
+  childrenIds: Joi.array().items(Joi.number()),
 });
 
 const updateCategorySchema = Joi.object({
   name: Joi.string().required(),
+  parentId: Joi.number(),
   umgUrl: Joi.string().optional(),
   weight: Joi.number().optional(),
   display: Joi.boolean(),
@@ -113,7 +126,7 @@ export default class CategoryController {
     request: Request<
       object,
       object,
-      Omit<Category, "id"> & { productIds?: number[] }
+      Omit<Category, "id"> & { productIds?: number[]; childrenIds?: number[] }
     >,
     response: Response
   ) => {

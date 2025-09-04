@@ -51,13 +51,28 @@ export class AgentLogic {
   // Update a agent and optionally update its roles
   async updateAgent(
     id: number,
-    data: Partial<Omit<Agent, "id" | "code">>
+    data: Partial<Omit<Agent, "id" | "code"> & { zoneIds: number[] }>
   ): Promise<Agent | null> {
-    const { ...agentData } = data;
+    const { zoneIds, ...agentData } = data;
+
+    // First, get all currently connected zones for this agent
+    const existingAgent = await prisma.agent.findUnique({
+      where: { id },
+      select: { zone: { select: { id: true } } },
+    });
+
+    // Prepare the list of zones to disconnect
+    const disconnectZones =
+      existingAgent?.zone.map((z) => ({ id: z.id })) || [];
+
     return prisma.agent.update({
       where: { id },
       data: {
         ...agentData,
+        zone: {
+          disconnect: disconnectZones, // Remove old zones
+          connect: zoneIds?.map((id) => ({ id })) || [], // Add new zones
+        },
       },
       include: {
         user: true,
