@@ -52,10 +52,6 @@ export class OrderLogic {
 
   // Get a order by id, including its roles
   async terminateOrderById(id: number): Promise<Order | null> {
-    const order = await prisma.order.findUnique({
-      where: { id },
-    });
-
     const delivery = await prisma.delivery.findMany({
       where: {
         orderId: id,
