@@ -11,11 +11,13 @@ export class PaymentLogic {
   ): Promise<Payment> {
     const { orderId, ...paymentData } = data;
     const depositId = uuidv4();
+    const now = new Date();
+    const ref = `TLS-${now.getTime()}`;
     const payOutData = await prisma.payment.create({
       data: {
         ...paymentData,
         depositId: depositId,
-        ref: depositId,
+        ref: ref,
         order: orderId
           ? {
               connect: {
@@ -72,11 +74,13 @@ export class PaymentLogic {
   ): Promise<Payment> {
     const { orderId, ...paymentData } = data;
     const depositId = `cash-${uuidv4()}`;
+    const now = new Date();
+    const ref = `TLS-${now.getTime()}`;
     const payOutData = await prisma.payment.create({
       data: {
         ...paymentData,
         depositId: depositId,
-        ref: depositId,
+        ref: ref,
         method: "CASH",
         status: "COMPLETED",
         order: orderId
