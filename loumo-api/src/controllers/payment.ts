@@ -20,14 +20,11 @@ const createPaymentSchema = Joi.object({
 
 // Payment schemas
 const createCashPaymentSchema = Joi.object({
-  name: Joi.string(),
-  total: Joi.number(),
-  status: Joi.string(),
+  name: Joi.string().required(),
+  total: Joi.number().required(),
   tel: Joi.string().required(),
-  method: Joi.string().optional(),
-  ref: Joi.string(),
   ids: Joi.array().items(Joi.number()),
-  orderId: Joi.number(),
+  orderId: Joi.number().required(),
 });
 
 const updatePaymentSchema = Joi.object({
@@ -163,7 +160,7 @@ export default class PaymentController {
     >,
     response: Response
   ) => {
-    if (!this.validate(request, response, "create")) return;
+    if (!this.validate(request, response, "cash")) return;
 
     try {
       const newPayment = await paymentLogic.createCashPayment(request.body);

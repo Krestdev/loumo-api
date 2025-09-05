@@ -16,6 +16,9 @@ export class DeliveryLogic {
     // const timePart = now.getTime().toString(36); // base36 for compactness
     const ref = `LIV-${now.getTime()}`;
 
+    console.log(data);
+    console.log(orderId, agentId, orderItemsIds, priority, deliveryData);
+
     return prisma.delivery.create({
       data: {
         ...deliveryData,
@@ -32,7 +35,6 @@ export class DeliveryLogic {
           ? {
               connect: {
                 id: agentId,
-                status: "PROCESSING", // "PROCESSING"
               },
             }
           : {},
