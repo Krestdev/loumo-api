@@ -93,6 +93,7 @@ export class OrderLogic {
           },
         },
         payment: true,
+        delivery: true,
       },
     });
   }
