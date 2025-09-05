@@ -39,6 +39,8 @@ model User {
   lastLogin DateTime?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+
+  @@map("User")
 }
 
 model Address {
@@ -54,6 +56,8 @@ model Address {
   zoneId      Int?
   shops       Shop[]
   orders      Order[]
+
+  @@map("Address")
 }
 
 model Role {
@@ -61,12 +65,16 @@ model Role {
   name        String
   permissions Permission[]
   user        User[]
+
+  @@map("Role")
 }
 
 model Permission {
   id     Int    @id @default(autoincrement())
   action String @unique
   roles  Role[]
+
+  @@map("Permission")
 }
 
 model Log {
@@ -76,6 +84,8 @@ model Log {
   createdAt   DateTime? @default(now())
   user        User?     @relation(fields: [userId], references: [id])
   userId      Int?
+
+  @@map("Log")
 }
 
 model Notification {
@@ -85,6 +95,8 @@ model Notification {
   createdAt   DateTime @default(now())
   user        User     @relation(fields: [userId], references: [id])
   userId      Int
+
+  @@map("Notification")
 }
 
 model Zone {
@@ -95,6 +107,8 @@ model Zone {
   status      String
   addresses   Address[]
   agents      Agent[]
+
+  @@map("Zone")
 }
 
 model Shop {
@@ -103,6 +117,8 @@ model Shop {
   address        Address? @relation(fields: [addressId], references: [id])
   addressId      Int?
   productVariant Stock[]
+
+  @@map("Shop")
 }
 
 model Stock {
@@ -118,6 +134,7 @@ model Stock {
   restockDate      DateTime       @default(now())
 
   @@unique([shopId, productVariantId])
+  @@map("Stock")
 }
 
 model Promotion {
@@ -135,6 +152,8 @@ model Promotion {
   updatedAt   DateTime  @default(now())
   createdAt   DateTime  @default(now())
   stock       Stock[]
+
+  @@map("Promotion")
 }
 
 model ProductVariant {
@@ -151,13 +170,15 @@ model ProductVariant {
   orderItems OrderItem[]
   stock      Stock[]
   createdAt  DateTime    @default(now())
+
+  @@map("ProductVariant")
 }
 
 model Product {
   id          Int              @id @default(autoincrement())
   ref         String
   name        String
-  description String?
+  description String?          @db.VarChar(255)
   slug        String
   weight      Int
   status      Boolean
@@ -167,6 +188,8 @@ model Product {
   user        User[]
   createdAt   DateTime         @default(now())
   updatedAt   DateTime         @updatedAt
+
+  @@map("Product")
 }
 
 model Category {
@@ -181,11 +204,14 @@ model Category {
   products Product[]
 
   children Category[] @relation("CategoryToCategory")
+
+  @@map("Category")
 }
 
 model Order {
   id          Int         @id @default(autoincrement())
   note        String
+  refIn       String
   ref         String
   weight      Int
   total       Int
@@ -199,6 +225,8 @@ model Order {
   payment     Payment?
   delivery    Delivery[]
   createdAt   DateTime    @default(now())
+
+  @@map("Order")
 }
 
 model OrderItem {
@@ -212,6 +240,8 @@ model OrderItem {
   total            Int
   delivery         Delivery?      @relation(fields: [deliveryId], references: [id], onDelete: Cascade)
   deliveryId       Int?
+
+  @@map("OrderItem")
 }
 
 model Payment {
@@ -227,6 +257,8 @@ model Payment {
   orderId   Int?     @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+
+  @@map("Payment")
 }
 
 model Delivery {
@@ -242,6 +274,8 @@ model Delivery {
   scheduledTime    DateTime
   deliveredTime    DateTime?
   estimatedArrival DateTime?
+
+  @@map("Delivery")
 }
 
 model Agent {
@@ -253,12 +287,16 @@ model Agent {
   delivery Delivery[]
   max      Int        @default(5)
   zone     Zone[]
+
+  @@map("Agent")
 }
 
 model Topic {
   id   Int    @id @default(autoincrement())
   name String
   faqs Faq[]
+
+  @@map("Topic")
 }
 
 model Faq {
@@ -267,6 +305,8 @@ model Faq {
   answer   String
   topic    Topic  @relation(fields: [topicId], references: [id], onDelete: Cascade)
   topicId  Int
+
+  @@map("Faq")
 }
 
 model Setting {
@@ -277,6 +317,8 @@ model Setting {
   note    String?
   section String
   date    DateTime?
+
+  @@map("Setting")
 }
 
 model OperationLog {
@@ -287,6 +329,7 @@ model OperationLog {
   performed_by String // user_id as string or 'system'
   timestamp    DateTime @default(now())
   ip_address   String?
-  changes      Json?
-  description  String?
+  changes      Json
+
+  @@map("OperationLog")
 }
