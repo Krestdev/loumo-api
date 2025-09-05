@@ -332,7 +332,7 @@ export default class UserController {
     if (!this.validate(request, response, "paramId")) return;
     try {
       const id = Number(request.params.id);
-      const addedProduct = await userLogic.updateUser(id, request.body);
+      const addedProduct = await userLogic.addToFav(id, request.body);
       if (!addedProduct) {
         response.status(404).json({ error: "User or Product not found" });
       }

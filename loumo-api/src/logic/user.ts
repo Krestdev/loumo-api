@@ -263,6 +263,40 @@ export class UserLogic {
     });
   }
 
+  // Update user
+  async addToFav(
+    id: number,
+    data: Partial<User> & { productIds: number[] }
+  ): Promise<User | null> {
+    console.log(data);
+    if (data.password !== undefined) {
+      data.password = await bcrypt.hash(data.password, 10);
+    }
+    const { productIds, ...userData } = data;
+    const fav = await prisma.user.findFirst({
+      where: { id: id },
+      include: {
+        favorite: true,
+      },
+    });
+
+    const isFav = fav?.favorite.some((fa) => fa.id === productIds[0]);
+
+    return prisma.user.update({
+      where: { id },
+      data: {
+        ...userData,
+        favorite: isFav
+          ? {
+              disconnect: { id: productIds[0] },
+            }
+          : {
+              connect: { id: productIds[0] },
+            },
+      },
+    });
+  }
+
   async assignRole(id: number, roleId: number): Promise<User | null> {
     return prisma.user.update({
       where: { id },

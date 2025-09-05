@@ -12,7 +12,7 @@ export class AgentLogic {
     const now = new Date();
     // const day = now.toISOString().slice(0, 10).replace(/-/g, ""); // YYYYMMDD
     // const timePart = now.getTime().toString(36); // base36 for compactness
-    const ref = `LIV-${now.getTime()}`;
+    const ref = `ID-${now.getTime()}`;
 
     return prisma.agent.create({
       data: {
