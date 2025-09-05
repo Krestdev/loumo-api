@@ -8,7 +8,7 @@ export class OrderLogic {
     data: Omit<Order, "id"> & {
       addressId: number;
       userId: number;
-      orderItems: Omit<OrderItem, "id">[];
+      orderItems: (Omit<OrderItem, "id"> & { shopId: number })[];
     }
   ): Promise<Order> {
     const { addressId, orderItems, userId, ...orderData } = data;
@@ -16,7 +16,8 @@ export class OrderLogic {
     // const day = now.toISOString().slice(0, 10).replace(/-/g, ""); // YYYYMMDD
     // const timePart = now.getTime().toString(36); // base36 for compactness
     const ref = `ORD-${now.getTime()}`;
-    return prisma.order.create({
+
+    const order = prisma.order.create({
       data: {
         ...orderData,
         status: "PENDING",
@@ -37,10 +38,46 @@ export class OrderLogic {
             }
           : {},
         orderItems: {
-          create: orderItems,
+          create: orderItems.map((x) => {
+            const { shopId, ...orderItm } = x;
+            return orderItm;
+          }),
         },
       },
     });
+
+    // 2. Loop through ordered items and decrement stock
+    for (const item of orderItems) {
+      // Find the stock entry for the product variant
+      const stock = await prisma.stock.findFirst({
+        where: {
+          productVariantId: item.productVariantId,
+          shopId: item.shopId, // If stock depends on shop, we must filter by shop
+        },
+      });
+
+      if (!stock) {
+        throw new Error(
+          `Stock not found for product variant ${item.productVariantId} in shop ${item.shopId}`
+        );
+      }
+
+      if (stock.quantity < item.quantity) {
+        throw new Error(
+          `Not enough stock for product variant ${item.productVariantId}`
+        );
+      }
+
+      // Decrement stock safely
+      await prisma.stock.update({
+        where: { id: stock.id },
+        data: {
+          quantity: stock.quantity - item.quantity,
+        },
+      });
+    }
+
+    return order;
   }
 
   // Get a order by id, including its roles

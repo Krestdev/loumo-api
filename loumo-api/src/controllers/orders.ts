@@ -22,6 +22,7 @@ const createOrderSchema = Joi.object({
       productVariantId: Joi.number(),
       quantity: Joi.number(),
       deliveryId: Joi.number(),
+      shopId: Joi.number().required(),
     })
   ),
 });
@@ -81,7 +82,7 @@ export default class OrderController {
       Omit<Order, "id"> & {
         addressId: number;
         userId: number;
-        orderItems: Omit<OrderItem, "id">[];
+        orderItems: (Omit<OrderItem, "id"> & { shopId: number })[];
       }
     >,
     response: Response
