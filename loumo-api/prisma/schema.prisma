@@ -330,6 +330,7 @@ model OperationLog {
   timestamp    DateTime @default(now())
   ip_address   String?
   changes      Json
+  description  String?
 
   @@map("OperationLog")
 }
