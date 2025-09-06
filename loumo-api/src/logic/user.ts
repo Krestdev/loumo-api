@@ -21,7 +21,7 @@ export class UserLogic {
       addressList?: number[];
     }
   ): Promise<User> {
-    const { email, name, password, addressList } = data;
+    const { email, name, password, addressList, tel } = data;
     const existing = await prisma.user.findUnique({
       where: { email: data.email },
     });
@@ -40,6 +40,7 @@ export class UserLogic {
 
     return prisma.user.create({
       data: {
+        tel: tel,
         email: email,
         password: hashedPassword,
         name: name,
