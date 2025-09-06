@@ -113,7 +113,11 @@ export class PaymentLogic {
       },
     });
 
-    if (orderId && deliveries.every((x) => x.status === "COMPLETED")) {
+    if (
+      orderId &&
+      deliveries.length > 0 &&
+      deliveries.every((x) => x.status === "COMPLETED")
+    ) {
       await prisma.order.update({
         where: {
           id: data.orderId,
