@@ -68,7 +68,7 @@ export class DeliveryLogic {
       },
     });
 
-    if (data.status === "COMPLETED" && orderId) {
+    if (data.status === "COMPLETED" && delivery.id) {
       await prisma.order.update({
         where: {
           id: orderId,
