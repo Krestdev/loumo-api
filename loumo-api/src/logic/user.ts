@@ -241,7 +241,6 @@ export class UserLogic {
     id: number,
     data: Partial<User> & { productIds?: number[]; addressIds?: number[] }
   ): Promise<User | null> {
-    console.log(data);
     if (data.password !== undefined) {
       data.password = await bcrypt.hash(data.password, 10);
     }
@@ -269,7 +268,6 @@ export class UserLogic {
     id: number,
     data: Partial<User> & { productIds: number[] }
   ): Promise<User | null> {
-    console.log(data);
     if (data.password !== undefined) {
       data.password = await bcrypt.hash(data.password, 10);
     }

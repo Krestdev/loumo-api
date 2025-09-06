@@ -157,14 +157,12 @@ export default class ProductController {
         variants?: (ProductVariant & { stock: Stock[] })[];
       };
       let { variants } = request.body;
-      console.log(request.body);
       if (variants) {
         variants = JSON.parse(variants as unknown as string);
         let files = null;
         if (request.files) {
           files = request.files as Express.Multer.File[];
         }
-        console.log(files);
         const enrichedVariants = variants?.map(
           (variant: ProductVariant & { stock: Stock[] }, index: number) => {
             if (files && files.length > 0) {

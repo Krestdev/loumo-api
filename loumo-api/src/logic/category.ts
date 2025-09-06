@@ -108,7 +108,6 @@ export class CategoryLogic {
         ? categoryData.imgUrl
         : `uploads/${categoryData.imgUrl}`;
     }
-    console.log(categoryData.imgUrl);
     return prisma.category.update({
       where: { id },
       data: {

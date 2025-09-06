@@ -16,9 +16,6 @@ export class DeliveryLogic {
     // const timePart = now.getTime().toString(36); // base36 for compactness
     const ref = `LIV-${now.getTime()}`;
 
-    console.log(data);
-    console.log(orderId, agentId, orderItemsIds, priority, deliveryData);
-
     return prisma.delivery.create({
       data: {
         ...deliveryData,
@@ -72,7 +69,7 @@ export class DeliveryLogic {
     });
 
     if (data.status === "COMPLETED" && orderId) {
-      prisma.order.update({
+      await prisma.order.update({
         where: {
           id: orderId,
           payment: {

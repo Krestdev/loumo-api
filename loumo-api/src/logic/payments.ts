@@ -58,14 +58,14 @@ export class PaymentLogic {
       await pawapay
         .requestPayout(payment)
         .then((res) => {
-          console.log(res);
+          console.info("Payment processing", res.status);
         })
         .catch((err) => {
-          console.log(err);
+          console.error("Payment failed", err);
           throw err;
         });
     } catch (err) {
-      console.log("Could not procid with Payment", err);
+      console.error("Could not procid with Payment", err);
       throw err;
     }
 
@@ -107,13 +107,16 @@ export class PaymentLogic {
       },
     });
 
-    if (data.status === "COMPLETED" && orderId) {
-      prisma.order.update({
+    const deliveries = await prisma.delivery.findMany({
+      where: {
+        orderId,
+      },
+    });
+
+    if (orderId && deliveries.every((x) => x.status === "COMPLETED")) {
+      await prisma.order.update({
         where: {
-          id: orderId,
-          payment: {
-            status: "COMPLETED",
-          },
+          id: data.orderId,
         },
         data: {
           status: "COMPLETED",

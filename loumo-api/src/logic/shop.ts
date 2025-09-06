@@ -24,7 +24,6 @@ export class ShopLogic {
     //   const shops = await prisma.shop.findMany({
     //     where: { addressId: address?.zone?.id },
     //   });
-    //   console.log(address);
     //   if (shops.length > 0)
     //     throw new Error("You can not creat another shop in this zone");
     // }
