@@ -102,21 +102,20 @@ export class OrderLogic {
       },
     });
 
-    const isDelivered = delivery.every((x) => x.status === "COMPLETED");
-    const isPayed = payment.some((x) => x.status === "COMPLETED");
+    if (payment.length > 0 || delivery.some((x) => x.status === "COMPLETED"))
+      throw new Error("Can not Terminate a processed command");
 
-    if (isDelivered && isPayed) {
-      return prisma.order.update({
-        where: {
-          id: id,
-        },
-        data: {
-          status: "COMPLETED",
-        },
-      });
-    } else {
-      throw new Error("Can not terminate command");
-    }
+    // const isDelivered = delivery.every((x) => x.status === "COMPLETED");
+    // const isPayed = payment.some((x) => x.status === "COMPLETED");
+
+    return prisma.order.update({
+      where: {
+        id: id,
+      },
+      data: {
+        status: "REJECTED",
+      },
+    });
   }
 
   // Get all orders, including their roles

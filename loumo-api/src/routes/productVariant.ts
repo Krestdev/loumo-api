@@ -24,6 +24,10 @@ export default class ProductVariantRouter {
       this.productVariantController.updateProductVariant
     );
     this.routes.delete(
+      "/image/:id",
+      this.productVariantController.deleteProductVariantImage
+    );
+    this.routes.delete(
       "/:id",
       this.productVariantController.deleteProductVariant
     );

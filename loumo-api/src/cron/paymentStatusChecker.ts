@@ -12,7 +12,7 @@ cron.schedule("*/1 * * * *", async () => {
     const pendingPayments = await prisma.payment.findMany({
       where: {
         status: {
-          in: ["PENDING", "PROCESSING", "ACCEPTED"],
+          in: ["PENDING", "PROCESSING", "ACCEPTED", "FOUND"],
         },
       },
     });
@@ -26,27 +26,32 @@ cron.schedule("*/1 * * * *", async () => {
 
       await pawapay
         .checkDepositstatus(payment.depositId)
-        .then(async (payoutStatusArr) => {
-          let payoutStatus = payment.status;
-          if (payoutStatusArr.data) {
-            payoutStatus = payoutStatusArr.data.status;
-          }
-          if (payoutStatus && payoutStatus !== payment.status) {
+        .then(async (payoutStatus) => {
+          if (payoutStatus.data) {
             await prisma.payment.update({
               where: { id: payment.id },
-              data: { status: payoutStatus },
+              data: { status: payoutStatus.data.status },
             });
             console.info(
-              `Payment ${payment.id} status updated to ${payoutStatus}`
+              `Payment ${payment.id} status updated to ${payoutStatus.data.status}`
+            );
+          } else if (payoutStatus.status !== payment.status) {
+            await prisma.payment.update({
+              where: { id: payment.id },
+              data: { status: payoutStatus.status },
+            });
+            console.info(
+              `Payment ${payment.id} status updated to ${payoutStatus.status}`
             );
           } else {
-            console.info(payoutStatusArr);
+            console.info("array", payoutStatus);
           }
         })
-        .catch((error: Error) => {
+        .catch((error) => {
           console.error(
             `Failed to check/update status for payment ${payment.id}:`,
-            error
+            error.message,
+            error.response
           );
         });
     }

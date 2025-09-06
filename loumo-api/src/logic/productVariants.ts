@@ -134,4 +134,22 @@ export class ProductVariantLogic {
       where: { id },
     });
   }
+
+  // Delete a product (removes from join table as well)
+  async deleteProductImage(id: number): Promise<ProductVariant | null> {
+    const product = await prisma.productVariant.findUnique({
+      where: { id: id },
+    });
+
+    if (!product) throw Error("Delete Product not found");
+
+    if (product.imgUrl) deleteImage(product.imgUrl.split("/")[1]);
+
+    return prisma.productVariant.update({
+      where: { id: product.id },
+      data: {
+        imgUrl: null,
+      },
+    });
+  }
 }

@@ -50,10 +50,11 @@ export class DeliveryLogic {
 
   async updateDelivery(
     id: number,
-    data: Partial<Omit<Delivery, "id" | "orderId">> & { agentId?: number }
+    data: Partial<Omit<Delivery, "id">> & { agentId?: number }
   ): Promise<Delivery> {
-    const { agentId, priority, ...deliveryData } = data;
-    return prisma.delivery.update({
+    const { agentId, priority, orderId, ...deliveryData } = data;
+
+    const delivery = await prisma.delivery.update({
       where: {
         id,
       },
@@ -69,6 +70,22 @@ export class DeliveryLogic {
         priority: priority ? priority : "NORMAL",
       },
     });
+
+    if (data.status === "COMPLETED" && orderId) {
+      prisma.order.update({
+        where: {
+          id: orderId,
+          payment: {
+            status: "COMPLETED",
+          },
+        },
+        data: {
+          status: "COMPLETED",
+        },
+      });
+    }
+
+    return delivery;
   }
 
   async getDeliveryById(

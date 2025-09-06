@@ -170,6 +170,23 @@ export default class ProductVariantController {
     }
   };
 
+  deleteProductVariantImage = async (
+    request: Request<{ id: string }>,
+    response: Response
+  ) => {
+    const { id } = request.params;
+    try {
+      await productVariantLogic.deleteProductImage(Number(id));
+      response.status(204).send();
+    } catch (err) {
+      throw new CustomError(
+        "Failed to delete productVariant Image",
+        undefined,
+        err as Error
+      );
+    }
+  };
+
   deleteProductVariant = async (
     request: Request<{ id: string }>,
     response: Response

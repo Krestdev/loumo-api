@@ -150,6 +150,13 @@ export class Server {
     this.app.use("/api/topics", this.topic.routes);
     this.app.use("/api/settings", this.setting.routes);
     this.app.use("/api/uploads", express.static("uploads"));
+    // ✅ Catch invalid image/file requests BEFORE hitting the error handler
+    this.app.use("/api/uploads/", (req: Request, res: Response) => {
+      res.status(404).json({
+        success: false,
+        message: "The requested file was not found on the server",
+      });
+    });
   }
 
   errorMiddleware() {
