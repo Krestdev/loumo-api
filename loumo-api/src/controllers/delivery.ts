@@ -21,6 +21,7 @@ const updateDeliverySchema = Joi.object({
   status: Joi.string().optional(),
   agentId: Joi.number().optional(),
   scheduledTime: Joi.string().optional(),
+  deliveredTime: Joi.string(),
   estimatedArrival: Joi.string().optional(),
   priority: Joi.string(),
 });

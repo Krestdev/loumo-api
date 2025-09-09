@@ -73,7 +73,6 @@ export class PaymentLogic {
   }
 
   // create cash payment
-
   async createCashPayment(
     data: Omit<Payment, "id" | "depositId" | "method" | "ref"> & {
       orderId: number;

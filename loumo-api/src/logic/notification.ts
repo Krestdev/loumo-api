@@ -11,13 +11,8 @@ export class NotificationLogic {
     return prisma.notification.create({
       data: {
         ...notificationData,
-        user: userId
-          ? {
-              connect: {
-                id: userId,
-              },
-            }
-          : {},
+        orderId: data.orderId,
+        userId: userId,
       },
     });
   }
@@ -44,13 +39,7 @@ export class NotificationLogic {
       where: { id },
       data: {
         ...notificationData,
-        user: userId
-          ? {
-              connect: {
-                id: userId,
-              },
-            }
-          : {},
+        userId: userId,
       },
     });
   }

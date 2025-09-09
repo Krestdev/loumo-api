@@ -13,6 +13,7 @@ export default class OrderRouter {
     this.routes.get("/", this.orderController.getOrders);
     this.routes.get("/:id", this.orderController.getOneOrder);
     this.routes.get("/terminate/:id", this.orderController.terminateOrder);
+    this.routes.get("/cancel/:id", this.orderController.cancelOrder);
     this.routes.post("/", this.orderController.createOrder);
     this.routes.put("/:id", this.orderController.updateOrder);
     this.routes.delete("/:id", this.orderController.deleteOrder);

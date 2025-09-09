@@ -141,7 +141,7 @@ export class ProductVariantLogic {
       where: { id: id },
     });
 
-    if (!product) throw Error("Delete Product not found");
+    if (!product) throw Error("Delete Product Image not found");
 
     if (product.imgUrl) deleteImage(product.imgUrl.split("/")[1]);
 

@@ -1,4 +1,4 @@
-import { PrismaClient, Order, OrderItem } from "@prisma/client";
+import { PrismaClient, Order, OrderItem, Notification } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -17,7 +17,7 @@ export class OrderLogic {
     // const timePart = now.getTime().toString(36); // base36 for compactness
     const ref = `ORD-${now.getTime()}`;
 
-    const order = prisma.order.create({
+    const order = await prisma.order.create({
       data: {
         ...orderData,
         status: "PENDING",
@@ -45,7 +45,13 @@ export class OrderLogic {
           }),
         },
       },
+      include: {
+        address: true,
+      },
     });
+
+    let orderNotification: Omit<Notification, "id"> | null = null;
+    let stockNotification: Omit<Notification, "id">[] = [];
 
     // 2. Loop through ordered items and decrement stock
     for (const item of orderItems) {
@@ -70,13 +76,51 @@ export class OrderLogic {
       }
 
       // Decrement stock safely
-      await prisma.stock.update({
+      const pStock = await prisma.stock.update({
         where: { id: stock.id },
         data: {
           quantity: stock.quantity - item.quantity,
         },
+        include: {
+          shop: true,
+          productVariant: true,
+        },
       });
+
+      if (pStock.quantity <= pStock.threshold) {
+        stockNotification.push({
+          variant: "DANGER",
+          type: "STOCK",
+          stockId: pStock.id,
+          orderId: order.id,
+          paymentId: null,
+          action: `Order Submission`,
+          description: `Stock decrease from order submission`,
+          createdAt: new Date(),
+          userId,
+        });
+      }
     }
+
+    orderNotification = {
+      variant: "INFO",
+      type: "ORDER",
+      stockId: null,
+      orderId: order.id,
+      paymentId: null,
+      action: "Order Created",
+      description: `A new order is made`,
+      createdAt: new Date(),
+      userId,
+    };
+
+    await prisma.notification.create({
+      data: orderNotification,
+    });
+
+    await prisma.notification.createMany({
+      data: stockNotification,
+    });
 
     return order;
   }
@@ -102,8 +146,9 @@ export class OrderLogic {
       },
     });
 
-    if (payment.length > 0 || delivery.some((x) => x.status === "COMPLETED"))
+    if (payment.length > 0 || delivery.some((x) => x.status === "COMPLETED")) {
       throw new Error("Can not Terminate a processed command");
+    }
 
     // const isDelivered = delivery.every((x) => x.status === "COMPLETED");
     // const isPayed = payment.some((x) => x.status === "COMPLETED");
@@ -114,6 +159,40 @@ export class OrderLogic {
       },
       data: {
         status: "REJECTED",
+      },
+    });
+  }
+
+  // Get a order by id, including its roles
+  async cancelOrderById(id: number): Promise<Order | null> {
+    const delivery = await prisma.delivery.findMany({
+      where: {
+        orderId: id,
+      },
+    });
+
+    const payment = await prisma.payment.findMany({
+      where: {
+        orderId: id,
+      },
+    });
+
+    if (
+      (payment.length > 0 && payment.some((x) => x.status === "COMPLETED")) ||
+      delivery.some((x) => x.status === "COMPLETED")
+    ) {
+      throw new Error("Can not Cancel a processed command");
+    }
+
+    // const isDelivered = delivery.every((x) => x.status === "COMPLETED");
+    // const isPayed = payment.some((x) => x.status === "COMPLETED");
+
+    return prisma.order.update({
+      where: {
+        id: id,
+      },
+      data: {
+        status: "CANCELED",
       },
     });
   }
