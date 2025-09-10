@@ -70,16 +70,14 @@ export class DeliveryLogic {
 
     const payment = await prisma.payment.findMany({
       where: {
-        orderId: data.orderId,
+        orderId: orderId,
       },
     });
-
-    console.log(delivery, payment);
 
     if (data.status === "COMPLETED" || payment.length > 0) {
       await prisma.order.update({
         where: {
-          id: delivery.orderId,
+          id: orderId,
           payment: {
             status: "COMPLETED",
           },

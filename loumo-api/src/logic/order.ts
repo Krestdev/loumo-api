@@ -51,7 +51,7 @@ export class OrderLogic {
     });
 
     let orderNotification: Omit<Notification, "id"> | null = null;
-    let stockNotification: Omit<Notification, "id">[] = [];
+    const stockNotification: Omit<Notification, "id">[] = [];
 
     // 2. Loop through ordered items and decrement stock
     for (const item of orderItems) {
