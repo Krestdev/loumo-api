@@ -49,6 +49,7 @@ export class DeliveryLogic {
     id: number,
     data: Partial<Omit<Delivery, "id">> & { agentId?: number }
   ): Promise<Delivery> {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { agentId, priority, orderId, ...deliveryData } = data;
 
     const delivery = await prisma.delivery.update({
@@ -70,14 +71,14 @@ export class DeliveryLogic {
 
     const payment = await prisma.payment.findMany({
       where: {
-        orderId: orderId,
+        orderId: data.orderId,
       },
     });
 
     if (data.status === "COMPLETED" || payment.length > 0) {
       await prisma.order.update({
         where: {
-          id: orderId,
+          id: data.orderId,
           payment: {
             status: "COMPLETED",
           },

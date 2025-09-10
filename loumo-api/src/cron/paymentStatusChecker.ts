@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 const pawapay = new PawapayService();
 
 // Runs every 5 minutes
-cron.schedule("*/1 * * * *", async () => {
+cron.schedule("*/10 * * * * *", async () => {
   try {
     // Fetch all payments with status 'PENDING'
     const pendingPayments = await prisma.payment.findMany({
@@ -44,7 +44,7 @@ cron.schedule("*/1 * * * *", async () => {
               `Payment ${payment.id} status updated to ${payoutStatus.status}`
             );
           } else {
-            console.info("array", payoutStatus);
+            console.info("array", payoutStatus.data, payoutStatus.status);
           }
         })
         .catch((error) => {
