@@ -89,8 +89,8 @@ export class OrderLogic {
 
       if (pStock.quantity <= pStock.threshold) {
         stockNotification.push({
-          variant: "DANGER",
-          type: "STOCK",
+          variant: "DANGER", // WARNING, INFO, SUCCESS
+          type: "STOCK", // ORDER, PAYMENT, STOCK
           stockId: pStock.id,
           orderId: order.id,
           paymentId: null,
