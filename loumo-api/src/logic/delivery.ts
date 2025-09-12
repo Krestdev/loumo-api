@@ -49,7 +49,6 @@ export class DeliveryLogic {
     id: number,
     data: Partial<Omit<Delivery, "id" | "orderId">> & { agentId?: number }
   ): Promise<Delivery> {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { agentId, priority, ...deliveryData } = data;
 
     const delivery = await prisma.delivery.update({
