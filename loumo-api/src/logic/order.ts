@@ -38,8 +38,8 @@ export class OrderLogic {
         orderItems: {
           create: orderItems.map((x) => {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const { shopId, ...orderItm } = x;
-            return orderItm;
+            const { shopId, ...orderItem } = x;
+            return orderItem;
           }),
         },
       },
