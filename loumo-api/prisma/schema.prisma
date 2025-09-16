@@ -170,7 +170,7 @@ model ProductVariant {
   id         Int         @id @default(autoincrement())
   name       String
   imgUrl     String?
-  weight     Int
+  weight     Float
   status     Boolean
   price      Int         @default(0)
   quantity   Float       @default(0)
