@@ -1882,3 +1882,439 @@
     timestamp: '2025-09-01T15:04:40.866Z'
   }
 }
+{
+  level: 'error',
+  message: 'HTTP GET /api/notifications/',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/notifications/',
+        headers: {
+          host: '192.168.1.67:5000',
+          connection: 'keep-alive',
+          'if-none-match': 'W/"2095-1dusu58wzli/KzudVfKKmcNFdCY"',
+          accept: 'application/json, text/plain, */*',
+          'user-agent': 'Expo/1017756 CFNetwork/1410.1 Darwin/22.6.0',
+          'accept-language': 'fr-FR,fr;q=0.9',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1OTc2MjkxMywiZXhwIjoxNzU5ODQ5MzEzfQ.BY7YPGsYFdNK-Q9VmMjMXWd4Qa-UaDMg_QdSUREGxo0',
+          'accept-encoding': 'gzip, deflate'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/notifications/',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 5039
+    },
+    timestamp: '2025-10-07T09:51:52.361Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/notifications/',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/notifications/',
+        headers: {
+          host: '192.168.1.67:5000',
+          connection: 'keep-alive',
+          'if-none-match': 'W/"2095-1dusu58wzli/KzudVfKKmcNFdCY"',
+          accept: 'application/json, text/plain, */*',
+          'user-agent': 'Expo/1017756 CFNetwork/1410.1 Darwin/22.6.0',
+          'accept-language': 'fr-FR,fr;q=0.9',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1OTc2MjkxMywiZXhwIjoxNzU5ODQ5MzEzfQ.BY7YPGsYFdNK-Q9VmMjMXWd4Qa-UaDMg_QdSUREGxo0',
+          'accept-encoding': 'gzip, deflate'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/notifications/',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 5039
+    },
+    timestamp: '2025-10-07T09:51:52.366Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/notifications/',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/notifications/',
+        headers: {
+          host: '192.168.1.67:5000',
+          connection: 'keep-alive',
+          'if-none-match': 'W/"2095-1dusu58wzli/KzudVfKKmcNFdCY"',
+          accept: 'application/json, text/plain, */*',
+          'user-agent': 'Expo/1017756 CFNetwork/1410.1 Darwin/22.6.0',
+          'accept-language': 'fr-FR,fr;q=0.9',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1OTc2MjkxMywiZXhwIjoxNzU5ODQ5MzEzfQ.BY7YPGsYFdNK-Q9VmMjMXWd4Qa-UaDMg_QdSUREGxo0',
+          'accept-encoding': 'gzip, deflate'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/notifications/',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 5017
+    },
+    timestamp: '2025-10-07T09:51:58.449Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/notifications/',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/notifications/',
+        headers: {
+          host: '192.168.1.67:5000',
+          connection: 'keep-alive',
+          'if-none-match': 'W/"2095-1dusu58wzli/KzudVfKKmcNFdCY"',
+          accept: 'application/json, text/plain, */*',
+          'user-agent': 'Expo/1017756 CFNetwork/1410.1 Darwin/22.6.0',
+          'accept-language': 'fr-FR,fr;q=0.9',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1OTc2MjkxMywiZXhwIjoxNzU5ODQ5MzEzfQ.BY7YPGsYFdNK-Q9VmMjMXWd4Qa-UaDMg_QdSUREGxo0',
+          'accept-encoding': 'gzip, deflate'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/notifications/',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 5017
+    },
+    timestamp: '2025-10-07T09:51:58.450Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/notifications/',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/notifications/',
+        headers: {
+          host: '192.168.1.67:5000',
+          connection: 'keep-alive',
+          accept: 'application/json, text/plain, */*',
+          'user-agent': 'Expo/1017756 CFNetwork/1410.1 Darwin/22.6.0',
+          'accept-language': 'fr-FR,fr;q=0.9',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1OTc2MjkxMywiZXhwIjoxNzU5ODQ5MzEzfQ.BY7YPGsYFdNK-Q9VmMjMXWd4Qa-UaDMg_QdSUREGxo0',
+          'accept-encoding': 'gzip, deflate'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/notifications/',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 5023
+    },
+    timestamp: '2025-10-07T09:52:07.673Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/notifications/',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/notifications/',
+        headers: {
+          host: '192.168.1.67:5000',
+          connection: 'keep-alive',
+          accept: 'application/json, text/plain, */*',
+          'user-agent': 'Expo/1017756 CFNetwork/1410.1 Darwin/22.6.0',
+          'accept-language': 'fr-FR,fr;q=0.9',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1OTc2MjkxMywiZXhwIjoxNzU5ODQ5MzEzfQ.BY7YPGsYFdNK-Q9VmMjMXWd4Qa-UaDMg_QdSUREGxo0',
+          'accept-encoding': 'gzip, deflate'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/notifications/',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 5023
+    },
+    timestamp: '2025-10-07T09:52:07.674Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/notifications/',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/notifications/',
+        headers: {
+          host: '192.168.1.67:5000',
+          connection: 'keep-alive',
+          accept: 'application/json, text/plain, */*',
+          'user-agent': 'Expo/1017756 CFNetwork/1410.1 Darwin/22.6.0',
+          'accept-language': 'fr-FR,fr;q=0.9',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1OTc2MjkxMywiZXhwIjoxNzU5ODQ5MzEzfQ.BY7YPGsYFdNK-Q9VmMjMXWd4Qa-UaDMg_QdSUREGxo0',
+          'accept-encoding': 'gzip, deflate'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/notifications/',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 5015
+    },
+    timestamp: '2025-10-07T09:52:13.807Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/notifications/',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/notifications/',
+        headers: {
+          host: '192.168.1.67:5000',
+          connection: 'keep-alive',
+          accept: 'application/json, text/plain, */*',
+          'user-agent': 'Expo/1017756 CFNetwork/1410.1 Darwin/22.6.0',
+          'accept-language': 'fr-FR,fr;q=0.9',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1OTc2MjkxMywiZXhwIjoxNzU5ODQ5MzEzfQ.BY7YPGsYFdNK-Q9VmMjMXWd4Qa-UaDMg_QdSUREGxo0',
+          'accept-encoding': 'gzip, deflate'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/notifications/',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 5015
+    },
+    timestamp: '2025-10-07T09:52:13.813Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/notifications/',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/notifications/',
+        headers: {
+          host: '192.168.1.67:5000',
+          connection: 'keep-alive',
+          accept: 'application/json, text/plain, */*',
+          'user-agent': 'Expo/1017756 CFNetwork/1410.1 Darwin/22.6.0',
+          'accept-language': 'fr-FR,fr;q=0.9',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1OTc2MjkxMywiZXhwIjoxNzU5ODQ5MzEzfQ.BY7YPGsYFdNK-Q9VmMjMXWd4Qa-UaDMg_QdSUREGxo0',
+          'accept-encoding': 'gzip, deflate'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/notifications/',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 5014
+    },
+    timestamp: '2025-10-07T09:52:19.968Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/notifications/',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/notifications/',
+        headers: {
+          host: '192.168.1.67:5000',
+          connection: 'keep-alive',
+          accept: 'application/json, text/plain, */*',
+          'user-agent': 'Expo/1017756 CFNetwork/1410.1 Darwin/22.6.0',
+          'accept-language': 'fr-FR,fr;q=0.9',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1OTc2MjkxMywiZXhwIjoxNzU5ODQ5MzEzfQ.BY7YPGsYFdNK-Q9VmMjMXWd4Qa-UaDMg_QdSUREGxo0',
+          'accept-encoding': 'gzip, deflate'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/notifications/',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 5014
+    },
+    timestamp: '2025-10-07T09:52:19.970Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/notifications/',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/notifications/',
+        headers: {
+          host: '192.168.1.67:5000',
+          connection: 'keep-alive',
+          accept: 'application/json, text/plain, */*',
+          'user-agent': 'Expo/1017756 CFNetwork/1410.1 Darwin/22.6.0',
+          'accept-language': 'fr-FR,fr;q=0.9',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1OTc2MjkxMywiZXhwIjoxNzU5ODQ5MzEzfQ.BY7YPGsYFdNK-Q9VmMjMXWd4Qa-UaDMg_QdSUREGxo0',
+          'accept-encoding': 'gzip, deflate'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/notifications/',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 5008
+    },
+    timestamp: '2025-10-07T09:52:27.025Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/notifications/',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/notifications/',
+        headers: {
+          host: '192.168.1.67:5000',
+          connection: 'keep-alive',
+          accept: 'application/json, text/plain, */*',
+          'user-agent': 'Expo/1017756 CFNetwork/1410.1 Darwin/22.6.0',
+          'accept-language': 'fr-FR,fr;q=0.9',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1OTc2MjkxMywiZXhwIjoxNzU5ODQ5MzEzfQ.BY7YPGsYFdNK-Q9VmMjMXWd4Qa-UaDMg_QdSUREGxo0',
+          'accept-encoding': 'gzip, deflate'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/notifications/',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 5008
+    },
+    timestamp: '2025-10-07T09:52:27.025Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/notifications/',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/notifications/',
+        headers: {
+          host: '192.168.1.67:5000',
+          connection: 'keep-alive',
+          accept: 'application/json, text/plain, */*',
+          'user-agent': 'Expo/1017756 CFNetwork/1410.1 Darwin/22.6.0',
+          'accept-language': 'fr-FR,fr;q=0.9',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1OTc2MjkxMywiZXhwIjoxNzU5ODQ5MzEzfQ.BY7YPGsYFdNK-Q9VmMjMXWd4Qa-UaDMg_QdSUREGxo0',
+          'accept-encoding': 'gzip, deflate'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/notifications/',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 5018
+    },
+    timestamp: '2025-10-07T09:52:36.100Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/notifications/',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/notifications/',
+        headers: {
+          host: '192.168.1.67:5000',
+          connection: 'keep-alive',
+          accept: 'application/json, text/plain, */*',
+          'user-agent': 'Expo/1017756 CFNetwork/1410.1 Darwin/22.6.0',
+          'accept-language': 'fr-FR,fr;q=0.9',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1OTc2MjkxMywiZXhwIjoxNzU5ODQ5MzEzfQ.BY7YPGsYFdNK-Q9VmMjMXWd4Qa-UaDMg_QdSUREGxo0',
+          'accept-encoding': 'gzip, deflate'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/notifications/',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 5018
+    },
+    timestamp: '2025-10-07T09:52:36.100Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/notifications/',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/notifications/',
+        headers: {
+          host: '192.168.1.67:5000',
+          connection: 'keep-alive',
+          accept: 'application/json, text/plain, */*',
+          'user-agent': 'Expo/1017756 CFNetwork/1410.1 Darwin/22.6.0',
+          'accept-language': 'fr-FR,fr;q=0.9',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1OTc2MjkxMywiZXhwIjoxNzU5ODQ5MzEzfQ.BY7YPGsYFdNK-Q9VmMjMXWd4Qa-UaDMg_QdSUREGxo0',
+          'accept-encoding': 'gzip, deflate'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/notifications/',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 5008
+    },
+    timestamp: '2025-10-07T09:52:42.179Z'
+  }
+}
+{
+  level: 'error',
+  message: 'HTTP GET /api/notifications/',
+  metadata: {
+    meta: {
+      req: {
+        url: '/api/notifications/',
+        headers: {
+          host: '192.168.1.67:5000',
+          connection: 'keep-alive',
+          accept: 'application/json, text/plain, */*',
+          'user-agent': 'Expo/1017756 CFNetwork/1410.1 Darwin/22.6.0',
+          'accept-language': 'fr-FR,fr;q=0.9',
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1OTc2MjkxMywiZXhwIjoxNzU5ODQ5MzEzfQ.BY7YPGsYFdNK-Q9VmMjMXWd4Qa-UaDMg_QdSUREGxo0',
+          'accept-encoding': 'gzip, deflate'
+        },
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/api/notifications/',
+        query: [Object: null prototype] {}
+      },
+      res: { statusCode: 500 },
+      responseTime: 5008
+    },
+    timestamp: '2025-10-07T09:52:42.180Z'
+  }
+}

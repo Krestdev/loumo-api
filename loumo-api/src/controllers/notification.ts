@@ -10,12 +10,14 @@ const createNotificationSchema = Joi.object({
   action: Joi.string(),
   description: Joi.string(),
   userId: Joi.number().optional(),
+  viewed: Joi.boolean().optional().default(false),
 });
 
 const updateNotificationSchema = Joi.object({
   action: Joi.string().optional(),
   description: Joi.string().optional(),
   userId: Joi.number().optional(),
+  viewed: Joi.boolean().optional(),
 });
 
 const paramSchema = Joi.object({
@@ -24,7 +26,11 @@ const paramSchema = Joi.object({
 
 export default class notificationController {
   validate = (
-    request: Request<{ id?: number }>,
+    request: Request<
+      { id?: string },
+      object,
+      Partial<Omit<Notification, "id">> & { userId?: number }
+    >,
     response: Response,
     schema: "create" | "update" | "paramId"
   ) => {
@@ -94,11 +100,7 @@ export default class notificationController {
     response: Response
   ) => {
     const { id } = request.params;
-    const { error } = updateNotificationSchema.validate(request.body);
-    if (error) {
-      response.status(400).json({ error: error.details[0].message });
-      return;
-    }
+    if (!this.validate(request, response, "update")) return;
     try {
       const updatedNotification = await notificationLogic.updateNotification(
         Number(id),
