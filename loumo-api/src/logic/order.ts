@@ -96,6 +96,7 @@ export class OrderLogic {
           description: `Stock decrease from order submission`,
           createdAt: new Date(),
           userId,
+          viewed: false,
         });
       }
     }
@@ -110,6 +111,7 @@ export class OrderLogic {
       description: `A new order is made`,
       createdAt: new Date(),
       userId,
+      viewed: false,
     };
 
     await prisma.notification.create({
