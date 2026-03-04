@@ -1,4 +1,3 @@
-# /bin/sh
 # ---- Build Stage ----
 FROM node:22-alpine AS base
 
@@ -25,5 +24,4 @@ COPY --from=base /app/src ./src
 
 EXPOSE 5000
 
-RUN npx prisma migrate deploy
-RUN npm run start
+CMD ["sh", "-c", "npx prisma migrate deploy && npm run start"]
