@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE `ProductVariant` ADD COLUMN `quantity` INTEGER NOT NULL DEFAULT 0,
-    ADD COLUMN `unit` VARCHAR(191) NOT NULL DEFAULT 'kg';

@@ -22,11 +22,6 @@ COPY --from=base /app/build ./build
 COPY --from=base /app/emailtemplates ./emailtemplates
 COPY --from=base /app/src ./src
 
-# Install production-only dependencies
-# (optional if you've already installed them above)
-# RUN npm ci --omit=dev
-
-# Wait-for script (can also be added via volume or Dockerfile ADD)
 ADD https://raw.githubusercontent.com/eficode/wait-for/v2.2.3/wait-for /wait-for
 RUN chmod +x /wait-for
 
