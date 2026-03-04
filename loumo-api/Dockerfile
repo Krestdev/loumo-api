@@ -22,9 +22,6 @@ COPY --from=base /app/build ./build
 COPY --from=base /app/emailtemplates ./emailtemplates
 COPY --from=base /app/src ./src
 
-ADD https://raw.githubusercontent.com/eficode/wait-for/v2.2.3/wait-for /wait-for
-RUN chmod +x /wait-for
-
 EXPOSE 5000
 
 CMD sh -c "npx prisma migrate deploy && \
