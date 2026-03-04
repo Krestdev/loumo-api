@@ -20,7 +20,7 @@ COPY --from=base /app/node_modules ./node_modules
 COPY --from=base /app/prisma ./prisma
 COPY --from=base /app/build ./build
 COPY --from=base /app/assets ./app/assets
-COPY --from=builder /app/emailtemplates ./emailtemplates
+COPY --from=base /app/emailtemplates ./emailtemplates
 COPY --from=base /app/src ./src
 
 # Install production-only dependencies
