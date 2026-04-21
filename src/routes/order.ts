@@ -17,5 +17,6 @@ export default class OrderRouter {
     this.routes.post("/", this.orderController.createOrder);
     this.routes.put("/:id", this.orderController.updateOrder);
     this.routes.delete("/:id", this.orderController.deleteOrder);
+    this.routes.put("/code/:id", this.orderController.getCode);
   }
 }

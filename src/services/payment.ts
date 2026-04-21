@@ -93,9 +93,10 @@ export class PawapayService {
    * Request a new payout
    */
   public async requestPayout(
-    data: PayoutRequest
+    data: PayoutRequest,
   ): Promise<DepositSimpleResponse> {
-    const response = await this.client.post("/deposits", data);
+    const response = await this.client.post("/v2/deposits", data);
+    console.log(data, response.data);
     return response.data;
   }
 
@@ -103,7 +104,7 @@ export class PawapayService {
    * Check the status of an existing payout
    */
   public async checkDepositstatus(payoutId: string): Promise<ApiResponse> {
-    const response = await this.client.get(`/deposits/${payoutId}`);
+    const response = await this.client.get(`/v2/deposits/${payoutId}`);
     return response.data;
   }
 
@@ -112,7 +113,7 @@ export class PawapayService {
    */
   public async resendPayoutCallback(payoutId: string): Promise<ResendRequest> {
     const response = await this.client.post(
-      `/deposits/${payoutId}/resend-callback`
+      `/v2/deposits/${payoutId}/resend-callback`,
     );
     return response.data;
   }
@@ -121,7 +122,7 @@ export class PawapayService {
    * Cancel a payout (only works for ENQUEUED status)
    */
   public async cancelPayout(payoutId: string): Promise<ResendRequest> {
-    const response = await this.client.post(`/deposits/${payoutId}/cancel`);
+    const response = await this.client.post(`/v2/deposits/${payoutId}/cancel`);
     return response.data;
   }
 }

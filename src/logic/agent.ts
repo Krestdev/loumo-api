@@ -1,11 +1,12 @@
-import { PrismaClient, Agent } from "@prisma/client";
+import { PrismaClient, Agent, Delivery } from "@prisma/client";
+import { agent } from "supertest";
 
 const prisma = new PrismaClient();
 
 export class AgentLogic {
   // Create a log and optionally connect to roles
   async createAgent(
-    data: Omit<Agent, "id" | "code"> & { userId: number; zoneIds: number[] }
+    data: Omit<Agent, "id" | "code"> & { userId: number; zoneIds: number[] },
   ): Promise<Agent> {
     const { userId, zoneIds, ...agentData } = data;
     // const { zoneId, ...restAgentData } = agentData as any;
@@ -48,10 +49,25 @@ export class AgentLogic {
     });
   }
 
+  async isAvailable(id: number) {
+    const agent = await prisma.agent.findUnique({ where: { id } });
+
+    if (agent === null) throw Error("agent not found");
+
+    if (agent !== null) {
+      return prisma.agent.update({
+        where: { id },
+        data: {
+          isAvailable: !agent.isAvailable,
+        },
+      });
+    }
+  }
+
   // Update a agent and optionally update its roles
   async updateAgent(
     id: number,
-    data: Partial<Omit<Agent, "id" | "code"> & { zoneIds: number[] }>
+    data: Partial<Omit<Agent, "id" | "code"> & { zoneIds: number[] }>,
   ): Promise<Agent | null> {
     const { zoneIds, ...agentData } = data;
 

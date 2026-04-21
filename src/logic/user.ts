@@ -19,7 +19,7 @@ export class UserLogic {
   async register(
     data: Omit<User, "id"> & {
       addressList?: number[];
-    }
+    },
   ): Promise<User> {
     const { email, name, password, addressList, tel } = data;
     const existing = await prisma.user.findUnique({
@@ -38,6 +38,10 @@ export class UserLogic {
       loginUrl: `${config.FRONTEND_URL}/auth/register/${otp}?email=${email}`,
     });
 
+    let role = await prisma.role.findFirst({ where: { name: "user" } });
+
+    if (!role) role = await prisma.role.create({ data: { name: "user" } });
+
     return prisma.user.create({
       data: {
         tel: tel,
@@ -55,9 +59,12 @@ export class UserLogic {
           : {},
         role: {
           connect: {
-            id: 2,
+            id: role.id,
           },
         },
+      },
+      include: {
+        role: true,
       },
     });
   }
@@ -143,7 +150,7 @@ export class UserLogic {
   async resetPassword(
     email: string,
     otp: string,
-    newPassword: string
+    newPassword: string,
   ): Promise<boolean> {
     const user = await prisma.user.findUnique({ where: { email } });
     if (
@@ -169,7 +176,7 @@ export class UserLogic {
   // Authenticate user (login)
   async authenticateUser(
     email: string,
-    password: string
+    password: string,
   ): Promise<{ user: User; token: string } | null> {
     const user = await this.getUserByEmail(email);
     if (!user || !user.verified) return null;
@@ -232,6 +239,7 @@ export class UserLogic {
       include: {
         orders: true,
         addresses: true,
+        role: true,
       },
     });
   }
@@ -239,7 +247,7 @@ export class UserLogic {
   // Update user
   async updateUser(
     id: number,
-    data: Partial<User> & { productIds?: number[]; addressIds?: number[] }
+    data: Partial<User> & { productIds?: number[]; addressIds?: number[] },
   ): Promise<User | null> {
     if (data.password !== undefined) {
       data.password = await bcrypt.hash(data.password, 10);
@@ -266,7 +274,7 @@ export class UserLogic {
   // Update user
   async addToFav(
     id: number,
-    data: Partial<User> & { productIds: number[] }
+    data: Partial<User> & { productIds: number[] },
   ): Promise<User | null> {
     if (data.password !== undefined) {
       data.password = await bcrypt.hash(data.password, 10);

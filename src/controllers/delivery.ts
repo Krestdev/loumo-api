@@ -3,6 +3,7 @@ import Joi from "joi";
 import { Delivery } from "@prisma/client";
 import { CustomError } from "../middleware/errorHandler";
 import { DeliveryLogic } from "../logic/delivery";
+import upload from "../utils/upload";
 
 const deliveryLogic = new DeliveryLogic();
 
@@ -34,7 +35,7 @@ export default class DeliveryController {
   validate = (
     request: Request<{ id?: string }>,
     response: Response,
-    schema: "create" | "update" | "paramId" | "queryData"
+    schema: "create" | "update" | "paramId" | "queryData",
   ) => {
     let result: Joi.ValidationResult | null = null;
     switch (schema) {
@@ -81,7 +82,7 @@ export default class DeliveryController {
       throw new CustomError(
         "Failed to fetch deliverys",
         undefined,
-        error as Error
+        error as Error,
       );
     }
   };
@@ -89,7 +90,7 @@ export default class DeliveryController {
   // Get one delivery by ID
   getOneDelivery = async (
     request: Request<{ id: string }>,
-    response: Response
+    response: Response,
   ) => {
     if (!this.validate(request, response, "paramId")) return;
 
@@ -104,7 +105,7 @@ export default class DeliveryController {
       throw new CustomError(
         "Failed to fetch delivery",
         undefined,
-        error as Error
+        error as Error,
       );
     }
   };
@@ -119,7 +120,7 @@ export default class DeliveryController {
         orderItemsIds?: number[];
       }
     >,
-    response: Response
+    response: Response,
   ) => {
     if (!this.validate(request, response, "create")) return;
 
@@ -130,7 +131,7 @@ export default class DeliveryController {
       throw new CustomError(
         "Failed to create delivery",
         undefined,
-        error as Error
+        error as Error,
       );
     }
   };
@@ -142,7 +143,7 @@ export default class DeliveryController {
       object,
       Partial<Omit<Delivery, "id" | "orderId">> & { agentId?: number }
     >,
-    response: Response
+    response: Response,
   ) => {
     if (!this.validate(request, response, "paramId")) return;
     if (!this.validate(request, response, "update")) return;
@@ -151,7 +152,7 @@ export default class DeliveryController {
     try {
       const updatedDelivery = await deliveryLogic.updateDelivery(
         id,
-        request.body
+        request.body,
       );
       if (!updatedDelivery) {
         response.status(404).json({ message: "Delivery not found" });
@@ -161,7 +162,7 @@ export default class DeliveryController {
       throw new CustomError(
         "Failed to update delivery",
         undefined,
-        error as Error
+        error as Error,
       );
     }
   };
@@ -169,7 +170,7 @@ export default class DeliveryController {
   // Delete a delivery
   deleteDelivery = async (
     request: Request<{ id: string }>,
-    response: Response
+    response: Response,
   ) => {
     if (!this.validate(request, response, "paramId")) return;
 
@@ -184,7 +185,44 @@ export default class DeliveryController {
       throw new CustomError(
         "Failed to delete delivery",
         undefined,
-        error as Error
+        error as Error,
+      );
+    }
+  };
+
+  // Complete a delivery with signature and proof images
+  completeDelivery = async (
+    request: Request<{ id: string }>,
+    response: Response,
+  ) => {
+    if (!this.validate(request, response, "paramId")) return;
+
+    try {
+      const id = Number(request.params.id);
+      const { verificationOtp } = request.body;
+      const signatureUrl =
+        request.files &&
+        !Array.isArray(request.files) &&
+        request.files["signature"]
+          ? `/uploads/${(request.files["signature"] as Express.Multer.File[])[0].filename}`
+          : undefined;
+      const proofUrl =
+        request.files && !Array.isArray(request.files) && request.files["proof"]
+          ? `/uploads/${(request.files["proof"] as Express.Multer.File[])[0].filename}`
+          : undefined;
+
+      const completedDelivery = await deliveryLogic.completeDelivery(
+        id,
+        verificationOtp,
+        signatureUrl,
+        proofUrl,
+      );
+      response.status(200).json(completedDelivery);
+    } catch (error) {
+      throw new CustomError(
+        "Failed to complete delivery",
+        undefined,
+        error as Error,
       );
     }
   };

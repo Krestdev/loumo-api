@@ -7,7 +7,7 @@ export class DeliveryLogic {
     data: Omit<Delivery, "id" | "trackingCode"> & {
       orderId: number;
       orderItemsIds?: number[];
-    }
+    },
   ): Promise<Delivery> {
     const { orderId, agentId, orderItemsIds, priority, ...deliveryData } = data;
     // Generate tracking code using current timestamp and base64 encoding
@@ -47,7 +47,7 @@ export class DeliveryLogic {
 
   async updateDelivery(
     id: number,
-    data: Partial<Omit<Delivery, "id" | "orderId">> & { agentId?: number }
+    data: Partial<Omit<Delivery, "id" | "orderId">> & { agentId?: number },
   ): Promise<Delivery> {
     const { agentId, priority, ...deliveryData } = data;
 
@@ -94,8 +94,69 @@ export class DeliveryLogic {
     return delivery;
   }
 
+  async completeDelivery(
+    id: number,
+    code: string,
+    signatureUrl?: string,
+    proofUrl?: string,
+  ): Promise<Delivery> {
+    const deliveryToComplete = await prisma.delivery.findUnique({
+      where: { id },
+    });
+
+    if (!deliveryToComplete) {
+      throw Error("Delivery Not found");
+    }
+
+    const { closeDeliveryCode, codeExpiryTime } = deliveryToComplete;
+    const currentTime = new Date();
+
+    console.log(closeDeliveryCode, code);
+    if (!closeDeliveryCode || !code.includes(closeDeliveryCode)) {
+      throw Error("Wrong Code");
+    }
+    if (!codeExpiryTime || currentTime > codeExpiryTime) {
+      throw Error("Code Expired");
+    }
+
+    const delivery = await prisma.delivery.update({
+      where: {
+        id,
+      },
+      data: {
+        status: "COMPLETED",
+        deliveredTime: new Date(),
+        signatureUrl,
+        proofUrl,
+      },
+      include: {
+        order: true,
+      },
+    });
+
+    // Update order status if payment is completed
+    const payment = await prisma.payment.findMany({
+      where: {
+        orderId: delivery.order.id,
+      },
+    });
+
+    if (payment.length > 0 && payment.some((p) => p.status === "COMPLETED")) {
+      await prisma.order.update({
+        where: {
+          id: delivery.order.id,
+        },
+        data: {
+          status: "COMPLETED",
+        },
+      });
+    }
+
+    return delivery;
+  }
+
   async getDeliveryById(
-    id: number
+    id: number,
   ): Promise<(Delivery & { agent: Agent | null }) | null> {
     return prisma.delivery.findUnique({
       where: { id },
@@ -115,7 +176,7 @@ export class DeliveryLogic {
 
   async addOagentToDelivery(
     deliveryId: number,
-    agentId: number
+    agentId: number,
   ): Promise<Delivery> {
     return prisma.delivery.update({
       where: { id: deliveryId },
@@ -131,7 +192,7 @@ export class DeliveryLogic {
 
   async removeAgentFromDelivery(
     deliveryId: number,
-    agentId: number
+    agentId: number,
   ): Promise<Delivery> {
     return prisma.delivery.update({
       where: { id: deliveryId },

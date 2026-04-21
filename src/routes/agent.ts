@@ -15,5 +15,6 @@ export default class AgentRouter {
     this.routes.post("/", this.agentController.createAgent);
     this.routes.put("/:id", this.agentController.updateAgent);
     this.routes.delete("/:id", this.agentController.deleteAgent);
+    this.routes.put("/available/:id", this.agentController.setAvailbality);
   }
 }

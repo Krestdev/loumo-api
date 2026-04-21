@@ -23,8 +23,9 @@ const createOrderSchema = Joi.object({
       quantity: Joi.number(),
       deliveryId: Joi.number(),
       shopId: Joi.number().required(),
-    })
+    }),
   ),
+  source: Joi.string().valid("web", "mobile").default("web"),
 });
 
 const updateOrderSchema = Joi.object({
@@ -44,7 +45,7 @@ export default class OrderController {
   validate = (
     request: Request<{ id?: number }>,
     response: Response,
-    schema: "create" | "update" | "paramId"
+    schema: "create" | "update" | "paramId",
   ) => {
     let result: Joi.ValidationResult | null = null;
     switch (schema) {
@@ -85,7 +86,7 @@ export default class OrderController {
         orderItems: (Omit<OrderItem, "id"> & { shopId: number })[];
       }
     >,
-    response: Response
+    response: Response,
   ) => {
     if (!this.validate(request, response, "create")) return;
     const { error } = createOrderSchema.validate(request.body);
@@ -107,7 +108,7 @@ export default class OrderController {
       object,
       Partial<Omit<Order, "id">> & { addressId?: number }
     >,
-    response: Response
+    response: Response,
   ) => {
     const { id } = request.params;
     const { error } = updateOrderSchema.validate(request.body);
@@ -118,7 +119,7 @@ export default class OrderController {
     try {
       const updatedOrder = await orderLogic.updateOrder(
         Number(id),
-        request.body
+        request.body,
       );
       response.status(200).json(updatedOrder);
     } catch (err) {
@@ -170,11 +171,22 @@ export default class OrderController {
 
   deleteOrder = async (
     request: Request<{ id: string }>,
-    response: Response
+    response: Response,
   ) => {
     const { id } = request.params;
     try {
       await orderLogic.deleteOrder(Number(id));
+      response.status(204).send();
+    } catch (err) {
+      throw new CustomError("Failed to delete order", undefined, err as Error);
+    }
+  };
+
+  getCode = async (request: Request, response: Response) => {
+    const { id } = request.params;
+    const { deliveryId } = request.body;
+    try {
+      await orderLogic.getCode(Number(id), deliveryId);
       response.status(204).send();
     } catch (err) {
       throw new CustomError("Failed to delete order", undefined, err as Error);

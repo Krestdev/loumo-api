@@ -1,4 +1,5 @@
 import { PrismaClient, Order, OrderItem, Notification } from "@prisma/client";
+import { v4 as uuidv4 } from "uuid";
 
 const prisma = new PrismaClient();
 
@@ -9,7 +10,7 @@ export class OrderLogic {
       addressId: number;
       userId: number;
       orderItems: (Omit<OrderItem, "id"> & { shopId: number })[];
-    }
+    },
   ): Promise<Order> {
     const { addressId, orderItems, userId, ...orderData } = data;
     const now = new Date();
@@ -63,13 +64,13 @@ export class OrderLogic {
 
       if (!stock) {
         throw new Error(
-          `Stock not found for product variant ${item.productVariantId} in shop ${item.shopId}`
+          `Stock not found for product variant ${item.productVariantId} in shop ${item.shopId}`,
         );
       }
 
       if (stock.quantity < item.quantity) {
         throw new Error(
-          `Not enough stock for product variant ${item.productVariantId}`
+          `Not enough stock for product variant ${item.productVariantId}`,
         );
       }
 
@@ -217,7 +218,7 @@ export class OrderLogic {
   // Update a order and optionally update its roles
   async updateOrder(
     id: number,
-    data: Partial<Omit<Order, "id" | "userId">> & { addressId?: number }
+    data: Partial<Omit<Order, "id" | "userId">> & { addressId?: number },
   ): Promise<Order | null> {
     const { addressId, ...orderData } = data;
     return prisma.order.update({
@@ -240,5 +241,22 @@ export class OrderLogic {
     return prisma.order.delete({
       where: { id },
     });
+  }
+
+  // Delete a order (removes from join table as well)
+  async getCode(
+    id: number,
+    deliveryId: number,
+  ): Promise<{ code: string; expiry: Date }> {
+    const code = Math.floor(100000 + Math.random() * 900000).toString(); // 6-digit OTP
+    const expiry = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes from now
+    await prisma.delivery.update({
+      where: { id: deliveryId },
+      data: {
+        closeDeliveryCode: code,
+        codeExpiryTime: expiry,
+      },
+    });
+    return { code, expiry };
   }
 }

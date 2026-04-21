@@ -10,7 +10,7 @@ const createUserSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().email().required(),
   tel: Joi.string().required(),
-  password: Joi.string().min(6).required(),
+  password: Joi.string().min(5).required(),
   address: Joi.array().items(Joi.number()),
   imgUrl: Joi.string(),
   // Add other fields as needed
@@ -25,7 +25,7 @@ const updateUserSchema = Joi.object({
   name: Joi.string().optional(),
   email: Joi.string().email().optional(),
   tel: Joi.string().optional(),
-  password: Joi.string().min(6).optional(),
+  password: Joi.string().min(5).optional(),
   address: Joi.array().items(Joi.number()).optional(),
   verified: Joi.boolean().optional(),
   addressIds: Joi.array().items(Joi.number()),
@@ -80,7 +80,7 @@ export default class UserController {
       | "assignRole"
       | "login"
       | "fav"
-      | "verify"
+      | "verify",
   ) => {
     let result: Joi.ValidationResult | null = null;
     switch (schema) {
@@ -144,7 +144,7 @@ export default class UserController {
 
   createUser = async (
     request: Request<object, object, Omit<User, "id">>,
-    response: Response
+    response: Response,
   ) => {
     if (!this.validate(request, response, "userCreate")) return;
 
@@ -158,7 +158,7 @@ export default class UserController {
 
   verifyEmail = async (
     request: Request<object, object, { email: string; otp: string }>,
-    response: Response
+    response: Response,
   ) => {
     if (!this.validate(request, response, "verify")) return;
     const { email, otp } = request.body;
@@ -169,14 +169,14 @@ export default class UserController {
       throw new CustomError(
         "Failed to verify account",
         undefined,
-        error as Error
+        error as Error,
       );
     }
   };
 
   requestPasswordRecovery = async (
     request: Request<object, object, { email: string; otp: string }>,
-    response: Response
+    response: Response,
   ) => {
     if (!this.validate(request, response, "verify")) return;
     const { email } = request.body;
@@ -187,14 +187,14 @@ export default class UserController {
       throw new CustomError(
         "Failed to validate pasword recover request",
         undefined,
-        error as Error
+        error as Error,
       );
     }
   };
 
   validatePasswordRecoveryToken = async (
     request: Request<object, object, { email: string; otp: string }>,
-    response: Response
+    response: Response,
   ) => {
     if (!this.validate(request, response, "verify")) return;
     const { email, otp } = request.body;
@@ -205,7 +205,7 @@ export default class UserController {
       throw new CustomError(
         "Failed to validate pasword recover request",
         undefined,
-        error as Error
+        error as Error,
       );
     }
   };
@@ -216,7 +216,7 @@ export default class UserController {
       object,
       { email: string; otp: string; newPassword: string }
     >,
-    response: Response
+    response: Response,
   ) => {
     if (!this.validate(request, response, "verify")) return;
     const { email, otp, newPassword } = request.body;
@@ -227,14 +227,14 @@ export default class UserController {
       throw new CustomError(
         "Failed to validate pasword recover request",
         undefined,
-        error as Error
+        error as Error,
       );
     }
   };
 
   getUserById = async (
     request: Request<{ id: string }>,
-    response: Response
+    response: Response,
   ) => {
     if (!this.validate(request, response, "paramId")) return;
     try {
@@ -252,7 +252,7 @@ export default class UserController {
 
   login = async (
     request: Request<object, object, { email: string; password: string }>,
-    response: Response
+    response: Response,
   ) => {
     if (!this.validate(request, response, "login")) return;
     try {
@@ -270,7 +270,7 @@ export default class UserController {
 
   verifyPass = async (
     request: Request<object, object, { email: string; password: string }>,
-    response: Response
+    response: Response,
   ) => {
     if (!this.validate(request, response, "login")) return;
     try {
@@ -285,7 +285,7 @@ export default class UserController {
       throw new CustomError(
         "Failed to verify user password",
         undefined,
-        error as Error
+        error as Error,
       );
     }
   };
@@ -307,7 +307,7 @@ export default class UserController {
       object,
       Partial<User> & { addressIds?: number[]; productIds?: number[] }
     >,
-    response: Response
+    response: Response,
   ) => {
     if (!this.validate(request, response, "paramId")) return;
     if (!this.validate(request, response, "userUpdate")) return;
@@ -327,7 +327,7 @@ export default class UserController {
 
   addProductToFavorites = async (
     request: Request<{ id: string }, object, { productIds: number[] }>,
-    response: Response
+    response: Response,
   ) => {
     if (!this.validate(request, response, "paramId")) return;
     try {
@@ -341,14 +341,14 @@ export default class UserController {
       throw new CustomError(
         "Error adding product to user favorite",
         500,
-        error as Error
+        error as Error,
       );
     }
   };
 
   assignRole = async (
     request: Request<{ id: string }, object, { roleId: number }>,
-    response: Response
+    response: Response,
   ) => {
     if (!this.validate(request, response, "paramId")) return;
     if (!this.validate(request, response, "assignRole")) return;

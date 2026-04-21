@@ -25,7 +25,7 @@ export default class AgentController {
   validate = (
     request: Request<{ id?: number }>,
     response: Response,
-    schema: "create" | "update" | "paramId"
+    schema: "create" | "update" | "paramId",
   ) => {
     let result: Joi.ValidationResult | null = null;
     switch (schema) {
@@ -62,7 +62,7 @@ export default class AgentController {
       object,
       Omit<Agent, "id" | "code"> & { userId: number; zoneIds: number[] }
     >,
-    response: Response
+    response: Response,
   ) => {
     if (!this.validate(request, response, "create")) return;
     const { error } = createAgentSchema.validate(request.body);
@@ -84,7 +84,7 @@ export default class AgentController {
       object,
       Partial<Omit<Agent, "id" | "code"> & { zoneIds: number[] }>
     >,
-    response: Response
+    response: Response,
   ) => {
     const { id } = request.params;
     const { error } = updateAgentSchema.validate(request.body);
@@ -95,7 +95,7 @@ export default class AgentController {
     try {
       const updatedAgent = await agentLogic.updateAgent(
         Number(id),
-        request.body
+        request.body,
       );
       response.status(200).json(updatedAgent);
     } catch (err) {
@@ -125,12 +125,22 @@ export default class AgentController {
 
   deleteAgent = async (
     request: Request<{ id: string }>,
-    response: Response
+    response: Response,
   ) => {
     const { id } = request.params;
     try {
       await agentLogic.deleteAgent(Number(id));
       response.status(204).send();
+    } catch (err) {
+      throw new CustomError("Failed to delete agent", undefined, err as Error);
+    }
+  };
+
+  setAvailbality = async (request: Request, response: Response) => {
+    const { id } = request.params;
+    try {
+      const agent = await agentLogic.isAvailable(Number(id));
+      response.status(200).send({ agent });
     } catch (err) {
       throw new CustomError("Failed to delete agent", undefined, err as Error);
     }
