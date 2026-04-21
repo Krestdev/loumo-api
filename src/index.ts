@@ -73,18 +73,18 @@ export class Server {
     this.app.use(helmet());
     this.app.use(
       cors({
-        origin: "*", // your frontend's origin
-        // origin: ["http://localhost:3000", "*"], // your frontend's origin
+        // origin: "*", // your frontend's origin
+        origin: ["https://loumoshop.com", "*"], // your frontend's origin
         credentials: true, // if you use cookies/auth headers
-      })
+      }),
     );
 
     this.rateLimiter();
     // console logger
     this.app.use(
       morgan(
-        `:remote-addr - :remote-user [:date] :method :url HTTP/:http-version" :status :res[content-length] ":referrer"`
-      )
+        `:remote-addr - :remote-user [:date] :method :url HTTP/:http-version" :status :res[content-length] ":referrer"`,
+      ),
     );
     this.app.use(RBACMiddleware);
 
