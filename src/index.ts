@@ -73,9 +73,9 @@ export class Server {
     this.app.use(helmet());
     this.app.use(
       cors({
-        // origin: "*", // your frontend's origin
-        origin: ["https://loumoshop.com", "*"], // your frontend's origin
-        credentials: true, // if you use cookies/auth headers
+        origin: ["https://loumoshop.com", "https://admin.loumoshop.com"], // your frontend's origin
+        // origin: ["https://loumoshop.com", "*"], // your frontend's origin
+        // credentials: true, // if you use cookies/auth headers
       }),
     );
 
