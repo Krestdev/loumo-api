@@ -1,4 +1,3 @@
-import bodyParser from "body-parser";
 import cors from "cors";
 import express, { Request, Response } from "express";
 import rateLimit from "express-rate-limit";
@@ -73,11 +72,12 @@ export class Server {
     this.app.use(helmet());
     this.app.use(
       cors({
-        origin: ["*"], // your frontend's origin
-        // origin: ["https://loumoshop.com", "*"], // your frontend's origin
-        // credentials: true, // if you use cookies/auth headers
+        // origin: ["*"], // your frontend's origin
+        origin: ["https://loumoshop.com", "*"], // your frontend's origin
+        credentials: true, // if you use cookies/auth headers
       }),
     );
+    this.app.use(express.json());
 
     this.rateLimiter();
     // console logger
@@ -90,11 +90,8 @@ export class Server {
 
     // error and warning save to server
     this.app.use(this.winstonLogger.warningLogger());
-    // error and warning save to server
-    this.app.use(this.winstonLogger.warningLogger());
 
     // body parser
-    this.app.use(bodyParser.json());
 
     // Routes
     this.health();

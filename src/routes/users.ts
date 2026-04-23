@@ -20,28 +20,27 @@ export default class UserRouter {
     this.routes.post("/request", this.userController.requestPasswordRecovery);
     this.routes.post(
       "/verifyReset",
-      this.userController.validatePasswordRecoveryToken
+      this.userController.validatePasswordRecoveryToken,
     );
     this.routes.post("/reset", this.userController.resetPassword);
     this.routes.post("/login", this.userController.login);
-    this.routes.get("/", this.userController.getAllUsers);
     this.routes.get("/:id", this.userController.getUserById);
     this.routes.patch("/:id", this.userController.addProductToFavorites);
     this.routes.post(
       "/",
       operationLoggerMiddleware("User"),
-      this.userController.createUser
+      this.userController.createUser,
     );
     this.routes.put(
       "/:id",
       operationLoggerMiddleware("User"),
-      this.userController.updateUser
+      this.userController.updateUser,
     );
     this.routes.put("/role/:id", this.userController.assignRole);
     this.routes.delete(
       "/:id",
       operationLoggerMiddleware("User"),
-      this.userController.deleteUser
+      this.userController.deleteUser,
     );
   }
 }
